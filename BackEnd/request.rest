@@ -2,15 +2,39 @@ POST http://localhost:7000/api/clientes
 Content-Type: application/json
 
 {
-    "nome": "Xablau",
-    "cpf": "12345678900",
-    "email": "xablau@example.com",
-    "celular": "11987654321",
+    "nome": "Vinícius",
+    "cpf": "91576348952",
+    "email": "vinicius@example.com",
+    "celular": "15349522236",
     "genero": "Masculino",
-    "senha": "123456",
-    "confirmarSenha": "123456"
+    "senha": "84631g",
+    "confirmarSenha": "84631g"
     
 }
+
+
+###
+GET http://localhost:7000/api/clientes
+
+
+###
+GET http://localhost:7000/api/clientes/68100b7830d782aee2f82be5
+
+###
+DELETE http://localhost:7000/api/clientes/68100a808fc9840df84bdbcf
+
+###
+PUT http://localhost:7000/api/clientes/68100b7830d782aee2f82be5
+Content-Type: application/json
+
+{
+    "nome": "Xablina",
+    "cpf": "12345678988",
+    "email": "xablina@example.com",
+    "celular": "15-349522236",
+    "genero": "Feminino"
+}
+
 
 ###
 POST http://localhost:7000/api/feirantes
