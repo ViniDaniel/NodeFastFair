@@ -1,0 +1,19 @@
+# Define tratamento automático de final de linha
+* text=auto
+
+# Garante que arquivos de configuração fiquem com finais de linha do Unix (LF)
+*.js text eol=lf
+*.json text eol=lf
+*.ts text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+
+# Arquivos binários (não fazer conversão de linha)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary

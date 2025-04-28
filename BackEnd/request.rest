@@ -1,0 +1,13 @@
+POST http://localhost:7000/api/clientes
+Content-Type: application/json
+
+{
+    "nome": "Xablau",
+    "cpf": "12345678900",
+    "email": "xablau@example.com",
+    "celular": "11987654321",
+    "genero": "Masculino",
+    "senha": "123456",
+    "confirmarSenha": "123486"
+    
+}
