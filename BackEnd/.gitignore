@@ -1,0 +1,34 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Ambiente
+.env
+.env.*.local
+
+# Diretórios de build
+dist/
+build/
+
+# Cache
+.cache/
+tmp/
+temp/
+
+# Editor e sistema
+.DS_Store
+.vscode/
+.idea/
+
+# Test coverage
+coverage/
+
+# Outros
+*.tgz
