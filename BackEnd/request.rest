@@ -8,6 +8,26 @@ Content-Type: application/json
     "celular": "11987654321",
     "genero": "Masculino",
     "senha": "123456",
-    "confirmarSenha": "123486"
+    "confirmarSenha": "123456"
     
+}
+
+###
+POST http://localhost:7000/api/feirantes
+Content-Type: application/json
+
+{
+    "nome": "feira livra",
+    "cpf_cnpj": "1234567891234",
+    "email": "abc@abc.com",
+    "celular": "123456728912",
+    "genero": "Feminino",
+    "cep": "12345-678",
+    "endereco": "Rua das Flores",
+    "numeroCasa": 123,
+    "bairro": "Jardim das Rosas",
+    "cidade": "São Paulo",
+    "uf": "SP",
+    "senha": "senhaSegura123",
+    "confirmarSenha": "senhaSegura123"
 }
