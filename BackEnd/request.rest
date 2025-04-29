@@ -41,17 +41,44 @@ POST http://localhost:7000/api/feirantes
 Content-Type: application/json
 
 {
-    "nome": "feira livra",
-    "cpf_cnpj": "1234567891234",
-    "email": "abc@abc.com",
-    "celular": "123456728912",
-    "genero": "Feminino",
-    "cep": "12345-678",
+    "nome": "feira privada",
+    "cpf_cnpj": "12520369745236",
+    "email": "cba@abc.com",
+    "celular": "12332112369",
+    "genero": "Metamorfo",
+    "cep": "15264896",
     "endereco": "Rua das Flores",
     "numeroCasa": 123,
     "bairro": "Jardim das Rosas",
     "cidade": "São Paulo",
     "uf": "SP",
-    "senha": "senhaSegura123",
-    "confirmarSenha": "senhaSegura123"
+    "senha": "senhaInsegura123",
+    "confirmarSenha": "senhaInsegura123"
+}
+
+###
+GET http://localhost:7000/api/feirantes
+
+###
+GET http://localhost:7000/api/feirantes/680ee6d5c2ff472deaabbdf8
+
+###
+DELETE http://localhost:7000/api/feirantes/681018dd01c94c3f565ea2c0
+
+###
+PUT http://localhost:7000/api/feirantes/681018dd01c94c3f565ea2c0
+Content-Type: application/json
+
+{
+    "nome": "feira aleatoria",
+    "cpf_cnpj": "12520369745555",
+    "email": "cba@abc.com",
+    "celular": "12332112369",
+    "genero": "Transformer",
+    "cep": "15264896",
+    "endereco": "Rua das garças",
+    "numeroCasa": 123,
+    "bairro": "Itauna",
+    "cidade": "Saquarema",
+    "uf": "rj"
 }
