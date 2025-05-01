@@ -1,4 +1,6 @@
 const { Produto: ProdutoModel } = require("../models/Produto");
+require("../models/CategoriaProduto"); // importa só pra registrar
+
 
 const produtoController = {
   create: async (req, res) => {
@@ -31,7 +33,7 @@ const produtoController = {
   getAll: async (req, res) => {
     try {
       const produto = await ProdutoModel.find().populate("categoria") //populate para encotrar a categoria
-      return res.status(204).json(produto);
+      return res.status(200).json(produto);
     } catch (error) {
       console.log(error);
       return res

@@ -82,3 +82,81 @@ Content-Type: application/json
     "cidade": "Saquarema",
     "uf": "rj"
 }
+
+###
+POST http://localhost:7000/api/produtos
+Content-Type: application/json
+
+{
+    "nome": "Pera",
+    "categoria": "68102a2e7752426bccaa05a1",
+    "descricao": "Fruta meio verde,  meio amarela",
+    "preco": 7.90,
+    "peso": 0.5,
+    "imagem": "https://www.naturaldaterra.com.br/_next/image?url=https%3A%2F%2Fnaturalterra.vtexassets.com%2Farquivos%2Fids%2F165417%2FPera-Williams-Unidade.jpg%3Fv%3D638671094105730000&w=1440&q=75",
+    "status": "Ativo"
+}
+
+###
+GET http://localhost:7000/api/produtos
+
+###
+GET http://localhost:7000/api/produtos/6813a1bb11865d4325d46c6e
+
+###
+DELETE http://localhost:7000/api/produtos/6813a57efa0399d36ae3a24a
+
+###
+PUT http://localhost:7000/api/produtos/6813a62d8eb1ca17c581eb04
+Content-Type: application/json
+
+{
+    "nome": "Pera",
+    "categoria": "68102a2e7752426bddaa05a9",
+    "descricao": "Fruta meio verde,  meio amarela",
+    "preco": 10.90,
+    "peso": 0.59,
+    "imagem": "https://www.naturaldaterra.com.br/_next/image?url=https%3A%2F%2Fnaturalterra.vtexassets.com%2Farquivos%2Fids%2F165417%2FPera-Williams-Unidade.jpg%3Fv%3D638671094105730000&w=1440&q=75",
+    "status": "Inativo"
+}
+
+###
+POST http://localhost:7000/api/enderecoCliente
+Content-Type: application/json
+
+{
+    "clienteId": "6813c2f4de3356d89714f65d",
+    "cep": "28990-967",
+    "endereco": "Rua prosopopéia",
+    "numeroCasa": 1564,
+    "bairro": "Bacaxá",
+    "cidade": "Saquarema",
+    "uf": "rj",
+    "complemento": "casa",
+    "referencia": "perto de outra casa"
+}
+
+###
+GET http://localhost:7000/api/enderecoCliente
+
+###
+GET http://localhost:7000/api/enderecoCliente/6813c2f4de3356d89714f65d
+
+###
+DELETE http://localhost:7000/api/enderecoCliente/6813c3d9de3356d89714f66f
+
+###
+PUT http://localhost:7000/api/enderecoCliente/6813c410de3356d89714f678
+Content-Type: application/json
+
+{
+    "clienteId": "68100b7830d782aee2f82be5",
+    "cep": "28990-967",
+    "endereco": "Rua prosopopéia",
+    "numeroCasa": 1564,
+    "bairro": "Bacaxá",
+    "cidade": "Saquarema",
+    "uf": "rj",
+    "complemento": "casa",
+    "referencia": "perto de outra casa"
+}

@@ -22,7 +22,7 @@ const enderecoClienteSchema = new Schema({
   numeroCasa: {
     type: Number,
     min: 1,
-    max: 10,
+    max: 100000,
   },
   bairro: {
     type: String,
