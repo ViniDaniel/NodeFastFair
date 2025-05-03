@@ -1,0 +1,62 @@
+/* Reset e Normalização */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Imagens responsivas */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Ajustes para elementos de formulário */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* Responsividade: usa uma tipografia escalável */
+:root {
+  /* Design tokens */
+  --font-base: 16px;
+  --font-scale: 1vw;
+}
+
+body {
+  font-size: clamp(14px, var(--font-scale) + 0.5rem, 18px);
+  padding: 1rem;
+}
+
+/* Layout responsivo básico */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Suporte para media queries */
+@media (max-width: 768px) {
+  body {
+    font-size: clamp(14px, 4vw, 18px);
+  }
+
+  .container {
+    padding: 0 0.5rem;
+  }
+}
