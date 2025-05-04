@@ -3,7 +3,10 @@ const cors = require("cors");
 const app = express();
 const routes = require("./routes/router");
 
-app.use(cors()); //evita erro com a conexção do front com o back
+app.use(cors({
+  origin: "http://localhost:5173"
+}));
+ //evita erro com a conexção do front com o back
 
 app.use(express.json()); //para receber dados em json
 

@@ -1,10 +1,12 @@
-import { useState } from "react";
 import "./App.css";
+import CadastroCliente from "./components/pages/CadastroCliente";
+import Home from "./components/pages/Home";
+
 
 function App() {
   return (
     <div>
-      <h1>Hello World</h1>
+      <CadastroCliente />
     </div>
   );
 }
