@@ -33,7 +33,7 @@ const enderecoClienteController = {
         .status(201)
         .json({ response, message: "Endereço criado com sucesso!" });
     } catch (error) {
-      console.logo(error);
+      console.log(error);
       return res
         .status(500)
         .json({ message: "Erro interno", error: error.message });

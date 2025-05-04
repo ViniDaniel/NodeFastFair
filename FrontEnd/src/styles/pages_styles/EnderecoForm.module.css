@@ -1,0 +1,40 @@
+.div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+  
+  }
+  
+  .form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .field {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .label {
+    width: 120px;
+    text-align: right;
+    font-weight: bold;
+  }
+  
+  .input {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  

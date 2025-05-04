@@ -40,7 +40,7 @@ input, button, textarea, select {
 
 body {
   font-size: clamp(14px, var(--font-scale) + 0.5rem, 18px);
-  padding: 1rem;
+
 }
 
 /* Layout responsivo básico */
