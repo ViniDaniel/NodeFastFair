@@ -69,3 +69,8 @@
 .button:last-child:hover {
   background-color: #9a0007;
 }
+.error {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}

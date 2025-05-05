@@ -42,11 +42,10 @@ Content-Type: application/json
 
 {
     "nome": "feira privada",
-    "cpf_cnpj": "12520369745236",
-    "email": "cba@abc.com",
-    "celular": "12332112369",
+    "cpf_cnpj": "12520319745236",
+    "email": "cba@arc.com",
+    "celular": "12322112369",
     "genero": "Metamorfo",
-    "cep": "15264896",
     "endereco": "Rua das Flores",
     "numeroCasa": 123,
     "bairro": "Jardim das Rosas",

@@ -40,6 +40,7 @@ const feiranteSchema = new Schema(
       type: String,
       minlength: 8,
       maxlength: 9,
+      required: false,
     },
 
     endereco: {

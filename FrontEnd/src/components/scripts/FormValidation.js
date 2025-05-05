@@ -38,29 +38,48 @@ export function isValidEmail(email) {
 }
 
 export function isValidCelular(celular) {
-    const celularRegex = /^(?:(?:\+|00)?55)?\(?([1-9]{2})\)?\s?9?[0-9]{4}-?[0-9]{4}$/;
-    return celularRegex.test(celular);
-  }
+  const celularRegex =
+    /^(?:(?:\+|00)?55)?\(?([1-9]{2})\)?\s?9?[0-9]{4}-?[0-9]{4}$/;
+  return celularRegex.test(celular);
+}
 
 export function isValidNome(nome) {
-    return nome && nome.trim() !== "";
+  return nome && nome.trim() !== "";
 }
 
 export function isValidGenero(genero) {
-    return genero && genero.trim() !== "";
+  return genero && genero.trim() !== "";
 }
 
 export function isValidSenha(senha, confirmaSenha) {
-    const senhaRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
-  
-    if (!senhaRegex.test(senha)) {
-      return { valid: false, message: "A senha deve ter no mínimo 6 caracteres, com pelo menos uma letra e um número." };
-    }
-  
-    if (senha !== confirmaSenha) {
-      return { valid: false, message: "As senhas não coincidem." };
-    }
-  
-    return { valid: true };
+  const senhaRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+
+  if (!senhaRegex.test(senha)) {
+    return {
+      valid: false,
+      message:
+        "A senha deve ter no mínimo 6 caracteres, com pelo menos uma letra e um número.",
+    };
   }
-  
+
+  if (senha !== confirmaSenha) {
+    return { valid: false, message: "As senhas não coincidem." };
+  }
+
+  return { valid: true };
+}
+
+
+export function isValidEndereco(endereco){
+  return endereco && endereco.trim() !== "";
+}
+
+export function isValidBairro(bairro){
+  return bairro && bairro.trim() !== "";
+}
+export function isValidCidade(cidade){
+  return cidade && cidade.trim() !== "";
+}
+export function isValidUF(uf){
+  return uf && uf.trim() !== "";
+}

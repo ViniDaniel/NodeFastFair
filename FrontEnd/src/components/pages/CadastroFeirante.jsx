@@ -1,6 +1,17 @@
-/*import validation from "../scripts/FormValidation";*/
+import {
+  isValidNome,
+  isValidCPF,
+  isValidEmail,
+  isValidCelular,
+  isValidGenero,
+  isValidEndereco,
+  isValidBairro,
+  isValidCidade,
+  isValidUF,
+  isValidSenha,
+} from "../scripts/FormValidation";
 import api from "../services/api";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import styles from "../../styles/pages_styles/CadastroCliente.module.css";
 
 function CadastroFeirante() {
@@ -18,22 +29,59 @@ function CadastroFeirante() {
   const inputUf = useRef();
   const inputCidade = useRef();
 
+  const [error, setError] = useState("");
+
   async function postUser() {
-    await api.post("/feirantes", {
-      nome: inputNome.current.value,
-      cpf_cnpj: inputCpfCnpj.current.value,
-      email: inputEmail.current.value,
-      celular: inputCelular.current.value,
-      genero: inputGenero.current.value,
-      cep: inputCep.current.value,
-      endereco: inputEndereco.current.value,
-      numeroCasa: inputNumeroCasa.current.value,
-      bairro: inputBairro.current.value,
-      uf: inputUf.current.value,
-      cidade: inputCidade.current.value,
-      senha: inputSenha.current.value,
-      confirmarSenha: inputConfirmarSenha.current.value,
-    });
+      const nome = inputNome.current.value;
+      const cpf_cnpj = inputCpfCnpj.current.value;
+      const email = inputEmail.current.value;
+      const celular = inputCelular.current.value;
+      const genero = inputGenero.current.value;
+      const cep = inputCep.current.value;
+      const endereco = inputEndereco.current.value;
+      const numeroCasa = inputNumeroCasa.current.value;
+      const bairro = inputBairro.current.value;
+      const uf = inputUf.current.value;
+      const cidade = inputCidade.current.value;
+      const senha = inputSenha.current.value;
+      const confirmarSenha = inputConfirmarSenha.current.value;
+
+      if(!isValidNome(nome)) return setError("Nome inválido!");
+      if(!isValidCPF(cpf_cnpj)) return setError("CPF inválido!");
+      if(!isValidEmail(email)) return setError("Email inválido");
+      if(!isValidCelular(celular)) return setError("Celular inválido!");
+      if(!isValidGenero(genero)) return setError("Gênero inválido!");
+      if(!isValidEndereco(endereco)) return setError("Endereço inválido!");
+      if(!isValidCidade(cidade)) return setError("Cidade inválida!");
+      if(!isValidBairro(bairro)) return setError("Bairro inválido!");
+      if(!isValidUF(uf)) return setError("Escolha um estádo!");
+      const senhaValidacao = isValidSenha(senha, confirmarSenha);
+      if(!senhaValidacao.valid) return setError(senhaValidacao.message);
+
+      try {
+        await api.post("/feirantes", {
+          nome,
+          cpf_cnpj,
+          email,
+          celular,
+          genero,
+          cep: cep || undefined,
+          endereco,
+          numeroCasa: numeroCasa || undefined,
+          bairro,
+          uf,
+          cidade,
+          senha,
+          confirmarSenha
+        })
+        alert("Cadastro realizado com sucesso!")
+      } catch (err) {
+        if(err.response && err.response.data?.message){
+          setError(err.response.data.message)//retorna mensagem de erro do backend, caso ja tenha algum dado cadastrado
+        } else {
+          setError("Erro ao cadastrar feirante. Tente novamente.");
+        }
+      }
   }
 
   return (
@@ -56,13 +104,14 @@ function CadastroFeirante() {
           </div>
           <div className={styles.field}>
             <label htmlFor="cpf_cnpj" className={styles.label}>
-              CPF ou CNPJ:
+              CPF:
             </label>
+            
             <input
               type="text"
               name="cpf_cnpj"
               id="cpf_cnpj"
-              placeholder="Digite seu CPF ou CNPJ: "
+              placeholder="Digite seu CPF: "
               ref={inputCpfCnpj}
               className={styles.input}
             />
@@ -272,6 +321,7 @@ function CadastroFeirante() {
               Cancelar
             </button>
           </div>
+          {error && <p className={styles.error}>{error}</p>}
         </form>
       </div>
     </div>
