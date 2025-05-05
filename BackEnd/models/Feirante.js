@@ -54,6 +54,7 @@ const feiranteSchema = new Schema(
       type: Number,
       min: 1,
       max: 100000,
+      required: false,
     },
 
     bairro: {
