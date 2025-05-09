@@ -3,9 +3,9 @@ Content-Type: application/json
 
 {
     "nome": "Vinícius",
-    "cpf": "91576348952",
-    "email": "vinicius@example.com",
-    "celular": "15349522236",
+    "cpf": "12345678955",
+    "email": "vinicius@example1.com",
+    "celular": "15349522226",
     "genero": "Masculino",
     "senha": "84631g",
     "confirmarSenha": "84631g"
@@ -35,6 +35,14 @@ Content-Type: application/json
     "genero": "Feminino"
 }
 
+###
+POST http://localhost:7000/api/clientes/login
+Content-Type: application/json
+
+{
+    "email": "vinicius@example1.com",
+    "senha": "84631g"
+}
 
 ###
 POST http://localhost:7000/api/feirantes

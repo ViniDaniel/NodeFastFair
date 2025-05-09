@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const clienteController = require("../controllers/clienteController");
+const loginClienteController = require("../controllers/loginClienteController");
 
 //rota de criação de um cliente
 router
@@ -23,5 +24,9 @@ router
 router
   .route("/clientes/:id")
   .put((req, res) => clienteController.update(req, res));
+
+router
+  .route("/clientes/login")
+  .post((req, res) => loginClienteController.login(req, res));
 
 module.exports = router;
