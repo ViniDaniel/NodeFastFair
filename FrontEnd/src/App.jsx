@@ -9,12 +9,14 @@ import Suporte from "./components/pages/Suporte";
 import CadastroCliente from "./components/pages/CadastroCliente";
 import Footer from "./components/layout/Footer";
 import CadastroFeirante from "./components/pages/CadastroFeirante";
+import { ClienteProvider } from "./components/context/ClienteContext";
 
 
 
 
 function App() {
   return (
+    <ClienteProvider>
     <Router> 
       <NavBar />
       <Container customClass="min-height">
@@ -29,6 +31,7 @@ function App() {
       </Container>
       <Footer />
     </Router>
+    </ClienteProvider>
   );
 }
 
