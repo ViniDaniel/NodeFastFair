@@ -1,4 +1,22 @@
 .p{
-    background-color: white;
-    color: black;
+    color: white;
+    text-align: right;
+    padding: 40px;
+    
+}
+
+.logoutButton {
+  margin-left: 10px;
+  background-color: #f81a0a;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.logoutButton:hover{
+    background-color: #bb1307;
+    font-weight: bold;
 }

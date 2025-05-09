@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const feiranteController = require("../controllers/feiranteController");
+const loginFeiranteController = require("../controllers/loginFeiranteController");
 
 //criação do feirante
 router
@@ -25,5 +26,9 @@ router
 router
   .route("/feirantes/:id")
   .put((req, res) => feiranteController.update(req, res));
+
+router
+  .route("/feirantes/login")
+  .post((req, res) => loginFeiranteController.login(req, res));
 
 module.exports = router;

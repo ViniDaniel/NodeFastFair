@@ -1,8 +1,8 @@
 /*import validation from "../scripts/FormValidation";*/
-import api from "../services/api";
+import api from "../../services/api";
 import { useState, useEffect, useRef } from "react";
-import styles from "../../styles/pages_styles/CadastroCliente.module.css";
-import Footer from "../layout/Footer";
+import styles from "../../../styles/pages_styles/Cadastro.module.css";
+import Footer from "../../layout/Footer";
 
 function EnderecoForm() {
   const inputCep = useRef();

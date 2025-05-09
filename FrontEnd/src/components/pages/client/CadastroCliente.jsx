@@ -5,10 +5,10 @@ import {
   isValidNome,
   isValidGenero,
   isValidSenha,
-} from "../scripts/FormValidation";
-import api from "../services/api";
+} from "../../scripts/FormValidation";
+import api from "../../services/api";
 import { useState, useRef } from "react";
-import styles from "../../styles/pages_styles/CadastroCliente.module.css";
+import styles from "../../../styles/pages_styles/Cadastro.module.css";
 
 function CadastroCliente() {
   const inputNome = useRef();

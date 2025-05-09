@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Container from "./Container";
 import styles from '../../styles/layout_styles/NavBar.module.css';
 import logo from "../../assets/logo.png";
+import Header from "./Header";
 function NavBar() {
   return (
     <nav className={styles.navbar}>
@@ -23,7 +24,9 @@ function NavBar() {
                     <Link to="/suporte">Suporte</Link>
                 </li>
             </ul>
+            
             </Container>  
+            <Header />
         </nav>
   );
 }

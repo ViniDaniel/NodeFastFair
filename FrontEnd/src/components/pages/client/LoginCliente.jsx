@@ -1,9 +1,9 @@
-import LinkButton from "../layout/LinkButton";
-import styles from "../../styles/pages_styles/CadastroCliente.module.css";
+import LinkButton from "../../layout/LinkButton";
+import styles from "../../../styles/pages_styles/Cadastro.module.css";
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ClienteContext } from "../context/ClienteContext";
-import api from "../services/api";
+import { ClienteContext } from "../../context/ClienteContext";
+import api from "../../services/api";
 
 function LoginCliente() {
   const inputEmail = useRef();
