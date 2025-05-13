@@ -39,7 +39,7 @@ const clienteController = {
   },
   get: async (req, res) => {
     try {
-      const id = req.params.id; //pega o id do usuario
+      const id = req.params.clienteId; //pega o id do usuario
       const cliente = await ClienteModel.findById(id);
 
       if (!cliente) {
@@ -53,7 +53,7 @@ const clienteController = {
   },
   delete: async (req, res) => {
     try {
-      const id = req.params.id;
+      const id = req.params.clienteId;
       const cliente = await ClienteModel.findById(id);
       if (!cliente) {
         return res.status(404).json({ message: "Cliente não encontrado!" });

@@ -40,8 +40,8 @@ POST http://localhost:7000/api/clientes/login
 Content-Type: application/json
 
 {
-    "email": "vinicius@example1.com",
-    "senha": "84631g"
+    "email": "dsfarfa@efaer.com",
+    "senha": "123ppp"
 }
 
 ###
@@ -139,9 +139,9 @@ Content-Type: application/json
 ###
 POST http://localhost:7000/api/enderecoCliente
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWQ0ZDZkYzE0NjNmY2FlOWFkYWNkNSIsImlhdCI6MTc0NzA5NDM1MywiZXhwIjoxNzQ3MTgwNzUzfQ.8fSJrhDRqOXo_KPfygXbfTYv8Me2bw3XKL_uLI74HgI
 
 {
-    "clienteId": "6813c2f4de3356d89714f65d",
     "cep": "28990-967",
     "endereco": "Rua prosopopéia",
     "numeroCasa": 1564,

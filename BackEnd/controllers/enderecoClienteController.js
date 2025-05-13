@@ -4,7 +4,6 @@ const enderecoClienteController = {
   create: async (req, res) => {
     try {
       const {
-        clienteId,
         cep,
         endereco,
         numeroCasa,
@@ -16,7 +15,7 @@ const enderecoClienteController = {
       } = req.body;
 
       const enderecoCliente = {
-        clienteId,
+        clienteId: req.user.id,
         cep,
         endereco,
         numeroCasa,
@@ -26,6 +25,11 @@ const enderecoClienteController = {
         complemento,
         referencia,
       };
+
+      const jaExiste = await EnderecoModel.findOne({ clienteId: req.user.id });
+      if (jaExiste) {
+        return res.status(400).json({ message: "Endereço já cadastrado." });
+      }
 
       const response = await EnderecoModel.create(enderecoCliente);
 
@@ -52,8 +56,10 @@ const enderecoClienteController = {
   },
   get: async (req, res) => {
     try {
-      const id = req.params.id;
-      const enderecoCliente = await EnderecoModel.findById(id).populate("clienteId");
+      const { clienteId } = req.params;
+      const enderecoCliente = await EnderecoModel.findOne({
+        clienteId,
+      }).populate("clienteId");
 
       if (!enderecoCliente) {
         return res.status(404).json({ message: "Endereço não encontrado!" });
@@ -62,14 +68,14 @@ const enderecoClienteController = {
     } catch (error) {
       console.log(error);
       return res
-        .satus(500)
+        .status(500)
         .json({ message: "Erro interno", error: error.message });
     }
   },
   delete: async (req, res) => {
     try {
-      const id = req.params.id;
-      const enderecoCliente = await  EnderecoModel.findById(id);
+      const id = req.params.clienteId;
+      const enderecoCliente = await EnderecoModel.findById(id);
       if (!enderecoCliente) {
         return res.status(404).json({ message: "Endereço não encontrado!" });
       }
@@ -87,7 +93,7 @@ const enderecoClienteController = {
   },
   update: async (req, res) => {
     try {
-      const id = req.params.id;
+      const id = req.params.clienteId;
       const {
         clienteId,
         cep,

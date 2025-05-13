@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const clienteController = require("../controllers/clienteController");
 const loginClienteController = require("../controllers/loginClienteController");
+const authCliente = require("../middlewares/authCliente");
 
 //rota de criação de um cliente
 router
@@ -12,8 +13,8 @@ router.route("/clientes").get((req, res) => clienteController.getAll(req, res));
 
 //rota de busca de um cliente específico
 router
-  .route("/clientes/:id")
-  .get((req, res) => clienteController.get(req, res));
+  .route("/clientes/:clienteId")
+  .get(authCliente, (req, res) => clienteController.get(req, res));
 
 //rota de delete do cliente
 router
@@ -23,7 +24,7 @@ router
 //rota de atualização do cliente
 router
   .route("/clientes/:id")
-  .put((req, res) => clienteController.update(req, res));
+  .put(authCliente, (req, res) => clienteController.update(req, res));
 
 router
   .route("/clientes/login")
