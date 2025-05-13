@@ -24,3 +24,22 @@ feira@vaca.com
 
 senha
 palmas1
+
+
+cliente
+
+email
+guruguru@teu.cu
+senha
+123zzz
+
+cliente
+
+marill@rapa.com
+
+asdasd1
+
+
+dados do .env para facilar no trabalho em sala
+JWT_SECRET=bnghj5421warujy5t4102
+JWT_EXPIRES_IN=1d

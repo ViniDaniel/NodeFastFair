@@ -11,6 +11,8 @@ import Footer from "./components/layout/Footer";
 import CadastroFeirante from "./components/pages/seller/CadastroFeirante";
 import { ClienteProvider } from "./components/context/ClienteContext";
 import { FeiranteProvider } from "./components/context/FeiranteContext";
+import PerfilCliente from "./components/pages/client/PerfilCliente";
+import EnderecoForm from "./components/pages/client/EnderecoForm";
 
 function App() {
   return (
@@ -28,6 +30,11 @@ function App() {
               <Route
                 path="/cadastroFeirante"
                 element={<CadastroFeirante />}
+              ></Route>
+              <Route path="/perfilCliente" element={<PerfilCliente />}></Route>
+              <Route
+                path="/cadastrar-endereco"
+                element={<EnderecoForm />}
               ></Route>
             </Routes>
           </Container>

@@ -1,8 +1,13 @@
-/*import validation from "../scripts/FormValidation";*/
-import api from "../../services/api";
-import { useState, useEffect, useRef } from "react";
+import {
+  isValidEndereco,
+  isValidBairro,
+  isValidCidade,
+  isValidUF,
+} from "../../scripts/FormValidation";
+import apiCliente from "../../services/apiCliente";
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "../../../styles/pages_styles/Cadastro.module.css";
-import Footer from "../../layout/Footer";
 
 function EnderecoForm() {
   const inputCep = useRef();
@@ -11,24 +16,59 @@ function EnderecoForm() {
   const inputBairro = useRef();
   const inputUf = useRef();
   const inputCidade = useRef();
+  const inputComplemento = useRef();
+  const inputReferencia = useRef();
+
+  const [error, setError] = useState();
+
+  const navigate = useNavigate();
 
   async function postUser() {
-    await api.post("/enderecoCliente", {
-      cep: inputCep.current.value,
-      endereco: inputEndereco.current.value,
-      numeroCasa: inputNumeroCasa.current.value,
-      bairro: inputBairro.current.value,
-      uf: inputUf.current.value,
-      cidade: inputCidade.current.value,
+    const cep = inputCep.current.value;
+    const endereco = inputEndereco.current.value;
+    const numeroCasa = inputNumeroCasa.current.value;
+    const bairro = inputBairro.current.value;
+    const uf = inputUf.current.value;
+    const cidade = inputCidade.current.value;
+    const complemento = inputComplemento.current.value;
+    const referencia = inputReferencia.current.value;
 
-    });
+    if (!isValidEndereco(endereco)) return setError("Endereço inválido!");
+    if (!isValidBairro(bairro)) return setError("Bairro inválido!");
+    if (!isValidCidade(cidade)) return setError("Cidade inválida!");
+    if (!isValidUF(uf)) return setError("Estado inválido!");
+
+    const clienteId = JSON.parse(localStorage.getItem("cliente"))?._id;
+
+    try {
+      await apiCliente.post("/enderecoCliente", {
+        cep,
+        endereco,
+        numeroCasa,
+        bairro,
+        uf,
+        cidade,
+        complemento,
+        referencia,
+        clienteId,
+
+      });
+      alert("Endereço cadastrado com sucesso!");
+      navigate("/perfilCliente");
+    } catch (err) {
+      if (err.response && err.response.data?.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("Erro ao cadastrar endereço");
+      }
+    }
   }
 
   return (
     <div>
       <div className={styles.div}>
         <form className={styles.form}>
-          <h1>Cadastrar seu Endereço</h1>
+          <h1>Cadastre seu Endereço</h1>
           <div className={styles.field}>
             <label htmlFor="cep" className={styles.label}>
               CEP:
@@ -141,6 +181,32 @@ function EnderecoForm() {
               <option value="TO">Tocantins</option>
             </select>
           </div>
+          <div className={styles.field}>
+            <label htmlFor="complemento" className={styles.label}>
+              Complemento:
+            </label>
+            <input
+              type="text"
+              name="complemento"
+              id="complemento"
+              placeholder="Digite um complemento: "
+              ref={inputComplemento}
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.field}>
+            <label htmlFor="referencia" className={styles.label}>
+              Referência:
+            </label>
+            <input
+              type="text"
+              name="referencia"
+              id="referencia"
+              placeholder="Digite uam referência: "
+              ref={inputReferencia}
+              className={styles.input}
+            />
+          </div>
 
           <div className={styles.buttonGroup}>
             <button
@@ -158,9 +224,9 @@ function EnderecoForm() {
               Cancelar
             </button>
           </div>
+          {error && <p className={styles.error}>{error}</p>}
         </form>
       </div>
-      <Footer />
     </div>
   );
 }

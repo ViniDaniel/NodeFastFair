@@ -3,7 +3,7 @@ import styles from "../../../styles/pages_styles/Cadastro.module.css";
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FeiranteContext } from "../../context/FeiranteContext";
-import api from "../../services/api";
+import apiFeirante from "../../services/apiFeirante";
 
 function LoginFeirante() {
   const inputEmail = useRef();
@@ -18,7 +18,7 @@ function LoginFeirante() {
     const senha = inputSenha.current.value;
 
     try {
-      const response = await api.post("/feirantes/login", { email, senha });
+      const response = await apiFeirante.post("/feirantes/login", { email, senha });
       const feirante = response.data.feirante;
 
       logarFeirante(feirante);

@@ -10,7 +10,7 @@ import {
   isValidUF,
   isValidSenha,
 } from "../../scripts/FormValidation";
-import api from "../../services/api";
+import apiFeirante from "../../services/apiFeirante";
 import { useState, useRef } from "react";
 import styles from "../../../styles/pages_styles/Cadastro.module.css";
 
@@ -59,7 +59,7 @@ function CadastroFeirante() {
       if(!senhaValidacao.valid) return setError(senhaValidacao.message);
 
       try {
-        await api.post("/feirantes", {
+        await apiFeirante.post("/feirantes", {
           nome,
           cpf_cnpj,
           email,

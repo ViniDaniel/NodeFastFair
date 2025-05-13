@@ -3,7 +3,7 @@ import styles from "../../../styles/pages_styles/Cadastro.module.css";
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ClienteContext } from "../../context/ClienteContext";
-import api from "../../services/api";
+import apiCliente from "../../services/apiCliente";
 
 function LoginCliente() {
   const inputEmail = useRef();
@@ -18,8 +18,10 @@ function LoginCliente() {
     const senha = inputSenha.current.value;
 
     try {
-      const response = await api.post("/clientes/login", { email, senha });
-      const cliente = response.data.cliente;
+      const response = await apiCliente.post("/clientes/login", { email, senha });
+      const {cliente, token} = response.data;
+
+      localStorage.setItem("token", token);
 
       logarCliente(cliente);
 
@@ -27,7 +29,8 @@ function LoginCliente() {
 
       navigate("/");
     } catch (err) {
-      if (err.respone && err.response.data?.message) {
+      console.log(err)
+      if (err.response && err.response.data?.message) {
         setError(err.response.data.message);
       } else {
         setError("Erro ao tentar logar.");

@@ -6,8 +6,9 @@ import {
   isValidGenero,
   isValidSenha,
 } from "../../scripts/FormValidation";
-import api from "../../services/api";
+import apiCliente from "../../services/apiCliente";
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "../../../styles/pages_styles/Cadastro.module.css";
 
 function CadastroCliente() {
@@ -20,6 +21,8 @@ function CadastroCliente() {
   const inputConfirmarSenha = useRef();
 
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   async function postUser() {
     const nome = inputNome.current.value;
@@ -40,7 +43,7 @@ function CadastroCliente() {
     if (!senhaValidacao.valid) return setError(senhaValidacao.message);
 
     try {
-      await api.post("/clientes", {
+      await apiCliente.post("/clientes", {
         nome,
         cpf,
         email,
@@ -50,6 +53,7 @@ function CadastroCliente() {
         confirmarSenha,
       });
       alert("Cliente cadastrado com sucesso!");
+      navigate("/loginCliente")
     } catch (err) {
       if (err.response && err.response.data?.message) {
         setError(err.response.data.message); //retorna mensagem de erro do backend, caso ja tenha algum dado cadastrado
