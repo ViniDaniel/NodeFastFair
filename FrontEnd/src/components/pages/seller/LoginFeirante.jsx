@@ -19,7 +19,9 @@ function LoginFeirante() {
 
     try {
       const response = await apiFeirante.post("/feirantes/login", { email, senha });
-      const feirante = response.data.feirante;
+      const {feirante, token} = response.data
+
+      localStorage.setItem("token", token)
 
       logarFeirante(feirante);
 

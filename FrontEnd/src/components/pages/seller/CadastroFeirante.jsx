@@ -162,7 +162,7 @@ function CadastroFeirante() {
               <option value="masculino">Masculino</option>
               <option value="feminino">Feminino</option>
               <option value="outro">Outro</option>
-              <option value="naoInformado">Prefiro não informar</option>
+              <option value="Não Informado">Prefiro não informar</option>
             </select>
           </div>
           <div className={styles.field}>

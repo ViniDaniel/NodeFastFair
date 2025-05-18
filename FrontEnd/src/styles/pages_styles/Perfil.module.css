@@ -1,22 +1,62 @@
 .container{
-    display: flex;
     font-size: 30px;
     justify-content: space-between;
-    padding: 2em;
+    padding: 3em;
     color: black    ;
     text-shadow: 1px 1px 0 white,
                -1px -1px 0 white,
+
 }
 
 .card_dados{
 text-align: left;
+background-color: white;
+border-radius: 10px;
+padding: 1em;
+max-width: 40%;
+
 }
 
 .card_endereco{
-    text-align: right;
+    text-align: left;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1em;
+    max-width: 40%;
+    margin-top: 10%;
 }
 
 h1 {
     color: black;
     font-size: 60px;
+}
+.sem_perfil{
+    font-weight: bold;
+    background-color: white;
+    font-size: 40px;
+    padding: 10em;
+    color: rgb(133, 0, 0);
+    display: grid;
+}
+.card_button{
+    text-align: left;
+    
+}
+.deslogar{
+
+  padding: 1.0rem 2.2rem;
+  background-color: #f81a0a;
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.2s;
+  margin-left: 2%;
+}
+
+.deslogar:hover{
+    background-color: #bb1307;
+    font-weight: bold;
 }

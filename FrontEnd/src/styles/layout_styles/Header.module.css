@@ -1,23 +1,23 @@
-.p{
-    color: white;
-    text-align: right;
-    padding: 40px;
-    
+.p {
+  color: white;
+  text-align: right;
+  padding: 40px;
 }
 
 .logoutButton {
-  margin-left: 10px;
+  padding: 1rem 2.2rem;
   background-color: #f81a0a;
-  color: white;
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  font-weight: bold;
   border: none;
-  padding: 5px;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 5px;
   transition: 0.2s;
+  margin-left: 2%;
 }
 
-.logoutButton:hover{
-    background-color: #bb1307;
-    font-weight: bold;
+.logoutButton:hover {
+  background-color: #bb1307;
+  font-weight: bold;
 }
-

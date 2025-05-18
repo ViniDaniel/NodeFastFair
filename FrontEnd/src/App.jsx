@@ -13,6 +13,10 @@ import { ClienteProvider } from "./components/context/ClienteContext";
 import { FeiranteProvider } from "./components/context/FeiranteContext";
 import PerfilCliente from "./components/pages/client/PerfilCliente";
 import EnderecoForm from "./components/pages/client/EnderecoForm";
+import AtualizarCliente from "./components/pages/client/AtualizarCliente";
+import AtualizarEndereco from "./components/pages/client/AtualizarEndereco";
+import PerfilFeirante from "./components/pages/seller/PerfilFeirante";
+import AtualizarFeirante from "./components/pages/seller/AtualizarFeirante";
 
 function App() {
   return (
@@ -27,6 +31,7 @@ function App() {
               <Route path="/loginFeirante" element={<LoginFeirante />}></Route>
               <Route path="/suporte" element={<Suporte />}></Route>
               <Route path="/cadastroCliente" element={<CadastroCliente />} />
+              <Route path="/atualizar_cliente/:clienteId" element={<AtualizarCliente />}></Route>
               <Route
                 path="/cadastroFeirante"
                 element={<CadastroFeirante />}
@@ -36,6 +41,9 @@ function App() {
                 path="/cadastrar-endereco"
                 element={<EnderecoForm />}
               ></Route>
+              <Route path="/atualizar_endereco/:clienteId" element={<AtualizarEndereco />} ></Route>
+              <Route path="/perfilFeirante" element={<PerfilFeirante />} ></Route>
+              <Route path="/atualizar_feirante/:feiranteId" element={<AtualizarFeirante />} ></Route>
             </Routes>
           </Container>
           <Footer />

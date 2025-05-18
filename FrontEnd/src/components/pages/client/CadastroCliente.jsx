@@ -137,10 +137,10 @@ function CadastroCliente() {
               <option disabled value="">
                 Selecione um gênero
               </option>
-              <option value="masculino">Masculino</option>
-              <option value="feminino">Feminino</option>
-              <option value="outro">Outro</option>
-              <option value="naoInformado">Prefiro não informar</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Feminino">Feminino</option>
+              <option value="Outro">Outro</option>
+              <option value="Não Informado">Prefiro não informar</option>
             </select>
           </div>
 
