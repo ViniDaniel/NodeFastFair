@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken")
 const { Feirante: FeiranteModel } = require("../models/Feirante");
 
 const loginFeiranteController = {
@@ -18,9 +19,15 @@ const loginFeiranteController = {
       }
 
       const { nome, _id } = feirante;
+
+      const token = jwt.sign({id: _id}, process.env.JWT_SECRET,{
+        expiresIn: process.env.JWT_EXPIRES_IN || "id",
+      })
+
       return res.status(200).json({
         message: "Feirante conectado com sucesso!",
         feirante: { nome, _id, email },
+        token,
       });
     } catch (error) {
       console.log("Erro no login", error);

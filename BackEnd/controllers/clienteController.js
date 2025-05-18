@@ -71,24 +71,34 @@ const clienteController = {
   },
   update: async (req, res) => {
     try {
-      const id = req.params.id;
-      const { nome, cpf, email, celular, genero } = req.body;
+      const { nome, celular, genero } = req.body;
 
-      const cliente = { nome, cpf, email, celular, genero };
+      const cliente = {
+        nome,
+        celular,
+        genero,
+      };
 
-      const updateCliente = await ClienteModel.findByIdAndUpdate(id, cliente, {
+      const clienteId = req.user.id
+
+      const updateCliente = await ClienteModel.findByIdAndUpdate(clienteId, cliente, {
         new: true,
       });
 
       if (!updateCliente) {
-        return res.status(404).json({ message: "Cliente não encontrado" });
+        
+        return res.status(404).json({ message: "Cliente não encontrado", error: error.message });
       }
 
       return res
         .status(200)
         .json({ updateCliente, message: "Cliente atualizado com sucesso!" });
     } catch (error) {
-      console.log(error);
+      if (error.code === 11000) {
+        return res
+          .status(400)
+          .json({ message: "Email ou celular já cadastrado." });
+      }
       return res
         .status(500)
         .json({ message: "Erro interno!", error: error.message });

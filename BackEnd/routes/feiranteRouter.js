@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const feiranteController = require("../controllers/feiranteController");
 const loginFeiranteController = require("../controllers/loginFeiranteController");
+const authFeirante = require("../middlewares/authFeirante");
 
 //criação do feirante
 router
@@ -15,7 +16,7 @@ router
 //Busca individual
 router
   .route("/feirantes/:id")
-  .get((req, res) => feiranteController.get(req, res));
+  .get(authFeirante, (req, res) => feiranteController.get(req, res));
 
 //Delete do feirante
 router
@@ -24,8 +25,8 @@ router
 
 //Atualização do feirante
 router
-  .route("/feirantes/:id")
-  .put((req, res) => feiranteController.update(req, res));
+  .route("/feirantes/")
+  .put(authFeirante, (req, res) => feiranteController.update(req, res));
 
 router
   .route("/feirantes/login")

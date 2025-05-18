@@ -23,7 +23,7 @@ router
 
 //rota de atualização do cliente
 router
-  .route("/clientes/:id")
+  .route("/clientes/")
   .put(authCliente, (req, res) => clienteController.update(req, res));
 
 router

@@ -24,14 +24,12 @@ GET http://localhost:7000/api/clientes/68100b7830d782aee2f82be5
 DELETE http://localhost:7000/api/clientes/68100a808fc9840df84bdbcf
 
 ###
-PUT http://localhost:7000/api/clientes/68100b7830d782aee2f82be5
+PUT http://localhost:7000/api/clientes
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MjYzMGJlMTJhODhjMzNkMmQ3ZDdmMyIsImlhdCI6MTc0NzM0MDQxMSwiZXhwIjoxNzQ3NDI2ODExfQ.eiwi3EqhG3ThLh6IzHD4S5DziSNBM0viLY5et_-otIc
 
 {
-    "nome": "Xablina",
-    "cpf": "12345678988",
-    "email": "xablina@example.com",
-    "celular": "15-349522236",
+    "email": "vinicius@example1.com",
     "genero": "Feminino"
 }
 
@@ -40,8 +38,8 @@ POST http://localhost:7000/api/clientes/login
 Content-Type: application/json
 
 {
-    "email": "dsfarfa@efaer.com",
-    "senha": "123ppp"
+    "email": "babu@b.com",
+    "senha": "123321c"
 }
 
 ###
@@ -67,20 +65,20 @@ Content-Type: application/json
 GET http://localhost:7000/api/feirantes
 
 ###
-GET http://localhost:7000/api/feirantes/680ee6d5c2ff472deaabbdf8
+GET http://localhost:7000/api/feirantes/
+Content-Type: application/json
+Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWU1YzA4NWQ3OWY1MGE3MTc2ZTExMSIsImlhdCI6MTc0NzM2NTM1MiwiZXhwIjoxNzQ3NDUxNzUyfQ.lIYOUHtOSCxLyPGJe50cLp9SuFykpqvFMTcG8JKWbiU"
 
 ###
 DELETE http://localhost:7000/api/feirantes/681018dd01c94c3f565ea2c0
 
 ###
-PUT http://localhost:7000/api/feirantes/681018dd01c94c3f565ea2c0
+PUT http://localhost:7000/api/feirantes
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWU1YzA4NWQ3OWY1MGE3MTc2ZTExMSIsImlhdCI6MTc0NzM2NjQ4MiwiZXhwIjoxNzQ3NDUyODgyfQ.kNtVIIvxW8O6qC5QmeCqELuFmALJ65aohY2ILwxkolg
 
 {
-    "nome": "feira aleatoria",
-    "cpf_cnpj": "12520369745555",
-    "email": "cba@abc.com",
-    "celular": "12332112369",
+    "celular": "21995548674",
     "genero": "Transformer",
     "cep": "15264896",
     "endereco": "Rua das garças",
@@ -88,6 +86,15 @@ Content-Type: application/json
     "bairro": "Itauna",
     "cidade": "Saquarema",
     "uf": "rj"
+}
+
+###
+POST http://localhost:7000/api/feirantes/login
+Content-Type: application/json
+
+{
+    "email": "feira@vaca.com",
+    "senha": "palmas1"
 }
 
 ###
@@ -162,17 +169,15 @@ GET http://localhost:7000/api/enderecoCliente/6813c2f4de3356d89714f65d
 DELETE http://localhost:7000/api/enderecoCliente/6813c3d9de3356d89714f66f
 
 ###
-PUT http://localhost:7000/api/enderecoCliente/6813c410de3356d89714f678
+PUT http://localhost:7000/api/enderecoCliente
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MjYzMGJlMTJhODhjMzNkMmQ3ZDdmMyIsImlhdCI6MTc0NzMzNTU3MywiZXhwIjoxNzQ3NDIxOTczfQ.OBNEEWU8MUjxpeYcKXY1__sMONJodnH3_kFxrOmOaZM
 
 {
-    "clienteId": "68100b7830d782aee2f82be5",
-    "cep": "28990-967",
-    "endereco": "Rua prosopopéia",
-    "numeroCasa": 1564,
-    "bairro": "Bacaxá",
+    "numeroCasa": 11114,
+    "bairro": "Bacaxota",
     "cidade": "Saquarema",
     "uf": "rj",
-    "complemento": "casa",
-    "referencia": "perto de outra casa"
+    "complemento": "Loja",
+    "referencia": "perto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra loja"
 }

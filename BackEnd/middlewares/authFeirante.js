@@ -1,12 +1,12 @@
 const jwt = require("jsonwebtoken");
 
-function authCliente(req, res, next) {
+function authFeirante(req, res, next) {
   const authHearder = req.headers.authorization;
 
   if (!authHearder || !authHearder.startsWith("Bearer ")) {
     return res.status(401).json({ message: "Token não fornecido." });
   }
-  
+
   const token = authHearder.split(" ")[1];
 
   try {
@@ -19,5 +19,4 @@ function authCliente(req, res, next) {
   }
 }
 
-module.exports = authCliente;
-
+module.exports = authFeirante;

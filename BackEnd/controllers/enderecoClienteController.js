@@ -93,9 +93,7 @@ const enderecoClienteController = {
   },
   update: async (req, res) => {
     try {
-      const id = req.params.clienteId;
       const {
-        clienteId,
         cep,
         endereco,
         numeroCasa,
@@ -107,7 +105,7 @@ const enderecoClienteController = {
       } = req.body;
 
       const enderecoCliente = {
-        clienteId,
+        clienteId: req.user.id,
         cep,
         endereco,
         numeroCasa,
@@ -117,8 +115,8 @@ const enderecoClienteController = {
         complemento,
         referencia,
       };
-      const updateEnderecoCliente = await EnderecoModel.findByIdAndUpdate(
-        id,
+      const updateEnderecoCliente = await EnderecoModel.findOneAndUpdate(
+        { clienteId: req.user.id },
         enderecoCliente,
         { new: true }
       );

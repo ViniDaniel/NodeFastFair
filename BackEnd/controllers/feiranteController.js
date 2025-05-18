@@ -68,6 +68,7 @@ const feiranteController = {
     try {
       const id = req.params.id;
       const feirante = await FeiranteModel.findById(id);
+
       if (!feirante) {
         return res.status(404).json({ message: "Feirante não encontrado!" });
       }
@@ -99,11 +100,9 @@ const feiranteController = {
   },
   update: async (req, res) => {
     try {
-      const id = req.params.id;
+      
       const {
         nome,
-        cpf_cnpj,
-        email,
         celular,
         genero,
         cep,
@@ -115,8 +114,6 @@ const feiranteController = {
       } = req.body;
       const feirante = {
         nome,
-        cpf_cnpj,
-        email,
         celular,
         genero,
         cep,
@@ -126,8 +123,11 @@ const feiranteController = {
         cidade,
         uf,
       };
+
+      const feiranteId = req.user.id;
+
       const updateFeirante = await FeiranteModel.findByIdAndUpdate(
-        id,
+        feiranteId,
         feirante,
         { new: true }
       );

@@ -11,7 +11,7 @@ router
 //rota para busca do endereço do cliente
 router
   .route("/enderecoCliente")
-  .get(authCliente, (req, res) => enderecoClienteController.getAll(req, res));
+  .get((req, res) => enderecoClienteController.getAll(req, res));
 
 //rota para busca individual do endereço do cliente
 router

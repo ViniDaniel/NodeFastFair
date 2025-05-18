@@ -45,13 +45,13 @@ const enderecoClienteSchema = new Schema(
     },
     complemento: {
       type: String,
-      minlength: 3,
       maxlength: 100,
+      require: false,
     },
     referencia: {
       type: String,
-      minlength: 3,
-      maxlength: 100,
+      maxlength: 200,
+      require: false,
     },
   },
   { timestamps: true }

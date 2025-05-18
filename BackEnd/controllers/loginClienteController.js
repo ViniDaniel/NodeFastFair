@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 const { Cliente: ClienteModel } = require("../models/Cliente");
 
 const loginClienteController = {
@@ -20,16 +20,19 @@ const loginClienteController = {
 
       const { nome, _id } = cliente;
 
-      const token = jwt.sign(
-        {id: _id},
-        process.env.JWT_SECRET,
-        {expiresIn: process.env.JWT_EXPIRES_IN || "id"}
-      )
-
+      const token = jwt.sign({ id: _id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN || "id",
+      });
 
       return res.status(200).json({
         message: "Login realizado com sucesso!",
-        cliente: { nome, _id, email },
+        cliente: {
+          _id: cliente._id,
+          nome: cliente.nome,
+          email: cliente.email,
+          celular: cliente.celular,
+          genero: cliente.genero,
+        },
         token,
       });
     } catch (error) {
