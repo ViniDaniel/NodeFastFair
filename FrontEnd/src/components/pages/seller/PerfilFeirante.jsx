@@ -83,7 +83,7 @@ function PerfilFeirante() {
         </div>
         <div className={styles.card_button}>
           <AttButton
-            to={`/atualizar_feirante/${feirante._id}`}
+            to={`/feirante/atualizar_feirante/${feirante._id}`}
             text="Atualizar Dados"
           />
           <button className={styles.deslogar} onClick={handleLogout} >Sair</button>

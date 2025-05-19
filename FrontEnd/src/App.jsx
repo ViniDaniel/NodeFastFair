@@ -17,6 +17,8 @@ import AtualizarCliente from "./components/pages/client/AtualizarCliente";
 import AtualizarEndereco from "./components/pages/client/AtualizarEndereco";
 import PerfilFeirante from "./components/pages/seller/PerfilFeirante";
 import AtualizarFeirante from "./components/pages/seller/AtualizarFeirante";
+import NotFound from "./components/pages/shared/NotFound";
+import Sobre from "./components/pages/shared/Sobre";
 
 function App() {
   return (
@@ -42,8 +44,10 @@ function App() {
                 element={<EnderecoForm />}
               ></Route>
               <Route path="/atualizar_endereco/:clienteId" element={<AtualizarEndereco />} ></Route>
-              <Route path="/perfilFeirante" element={<PerfilFeirante />} ></Route>
-              <Route path="/atualizar_feirante/:feiranteId" element={<AtualizarFeirante />} ></Route>
+              <Route path="/feirante/perfilFeirante" element={<PerfilFeirante />} ></Route>
+              <Route path="/feirante/atualizar_feirante/:feiranteId" element={<AtualizarFeirante />} ></Route>
+              <Route path="/sobre" element={<Sobre />} ></Route>
+              <Route path="*" element={<NotFound />} ></Route>
             </Routes>
           </Container>
           <Footer />

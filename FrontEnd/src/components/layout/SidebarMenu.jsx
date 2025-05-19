@@ -9,7 +9,6 @@ function SidebarMenu({ isOpen, onClose }) {
       <ul>
         <li><Link to="/cadastroCliente" onClick={onClose}>Cadastro</Link></li>
         <li><Link to="/loginCliente" onClick={onClose}>Login</Link></li>
-        {/*<li><Link to="/carrinho" onClick={onClose}>Carrinho</Link></li>*/}
       </ul>
 
       <h3>Feirante</h3>

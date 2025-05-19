@@ -4,19 +4,19 @@
     padding: 1em;
     text-align: center;
 }
-ul {
+ .footer ul {
     display: flex;
     list-style-type: none;
     justify-content: center;
 }
-ul li {
+.footer ul li {
     margin: 0 1em;
 }
-ul li:hover {
+.footer ul li:hover {
     color: #27c213;
     text-decoration: none;
 }
-svg {
+.footer svg {
     font-size: 1.5em;
     cursor: pointer;
 }

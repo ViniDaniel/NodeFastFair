@@ -27,7 +27,7 @@ function LoginFeirante() {
 
       console.log("Feirante Logado", feirante);
 
-      navigate("/");
+      navigate("/feirante/descricao");
     } catch (err) {
       if (err.response && err.response.data?.message) {
         setError(err.response.data.message);
