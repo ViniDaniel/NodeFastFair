@@ -1,11 +1,11 @@
 const router = require("express").Router();
-
+const authFeirante = require("../middlewares/authFeirante");
 const produtoController = require("../controllers/produtoController");
 
 //routa de criação de produto
 router
   .route("/produtos")
-  .post((req, res) => produtoController.create(req, res));
+  .post(authFeirante,(req, res) => produtoController.create(req, res));
 
 //rota da lista de produtos
 router.route("/produtos").get((req, res) => produtoController.getAll(req, res));
@@ -17,13 +17,13 @@ router
 
 //rta de delete do produto
 router
-  .route("/produtos/:id")
-  .delete((req, res) => produtoController.delete(req, res));
+  .route("/produtos/:feiranteId")
+  .delete(authFeirante,(req, res) => produtoController.delete(req, res));
 
 //rota de update
 router
-  .route("/produtos/:id")
-  .put((req, res) => produtoController.update(req, res));
+  .route("/produtos/:feiranteId")
+  .put(authFeirante,(req, res) => produtoController.update(req, res));
 
 
   module.exports = router;

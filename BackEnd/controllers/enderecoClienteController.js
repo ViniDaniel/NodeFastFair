@@ -126,7 +126,7 @@ const enderecoClienteController = {
       }
       return res
         .status(200)
-        .json({ updateEnderecoCliente, message: "Atualizadp com sucesso" });
+        .json({ updateEnderecoCliente, message: "Atualizado com sucesso" });
     } catch (error) {
       console.log(error);
       return res

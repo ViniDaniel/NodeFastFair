@@ -5,15 +5,17 @@ require("../models/CategoriaProduto"); // importa só pra registrar
 const produtoController = {
   create: async (req, res) => {
     try {
-      const { nome, categoria, descricao, preco, peso, imagem, status } =
+      const { nome, categoria, descricao, preco, peso, quantidade, imagem, status } =
         req.body;
 
       const produto = {
+        feiranteId: req.user.id,
         nome,
         categoria,
         descricao,
         preco,
         peso,
+        quantidade,
         imagem,
         status,
       };
@@ -32,7 +34,7 @@ const produtoController = {
   },
   getAll: async (req, res) => {
     try {
-      const produto = await ProdutoModel.find().populate("categoria") //populate para encotrar a categoria
+      const produto = await ProdutoModel.find().populate("categoria", "feiranteId") //populate para encotrar a categoria
       return res.status(200).json(produto);
     } catch (error) {
       console.log(error);
@@ -43,8 +45,8 @@ const produtoController = {
   },
   get: async (req, res) => {
     try {
-      const id = req.params.id;
-      const produto = await ProdutoModel.findById(id).populate("categoria")
+      const {feiranteId} = req.params;
+      const produto = await ProdutoModel.findOne({feiranteId}).populate("categoria", "feiranteId");
 
       if (!produto) {
         return res.status(404).json({ message: "Produto não encontrado" });
@@ -59,12 +61,12 @@ const produtoController = {
   },
   delete: async (req, res) => {
     try {
-      const id = req.params.id;
-      const produto = await ProdutoModel.findById(id);
+      const {feiranteId} = req.params;
+      const produto = await ProdutoModel.findOne({feiranteId});
       if (!produto) {
         return res.status(404).json({ message: "Produto não encontrado" });
       }
-      const deleteProduto = await ProdutoModel.findByIdAndDelete(id);
+      const deleteProduto = await ProdutoModel.findByIdAndDelete(produto._id);
       return res
         .status(200)
         .json({ deleteProduto, message: "produto deletado com sucesso" });
@@ -78,19 +80,21 @@ const produtoController = {
   update: async (req, res) => {
     try {
       const id = req.params.id;
-      const { nome, categoria, descricao, preco, peso, imagem, status } =
+      const { nome, categoria, descricao, preco, peso, quantidade, imagem, status } =
         req.body;
       const produto = {
+        feiranteId: req.user.id,
         nome,
         categoria,
         descricao,
         preco,
         peso,
+        quantidade,
         imagem,
         status,
       };
 
-      const updateProduto = await ProdutoModel.findByIdAndUpdate(id, produto, {
+      const updateProduto = await ProdutoModel.findOneAndUpdate({feiranteId: req.user.id}, produto, {
         new: true,
       });
 

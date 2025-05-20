@@ -31,12 +31,23 @@ const produtoSchema = new Schema(
       min: 0,
       max: 1000000,
     },
+    quantidade: {
+      type: Number,
+      required: true,
+      min: 0,
+      max: 10000,
+    },
     imagem: {
       type: [String],
     },
     status: {
       type: String,
       default: "Ativo",
+    },
+    feiranteId: {
+      type: Schema.Types.ObjectId,
+      ref: "Feirante",
+      required: true,
     },
   },
   { timestamps: true }

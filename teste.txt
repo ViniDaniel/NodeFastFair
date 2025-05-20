@@ -39,6 +39,9 @@ marill@rapa.com
 
 asdasd1
 
+babu@b.com
+123321c
+
 
 dados do .env para facilar no trabalho em sala
 JWT_SECRET=bnghj5421warujy5t4102
