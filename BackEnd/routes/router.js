@@ -13,4 +13,7 @@ router.use("/", produtoRouter)
 const enderecoClienteRouter = require("./enderecoClienteRouter")
 router.use("/", enderecoClienteRouter)
 
+const categoriaProdutoRouter = require("./categoriaProdutoRouter")
+router.use("/", categoriaProdutoRouter)
+
 module.exports = router;

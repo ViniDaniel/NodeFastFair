@@ -2,13 +2,17 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-
 const produtoSchema = new Schema(
   {
     nome: {
       type: String,
       require: true,
       maxlenght: 50,
+    },
+    feiranteId: {
+      type: Schema.Types.ObjectId,
+      ref: "Feirante",
+      required: true,
     },
     categoria: {
       type: Schema.Types.ObjectId,
@@ -39,15 +43,11 @@ const produtoSchema = new Schema(
     },
     imagem: {
       type: [String],
+      required: true,
     },
     status: {
       type: String,
       default: "Ativo",
-    },
-    feiranteId: {
-      type: Schema.Types.ObjectId,
-      ref: "Feirante",
-      required: true,
     },
   },
   { timestamps: true }

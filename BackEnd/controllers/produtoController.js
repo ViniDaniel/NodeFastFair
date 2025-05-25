@@ -5,8 +5,16 @@ require("../models/CategoriaProduto"); // importa só pra registrar
 const produtoController = {
   create: async (req, res) => {
     try {
-      const { nome, categoria, descricao, preco, peso, quantidade, imagem, status } =
-        req.body;
+      const {
+        nome,
+        categoria,
+        descricao,
+        preco,
+        peso,
+        quantidade,
+        imagem,
+        status,
+      } = req.body;
 
       const produto = {
         feiranteId: req.user.id,
@@ -34,7 +42,9 @@ const produtoController = {
   },
   getAll: async (req, res) => {
     try {
-      const produto = await ProdutoModel.find().populate("categoria", "feiranteId") //populate para encotrar a categoria
+      const produto = await ProdutoModel.find()
+        .populate("feiranteId")
+        .populate("categoria");
       return res.status(200).json(produto);
     } catch (error) {
       console.log(error);
@@ -45,12 +55,15 @@ const produtoController = {
   },
   get: async (req, res) => {
     try {
-      const {feiranteId} = req.params;
-      const produto = await ProdutoModel.findOne({feiranteId}).populate("categoria", "feiranteId");
+      const { feiranteId } = req.params;
+      const produto = await ProdutoModel.find({ feiranteId })
+        .populate("categoria")
+        .populate("feiranteId");
 
-      if (!produto) {
-        return res.status(404).json({ message: "Produto não encontrado" });
+      if (!produto || produto.length === 0) {
+        return res.status(404).json({ message: "Nenhum produto encontrado" });
       }
+
       return res.status(200).json(produto);
     } catch (error) {
       console.log(error);
@@ -59,17 +72,37 @@ const produtoController = {
         .json({ message: "Produto não encontrado!", error: error.message });
     }
   },
+
+  getP: async (req, res) => {
+    try {
+      const { feiranteId, produtoId } = req.params;
+      const produto = await ProdutoModel.findOne({
+        feiranteId: feiranteId,
+        _id: produtoId,
+      })
+        .populate("categoria")
+        .populate("feiranteId");
+      return res.status(200).json(produto);
+    } catch (error) {
+      console.log(error);
+      return res
+        .status(500)
+        .json({ message: "Produto não encontrado!", error: error.message });
+    }
+  },
+
   delete: async (req, res) => {
     try {
-      const {feiranteId} = req.params;
-      const produto = await ProdutoModel.findOne({feiranteId});
+      const { feiranteId, produtoId } = req.params;
+
+      const produto = await ProdutoModel.findByIdAndDelete({
+        _id: produtoId,
+        feirante: feiranteId,
+      });
       if (!produto) {
         return res.status(404).json({ message: "Produto não encontrado" });
       }
-      const deleteProduto = await ProdutoModel.findByIdAndDelete(produto._id);
-      return res
-        .status(200)
-        .json({ deleteProduto, message: "produto deletado com sucesso" });
+      return res.status(200).json({ message: "produto deletado com sucesso" });
     } catch (error) {
       console.log(error);
       return res
@@ -79,11 +112,18 @@ const produtoController = {
   },
   update: async (req, res) => {
     try {
-      const id = req.params.id;
-      const { nome, categoria, descricao, preco, peso, quantidade, imagem, status } =
-        req.body;
+      const { feiranteId, produtoId } = req.params;
+      const {
+        nome,
+        categoria,
+        descricao,
+        preco,
+        peso,
+        quantidade,
+        imagem,
+        status,
+      } = req.body;
       const produto = {
-        feiranteId: req.user.id,
         nome,
         categoria,
         descricao,
@@ -94,9 +134,13 @@ const produtoController = {
         status,
       };
 
-      const updateProduto = await ProdutoModel.findOneAndUpdate({feiranteId: req.user.id}, produto, {
-        new: true,
-      });
+      const updateProduto = await ProdutoModel.findOneAndUpdate(
+        { _id: produtoId, feiranteId: feiranteId },
+        produto,
+        {
+          new: true,
+        }
+      );
 
       if (!updateProduto) {
         return res.status(404).json({ message: "Produto não encontrado!" });

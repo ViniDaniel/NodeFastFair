@@ -67,7 +67,7 @@ GET http://localhost:7000/api/feirantes
 ###
 GET http://localhost:7000/api/feirantes/
 Content-Type: application/json
-Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWU1YzA4NWQ3OWY1MGE3MTc2ZTExMSIsImlhdCI6MTc0NzM2NTM1MiwiZXhwIjoxNzQ3NDUxNzUyfQ.lIYOUHtOSCxLyPGJe50cLp9SuFykpqvFMTcG8JKWbiU"
+Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzBkNjg5YjA5ZDc1YWQxODM5MDljZCIsImlhdCI6MTc0ODAzMjcxMiwiZXhwIjoxNzQ4MTE5MTEyfQ.ZQFvY2-y-6o7nQL_3pLc7gW2cv4f444L9MONF76xDYU"
 
 ###
 DELETE http://localhost:7000/api/feirantes/681018dd01c94c3f565ea2c0
@@ -93,17 +93,8 @@ POST http://localhost:7000/api/feirantes/login
 Content-Type: application/json
 
 {
-    "email": "feira@vaca.com",
-    "senha": "palmas1"
-}
-
-###
-POST http://localhost:7000/api/feirantes/login
-Content-Type: application/json
-
-{
-    "email": "cba@arc.com",
-    "senha": "senhaInsegura123"
+    "email": "maraba@m.com",
+    "senha": "1234n6"
 }
 
 ###

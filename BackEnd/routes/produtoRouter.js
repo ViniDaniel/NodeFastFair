@@ -4,25 +4,29 @@ const produtoController = require("../controllers/produtoController");
 
 //routa de criação de produto
 router
-  .route("/produtos")
+  .route("/produtos/:feiranteId")
   .post(authFeirante,(req, res) => produtoController.create(req, res));
 
 //rota da lista de produtos
-router.route("/produtos").get((req, res) => produtoController.getAll(req, res));
+router.route("/produtos/").get((req, res) => produtoController.getAll(req, res));
 
 //rota da busca unitaria de produto
 router
-  .route("/produtos/:id")
-  .get((req, res) => produtoController.get(req, res));
+  .route("/produtos/:feiranteId")
+  .get(authFeirante, (req, res) => produtoController.get(req, res));
+
+router
+  .route("/produtos/:feiranteId/:produtoId")
+  .get(authFeirante, (req, res) => produtoController.getP(req, res));
 
 //rta de delete do produto
 router
-  .route("/produtos/:feiranteId")
+  .route("/produtos/:feiranteId/:produtoId")
   .delete(authFeirante,(req, res) => produtoController.delete(req, res));
 
 //rota de update
 router
-  .route("/produtos/:feiranteId")
+  .route("/produtos/:feiranteId/:produtoId")
   .put(authFeirante,(req, res) => produtoController.update(req, res));
 
 
