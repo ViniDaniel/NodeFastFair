@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const { Schema } = mongoose;
 
-const clenteSchema = new Schema(
+const clienteSchema = new Schema(
   {
     nome: {
       type: String,
@@ -44,7 +44,7 @@ const clenteSchema = new Schema(
   { timestamps: true }
 );
 
-clenteSchema.pre("save", async function (next) {
+clienteSchema.pre("save", async function (next) {
   if (!this.isModified("senha")) {
     return next();
   }
@@ -57,6 +57,6 @@ clenteSchema.pre("save", async function (next) {
   }
 });
 
-const Cliente = mongoose.model("Cliente", clenteSchema);
+const Cliente = mongoose.model("Cliente", clienteSchema);
 
 module.exports = {Cliente};

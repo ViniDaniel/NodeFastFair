@@ -172,3 +172,29 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MjYzMGJlM
     "complemento": "Loja",
     "referencia": "perto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra lojaperto de outra loja"
 }
+
+###
+POST http://localhost:7000/api/feirante/descricao
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MWU1YzA4NWQ3OWY1MGE3MTc2ZTExMSIsImlhdCI6MTc0ODE0NTg4MSwiZXhwIjoxNzQ4MjMyMjgxfQ.8CVxpCx0DggpjELKGrMiHLjph3wC2wHf4Bhn6e0Nz9k
+
+{
+    "descricao": "dnsfjkcesvfjgseifgbusgvfjksvfyhesuhfihewuifhjkebvsfhvysegfuhyweoidhuegbfyegsfuygeusghfuiegwuifge8wyhafdoiwhuiedghwyhfioweghrdtw7iyrh83wyer893yw8rf",
+    "topicos": ["Alimentos orgânicos", "Feira livre", "Produtos frescos"],
+    "enderecos": ["Rua das Feiras, 123", "Avenida Central, box 9"],
+    "capa": ["https://meusite.com/img1.jpg", "https://meusite.com/img2.jpg"]
+
+
+}
+
+###
+POST http://localhost:7000/api/feirantes/login
+Content-Type: application/json
+
+{
+    "email": "feira@vaca.com",
+    "senha": "palmas1"
+}
+
+###
+GET http://localhost:7000/api/feirante/descricao
