@@ -19,6 +19,9 @@ import PerfilFeirante from "./components/pages/seller/PerfilFeirante";
 import AtualizarFeirante from "./components/pages/seller/AtualizarFeirante";
 import NotFound from "./components/pages/shared/NotFound";
 import Sobre from "./components/pages/shared/Sobre";
+import ProdutoAdd from "./components/pages/seller/store/ProdutoAdd";
+import EstoqueFeirante from "./components/pages/seller/store/EstoqueFeirante";
+import ProdutoAtt from "./components/pages/seller/store/ProdutoAtt";
 
 function App() {
   return (
@@ -33,7 +36,10 @@ function App() {
               <Route path="/loginFeirante" element={<LoginFeirante />}></Route>
               <Route path="/suporte" element={<Suporte />}></Route>
               <Route path="/cadastroCliente" element={<CadastroCliente />} />
-              <Route path="/atualizar_cliente/:clienteId" element={<AtualizarCliente />}></Route>
+              <Route
+                path="/atualizar_cliente/:clienteId"
+                element={<AtualizarCliente />}
+              ></Route>
               <Route
                 path="/cadastroFeirante"
                 element={<CadastroFeirante />}
@@ -43,11 +49,23 @@ function App() {
                 path="/cadastrar-endereco"
                 element={<EnderecoForm />}
               ></Route>
-              <Route path="/atualizar_endereco/:clienteId" element={<AtualizarEndereco />} ></Route>
-              <Route path="/feirante/perfilFeirante" element={<PerfilFeirante />} ></Route>
-              <Route path="/feirante/atualizar_feirante/:feiranteId" element={<AtualizarFeirante />} ></Route>
-              <Route path="/sobre" element={<Sobre />} ></Route>
-              <Route path="*" element={<NotFound />} ></Route>
+              <Route
+                path="/atualizar_endereco/:clienteId"
+                element={<AtualizarEndereco />}
+              ></Route>
+              <Route
+                path="/feirante/perfilFeirante"
+                element={<PerfilFeirante />}
+              ></Route>
+              <Route
+                path="/feirante/atualizar_feirante/:feiranteId"
+                element={<AtualizarFeirante />}
+              ></Route>
+              <Route path="/sobre" element={<Sobre />}></Route>
+              <Route path="/feirante/adicionar-produto" element={<ProdutoAdd />}></Route>
+              <Route path="/atualizar_produto/:feiranteId/:produtoId"  element={<ProdutoAtt/>}></Route>
+              <Route path="*" element={<NotFound />}></Route>
+              <Route path="/feirante/estoque" element={<EstoqueFeirante />} ></Route>
             </Routes>
           </Container>
           <Footer />

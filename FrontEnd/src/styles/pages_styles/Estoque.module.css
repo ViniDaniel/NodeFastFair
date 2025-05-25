@@ -1,0 +1,71 @@
+.container {
+  font-size: 30px;
+  /* justify-content: space-between; <-- Provavelmente não terá efeito útil aqui se .card_dados é o único filho */
+  padding: 3em;
+  color: black;
+  text-shadow: 1px 1px 0 white, -1px -1px 0 white;
+  /* Se você quiser centralizar o card_dados dentro do container */
+  display: flex;
+  justify-content: center; /* Centraliza o card_dados */
+}
+
+.card_dados {
+  text-align: left;
+  background-color: white;
+  border-radius: 10px;
+  padding: 1em;
+  /* Ajuste ou remova esta linha para permitir que os produtos se organizem */
+  max-width: 90%; /* Por exemplo, para ocupar mais da largura da tela */
+  width: 100%; /* Garante que ele ocupe 100% do max-width definido */
+  box-sizing: border-box; /* Boa prática */
+}
+
+.produtos_grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: flex-start;
+}
+
+.produto_item {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  flex: 1 1 calc(33% - 20px); /* Ajustado para 3 itens com 30px de gap. O 20px é (gap_left + gap_right)/2 de cada lado do item */
+  min-width: 280px; /* Largura mínima para o item */
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.produto_item p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    /* Opcional: Para remover o espaço em branco extra se houver muitos */
+    white-space: normal; /* Garante que o texto se envolva normalmente */
+}
+
+.button {
+  padding-left: 10px;
+  border: none;
+  color: rgb(184, 5, 5);
+  background-color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  color: rgb(80, 0, 0);
+}
+/* Considerar media queries para responsividade */
+@media (max-width: 1200px) {
+  .produto_item {
+    flex: 1 1 calc(50% - 15px); /* 2 itens por linha em telas médias */
+  }
+}
+
+@media (max-width: 768px) {
+  .produto_item {
+    flex: 1 1 100%; /* 1 item por linha em telas pequenas */
+  }
+}

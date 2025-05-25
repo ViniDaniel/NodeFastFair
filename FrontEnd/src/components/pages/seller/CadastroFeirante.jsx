@@ -12,6 +12,7 @@ import {
 } from "../../scripts/FormValidation";
 import apiFeirante from "../../services/apiFeirante";
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "../../../styles/pages_styles/Cadastro.module.css";
 
 function CadastroFeirante() {
@@ -31,57 +32,60 @@ function CadastroFeirante() {
 
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+
   async function postUser() {
-      const nome = inputNome.current.value;
-      const cpf_cnpj = inputCpfCnpj.current.value;
-      const email = inputEmail.current.value;
-      const celular = inputCelular.current.value;
-      const genero = inputGenero.current.value;
-      const cep = inputCep.current.value;
-      const endereco = inputEndereco.current.value;
-      const numeroCasa = inputNumeroCasa.current.value;
-      const bairro = inputBairro.current.value;
-      const uf = inputUf.current.value;
-      const cidade = inputCidade.current.value;
-      const senha = inputSenha.current.value;
-      const confirmarSenha = inputConfirmarSenha.current.value;
+    const nome = inputNome.current.value;
+    const cpf_cnpj = inputCpfCnpj.current.value;
+    const email = inputEmail.current.value;
+    const celular = inputCelular.current.value;
+    const genero = inputGenero.current.value;
+    const cep = inputCep.current.value;
+    const endereco = inputEndereco.current.value;
+    const numeroCasa = inputNumeroCasa.current.value;
+    const bairro = inputBairro.current.value;
+    const uf = inputUf.current.value;
+    const cidade = inputCidade.current.value;
+    const senha = inputSenha.current.value;
+    const confirmarSenha = inputConfirmarSenha.current.value;
 
-      if(!isValidNome(nome)) return setError("Nome inválido!");
-      if(!isValidCPF(cpf_cnpj)) return setError("CPF inválido!");
-      if(!isValidEmail(email)) return setError("Email inválido");
-      if(!isValidCelular(celular)) return setError("Celular inválido!");
-      if(!isValidGenero(genero)) return setError("Gênero inválido!");
-      if(!isValidEndereco(endereco)) return setError("Endereço inválido!");
-      if(!isValidCidade(cidade)) return setError("Cidade inválida!");
-      if(!isValidBairro(bairro)) return setError("Bairro inválido!");
-      if(!isValidUF(uf)) return setError("Escolha um estádo!");
-      const senhaValidacao = isValidSenha(senha, confirmarSenha);
-      if(!senhaValidacao.valid) return setError(senhaValidacao.message);
+    if (!isValidNome(nome)) return setError("Nome inválido!");
+    if (!isValidCPF(cpf_cnpj)) return setError("CPF inválido!");
+    if (!isValidEmail(email)) return setError("Email inválido");
+    if (!isValidCelular(celular)) return setError("Celular inválido!");
+    if (!isValidGenero(genero)) return setError("Gênero inválido!");
+    if (!isValidEndereco(endereco)) return setError("Endereço inválido!");
+    if (!isValidCidade(cidade)) return setError("Cidade inválida!");
+    if (!isValidBairro(bairro)) return setError("Bairro inválido!");
+    if (!isValidUF(uf)) return setError("Escolha um estádo!");
+    const senhaValidacao = isValidSenha(senha, confirmarSenha);
+    if (!senhaValidacao.valid) return setError(senhaValidacao.message);
 
-      try {
-        await apiFeirante.post("/feirantes", {
-          nome,
-          cpf_cnpj,
-          email,
-          celular,
-          genero,
-          cep: cep || undefined,
-          endereco,
-          numeroCasa: numeroCasa || undefined,
-          bairro,
-          uf,
-          cidade,
-          senha,
-          confirmarSenha
-        })
-        alert("Cadastro realizado com sucesso!")
-      } catch (err) {
-        if(err.response && err.response.data?.message){
-          setError(err.response.data.message)//retorna mensagem de erro do backend, caso ja tenha algum dado cadastrado
-        } else {
-          setError("Erro ao cadastrar feirante. Tente novamente.");
-        }
+    try {
+      await apiFeirante.post("/feirantes", {
+        nome,
+        cpf_cnpj,
+        email,
+        celular,
+        genero,
+        cep: cep || undefined,
+        endereco,
+        numeroCasa: numeroCasa || undefined,
+        bairro,
+        uf,
+        cidade,
+        senha,
+        confirmarSenha,
+      });
+      alert("Cadastro realizado com sucesso!");
+      navigate("/loginFeirante");
+    } catch (err) {
+      if (err.response && err.response.data?.message) {
+        setError(err.response.data.message); //retorna mensagem de erro do backend, caso ja tenha algum dado cadastrado
+      } else {
+        setError("Erro ao cadastrar feirante. Tente novamente.");
       }
+    }
   }
 
   return (
@@ -106,7 +110,7 @@ function CadastroFeirante() {
             <label htmlFor="cpf_cnpj" className={styles.label}>
               CPF:
             </label>
-            
+
             <input
               type="text"
               name="cpf_cnpj"
