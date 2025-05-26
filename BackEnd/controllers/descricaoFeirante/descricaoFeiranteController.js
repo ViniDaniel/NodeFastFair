@@ -1,6 +1,6 @@
 const {
   DescricaoFeirante: DescricaoModel,
-} = require("../models/DescricaoFeirante");
+} = require("../../models/DescricaoFeirante");
 
 const descricaoFeiranteController = {
   create: async (req, res) => {
