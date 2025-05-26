@@ -2,12 +2,11 @@ import { useEffect, useState, useContext } from "react";
 import { FeiranteContext } from "../../../context/FeiranteContext";
 import apiFeirante from "../../../services/apiFeirante";
 import AttButton from "../../../layout/AttButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styles from "../../../../styles/pages_styles/Estoque.module.css";
 import LinkButton from "../../../layout/LinkButton";
 import { formatPreco } from "../../../scripts/ProdutoFormValidation";
 import { FaTrashAlt } from "react-icons/fa";
-import { useLocation } from "react-router-dom"
 
 function EstoqueFeirante() {
   const { feirante } = useContext(FeiranteContext);

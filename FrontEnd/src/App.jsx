@@ -22,6 +22,8 @@ import Sobre from "./components/pages/shared/Sobre";
 import ProdutoAdd from "./components/pages/seller/store/ProdutoAdd";
 import EstoqueFeirante from "./components/pages/seller/store/EstoqueFeirante";
 import ProdutoAtt from "./components/pages/seller/store/ProdutoAtt";
+import AddDescricao from "./components/pages/seller/custom/AddDescricao";
+import  DescricaoFeirante  from "./components/pages/seller/custom/DescricaoFeirante";
 
 function App() {
   return (
@@ -66,6 +68,8 @@ function App() {
               <Route path="/atualizar_produto/:feiranteId/:produtoId"  element={<ProdutoAtt/>}></Route>
               <Route path="*" element={<NotFound />}></Route>
               <Route path="/feirante/estoque" element={<EstoqueFeirante />} ></Route>
+              <Route path="/feirante/adicionar_descricao/" element={<AddDescricao />}></Route>
+              <Route path="/feirante/descricao" element={<DescricaoFeirante />}></Route>
             </Routes>
           </Container>
           <Footer />

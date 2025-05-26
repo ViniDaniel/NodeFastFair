@@ -30,10 +30,9 @@ function ProdutoAdd() {
   const navigate = useNavigate();
 
   function handleChange(e) {
-  const { name, value } = e.target;
-  setForm((prevForm) => ({ ...prevForm, [name]: value }));
-}
-
+    const { name, value } = e.target;
+    setForm((prevForm) => ({ ...prevForm, [name]: value }));
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -43,8 +42,7 @@ function ProdutoAdd() {
     if (!isValidCategoria(form.categoria))
       return setError("Escolha uma categoria válida");
     if (!isValidPreco(form.preco)) return setError("Digite o preço do produto");
-    if (!isValidPeso(form.peso))
-      return setError("Digite o peso do produto");
+    if (!isValidPeso(form.peso)) return setError("Digite o peso do produto");
     if (!isValidQuantidade(form.quantidade))
       return setError("Digite a quantidade atual de estoque");
     if (!isValidImagem(form.imagem))
@@ -65,7 +63,7 @@ function ProdutoAdd() {
         },
       });
       alert("Produto cadastrado com sucesso!");
-      navigate("/feirante/estoque",  { state: { from: "cadastro" } });
+      navigate("/feirante/estoque", { state: { from: "cadastro" } });
     } catch (error) {
       if (error.response && error.response.data?.message) {
         setError(error.response.data.message);
@@ -73,7 +71,6 @@ function ProdutoAdd() {
         setError("Erro ao cadastrar produto");
       }
     }
-    
   }
   return (
     <div>

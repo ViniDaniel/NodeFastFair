@@ -1,0 +1,201 @@
+.div {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa; /* Um cinza bem claro para o fundo geral */
+  padding: 20px;
+  max-width: 1000px; /* Limita a largura máxima para melhor leitura */
+  margin: 40px auto; /* Centraliza o container na página */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave para profundidade */
+}
+
+.h2 {
+  text-align: center;
+  color: #343a40; /* Cor escura para o título principal */
+  margin-bottom: 30px;
+  font-size: 2.2em;
+  font-weight: 700;
+}
+
+.h3 {
+  color: #495057; /* Cor um pouco mais clara para subtítulos de seção */
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 1.6em;
+  border-bottom: 2px solid #e9ecef; /* Linha divisória sutil */
+  padding-bottom: 8px;
+}
+
+/* Seções (descrição, topicos, enderecos, contatos, capa) */
+.descricao,
+.topicos,
+.enderecos,
+.contatos,
+.capa {
+  background-color: #ffffff; /* Fundo branco para as seções */
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra mais leve para as seções */
+}
+
+.descricao p {
+  color: #5a5a5a;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-size: 1.1em;
+  border-bottom: 1px dashed #ced4da; /* Linha tracejada para separar a descrição */
+  padding-bottom: 15px;
+}
+
+/* Inputs gerais */
+.input {
+  width: calc(100% - 20px); /* Ocupa quase 100% com padding */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ced4da; /* Borda cinza claro */
+  border-radius: 5px;
+  font-size: 1em;
+  box-sizing: border-box; /* Inclui padding e borda no tamanho total */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #007bff; /* Borda azul ao focar */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra suave ao focar */
+}
+
+/* Botões gerais */
+.button {
+  display: inline-block; /* Para que o padding e margin funcionem corretamente */
+  padding: 10px 20px;
+  margin-right: 10px; /* Espaçamento entre botões */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  white-space: nowrap; /* Evita que o texto do botão quebre a linha */
+}
+
+.button:hover {
+  transform: translateY(-2px); /* Efeito de "levantar" ao hover */
+}
+
+/* Botão de Atualizar (geral) */
+.btn_atualizar {
+  composes: button; /* Reutiliza estilos do .button */
+  background-color: #007bff; /* Azul primário */
+  color: white;
+}
+
+.btn_atualizar:hover {
+  background-color: #0056b3; /* Azul mais escuro ao hover */
+}
+
+/* Botão de Adicionar */
+.btn_adicionar {
+  composes: button; /* Reutiliza estilos do .button */
+  background-color: #28a745; /* Verde para adicionar */
+  color: white;
+  width: 100%; /* Para ocupar a largura total no final da seção */
+  margin-top: 10px;
+}
+
+.btn_adicionar:hover {
+  background-color: #218838; /* Verde mais escuro ao hover */
+}
+
+/* Listas (ul e li) */
+.ul {
+  list-style: none; /* Remove marcadores de lista */
+  padding: 0;
+  margin: 0;
+}
+
+.li {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os itens quebrem a linha se necessário */
+  align-items: center;
+  justify-content: space-between; /* Espaço entre o input e o grupo de botões */
+  background-color: #e9ecef; /* Fundo suave para cada item da lista */
+  padding: 10px 15px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.li:hover {
+  background-color: #dee2e6; /* Leve escurecimento ao hover */
+}
+
+.li .input {
+  flex-grow: 1; /* Permite que o input cresça para preencher o espaço */
+  margin-right: 10px;
+  margin-bottom: 0; /* Remove margem inferior para alinhamento */
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 8px; /* Espaçamento entre os botões dentro do grupo */
+}
+
+/* Botão de lixeira (remover) */
+.trash {
+  composes: button; /* Reutiliza estilos do .button */
+  background-color: #dc3545; /* Vermelho para remover */
+  color: white;
+  padding: 8px 12px; /* Menor padding para o ícone */
+  display: flex; /* Para centralizar o ícone */
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em; /* Tamanho do ícone */
+  margin-right: 0; /* Remove margem direita para alinhamento */
+}
+
+.trash:hover {
+  background-color: #a30615; /* Vermelho mais escuro ao hover */
+}
+
+/* Select para contatos */
+.select {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: white;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Ajustes para o layout do input e select na linha de contato */
+.contatos .li .select {
+  width: 150px; /* Largura fixa para o select de tipo de contato */
+  margin-right: 10px;
+  margin-bottom: 0;
+  flex-shrink: 0; /* Impede que o select encolha */
+}
+
+.contatos .li .input {
+  flex-grow: 1;
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+
+/* Mensagens de erro */
+.error {
+  color: #dc3545; /* Vermelho para erros */
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.95em;
+  font-weight: bold;
+}

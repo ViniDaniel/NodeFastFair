@@ -1,0 +1,167 @@
+.div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ajusta para ocupar a largura total do body */
+  margin: 1%;
+}   
+
+.form {
+  background-color: #ffff;
+  padding: 2.5rem; /* Aumenta o padding */
+  border-radius: 12px; /* Aumenta o border-radius para um visual mais suave */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada e suave */
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Aumenta o espaçamento entre os campos */
+}
+
+.h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem; /* Mais espaço abaixo do título */
+  font-size: 2.2rem; /* Aumenta o tamanho da fonte */
+  font-weight: 600; /* Levemente mais bold */
+}
+
+/* Campos de Formulário */
+.field {
+  display: flex;
+  flex-direction: column; /* Organiza label e input em coluna */
+  gap: 0.5rem; /* Espaçamento entre label e input */
+  align-items: flex-start; /* Alinha os itens ao início */
+}
+
+.label {
+  width: auto; /* Remove largura fixa para o label */
+  text-align: left; /* Alinha o texto do label à esquerda */
+  font-weight: 600; /* Mais bold */
+  color: #555;
+  font-size: 1.05rem; /* Aumenta um pouco o tamanho da fonte */
+  margin-bottom: 0.2rem; /* Espaço entre o label e o input */
+}
+
+.input,
+.textarea,
+.select {
+  flex: 1;
+  padding: 0.8rem 1rem; /* Aumenta o padding para inputs */
+  font-size: 1rem;
+  border: 1px solid #dcdcdc; /* Borda mais clara */
+  border-radius: 8px; /* Aumenta o border-radius */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+  width: 100%; /* Garante que os inputs ocupem 100% da largura disponível */
+  box-sizing: border-box; /* Inclui padding e borda na largura */
+}
+
+.textarea {
+  resize: vertical; /* Permite redimensionar verticalmente */
+  min-height: 100px; /* Altura mínima para a textarea */
+}
+
+/* Flex Row para Adicionar Itens */
+.flexRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* Espaçamento entre o input e o botão "+" */
+  width: 100%;
+}
+
+.flexRow input {
+  flex: 1; /* O input ocupa o máximo de espaço */
+}
+
+.flexRow button {
+  padding: 0.6rem 1rem;
+  border: none;
+  background-color: #28a745; /* Verde para o botão de adicionar */
+  color: white;
+  font-size: 1.2rem; /* Aumenta o tamanho da fonte */
+  font-weight: bold;
+  border-radius: 8px; /* Borda arredondada */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0; /* Evita que o botão encolha */
+  line-height: 1; /* Alinha o texto verticalmente */
+}
+
+.flexRow button:hover {
+  background-color: #218838; /* Escurece o verde ao hover */
+}
+
+/* Listas de Itens Adicionados */
+.ul {
+  list-style: none; /* Remove os marcadores de lista */
+  padding: 0;
+  margin-top: 0.75rem; /* Espaçamento acima da lista */
+  width: 100%;
+}
+
+.li {
+  display: flex;
+  justify-content: space-between; /* Alinha texto à esquerda e botão à direita */
+  align-items: center;
+  background-color: #e9ecef; /* Fundo cinza claro para cada item */
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem; /* Espaçamento entre os itens */
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.li button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  background-color: #dc3545; /* Vermelho para o botão remover */
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 1rem; /* Espaçamento entre o texto e o botão remover */
+  flex-shrink: 0; /* Evita que o botão encolha */
+}
+
+.li button:hover {
+  background-color: #c82333; /* Escurece o vermelho ao hover */
+}
+
+/* Botão Salvar Descrição */
+.button {
+  padding: 1rem 2rem; /* Aumenta o padding */
+  border: none;
+  background-color: #007bff; /* Azul primário */
+  color: white;
+  font-size: 1.15rem; /* Aumenta o tamanho da fonte */
+  font-weight: bold;
+  border-radius: 8px; /* Borda arredondada */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Adiciona transição de transformação */
+  align-self: center; /* Centraliza o botão */
+  width: 100%;
+  max-width: 300px; /* Limita a largura do botão */
+  margin-top: 1.5rem; /* Mais espaço acima do botão */
+}
+
+.button:hover {
+  background-color: #0056b3; /* Escurece o azul ao hover */
+  transform: translateY(-2px); /* Efeito de "levantar" ao hover */
+}
+
+/* Mensagem de Erro */
+.error {
+  color: #dc3545; /* Vermelho para mensagens de erro */
+  font-weight: 600;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Estilos específicos para o select no Contatos */
+.field select {
+  width: auto; /* Deixa o select com largura automática */
+  padding-right: 2rem; /* Espaço para a seta do select */
+}
