@@ -18,6 +18,9 @@ conn(); //chama a função de conexão com o banco de dados
 
 app.use("/api", routes); //chama as rotas
 
+app.use("/uploads", express.static("uploads"));
+
+
 app.listen(7000, function () {
   console.log("Servidor rodando na porta 7000");
 });

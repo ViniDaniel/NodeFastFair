@@ -1,11 +1,12 @@
 const router = require("express").Router();
 const authFeirante = require("../middlewares/authFeirante");
 const produtoController = require("../controllers/produtoController");
+const upload = require("../middlewares/upload");
 
 //routa de criação de produto
 router
   .route("/produtos/:feiranteId")
-  .post(authFeirante,(req, res) => produtoController.create(req, res));
+  .post(authFeirante, upload.single("imagem"), (req, res) => produtoController.create(req, res));
 
 //rota da lista de produtos
 router.route("/produtos/").get((req, res) => produtoController.getAll(req, res));

@@ -12,9 +12,11 @@ const produtoController = {
         preco,
         peso,
         quantidade,
-        imagem,
         status,
       } = req.body;
+
+      const imagemPath = req.file ? req.file.path : null;
+
 
       const produto = {
         feiranteId: req.user.id,
@@ -24,7 +26,7 @@ const produtoController = {
         preco,
         peso,
         quantidade,
-        imagem,
+        imagem: imagemPath ? [imagemPath] : [],
         status,
       };
 
