@@ -15,31 +15,31 @@ function EstoqueFeirante() {
   const navigate = useNavigate();
   const location = useLocation();
 
-
   useEffect(() => {
-  async function fetchProdutos() {
-    try {
-      const { data } = await apiFeirante.get(`/produtos/${feirante._id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      setProduto(data);
-    } catch (error) {
-      if (error.response?.status === 4001) {
-        navigate("/loginFeirante");
-      } else {
-        setProduto([]);
+    async function fetchProdutos() {
+      try {
+        const { data } = await apiFeirante.get(`/produtos/${feirante._id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        setProduto(data);
+      } catch (error) {
+        if (error.response?.status === 4001) {
+          navigate("/loginFeirante");
+        } else {
+          setProduto([]);
+        }
+      } finally {
+        setLoading(false);
       }
-    } finally {
-      setLoading(false);
     }
-  }
 
-  if (feirante?._id) {
-    fetchProdutos();
-  }
-}, [feirante, location.state]);
+    if (feirante?._id) {
+      fetchProdutos();
+    }
+  }, [feirante, location.state]);
+  
 
   async function deletarProduto(produtoId) {
     if (!window.confirm("Tem certeza que deseja deletar este produto?")) return;
@@ -87,13 +87,28 @@ function EstoqueFeirante() {
                   <p>
                     <strong>Quantidade:</strong> {item.quantidade} und
                   </p>
+
+                  {item.imagem?.map((img, idx) => (
+                    <img
+                      key={idx}
+                      src={`http://localhost:7000/${img}`}
+                      alt={`${item.nome} ${idx}`}
+                      className={styles.imagem_produto}
+                    />
+                  ))}
+
                   <div>
-                  <AttButton
-                    to={`/atualizar_produto/${feirante._id}/${item._id}`}
-                    text="Atualizar Produto"
-                  />
-                  <button onClick={() => deletarProduto(item._id)} className={styles.button} ><FaTrashAlt /></button>
-                </div>
+                    <AttButton
+                      to={`/atualizar_produto/${feirante._id}/${item._id}`}
+                      text="Atualizar Produto"
+                    />
+                    <button
+                      onClick={() => deletarProduto(item._id)}
+                      className={styles.button}
+                    >
+                      <FaTrashAlt />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

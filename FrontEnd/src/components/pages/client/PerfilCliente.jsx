@@ -7,11 +7,16 @@ import LinkButton from "../../layout/LinkButton";
 import AttButton from "../../layout/AttButton";
 
 function PerfilCliente() {
-  const { cliente } = useContext(ClienteContext);
+  const { cliente, deslogarCliente } = useContext(ClienteContext);
   const [dadosCliente, setDadosCliente] = useState(cliente);
   const [endereco, setEndereco] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    deslogarCliente();
+    navigate("/loginCliente");
+  };
 
   useEffect(() => {
     async function fetchCliente() {
@@ -72,6 +77,11 @@ function PerfilCliente() {
   return (
     <div>
       <h1>Seu Perfil</h1>
+      <div className={styles.card_button_cliente}>
+        <button onClick={handleLogout} className={styles.deslogar}>
+          Sair
+        </button>
+      </div>
       <div className={styles.container}>
         <div className={styles.card_dados}>
           <h2>Dados</h2>

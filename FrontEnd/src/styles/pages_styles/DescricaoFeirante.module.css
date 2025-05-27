@@ -45,6 +45,8 @@
   font-size: 1.1em;
   border-bottom: 1px dashed #ced4da; /* Linha tracejada para separar a descrição */
   padding-bottom: 15px;
+  word-wrap: break-word; /* Permite quebrar palavras longas que excedam a largura */
+  
 }
 
 /* Inputs gerais */
@@ -124,6 +126,7 @@
   margin-bottom: 8px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  
 }
 
 .li:hover {
@@ -134,6 +137,7 @@
   flex-grow: 1; /* Permite que o input cresça para preencher o espaço */
   margin-right: 10px;
   margin-bottom: 0; /* Remove margem inferior para alinhamento */
+  
 }
 
 .buttonGroup {

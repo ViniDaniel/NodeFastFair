@@ -1,0 +1,96 @@
+/* Container principal da página de categorias */
+.categoriasContainer {
+  min-height: 100vh; /* Garante que o container ocupe a altura total da viewport */
+  background-color: #388e3c; /* Verde escuro similar ao da imagem */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente o conteúdo */
+  padding-bottom: 50px; /* Espaço para o final da página */
+}
+
+/* Estilo para o título "Categorias" */
+.tituloCategorias {
+  color: #212121; /* Cor do texto (quase preto) para contraste */
+  font-size: 3.5rem; /* Tamanho maior para o título */
+  font-family: 'Arial', sans-serif; /* Uma fonte simples e legível, você pode mudar */
+  text-align: center;
+  margin-top: 80px; /* Espaço superior para a navbar */
+  margin-bottom: 60px; /* Espaço entre o título e a lista */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra sutil no texto */
+}
+
+/* Container da lista de categorias */
+.listaCategorias {
+  width: 100%;
+  max-width: 500px; /* Largura máxima para a lista, para não esticar muito em telas grandes */
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1); /* Um leve background translúcido para a área da lista */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */
+}
+
+/* Remove o estilo padrão da lista */
+.listaCategorias ul {
+  list-style: none; /* Remove os marcadores de lista */
+  padding: 0;
+  margin: 0;
+  text-align: center; /* Centraliza os itens da lista */
+}
+
+/* Estilo para cada item da lista (<li>) */
+.listaCategorias li {
+  margin-bottom: 25px; /* Espaçamento entre cada categoria */
+}
+
+/* Estilo para os links de categoria */
+.linkCategoria {
+  color: #fff; /* Cor do texto branco para os links */
+  text-decoration: none; /* Remove o sublinhado padrão dos links */
+  font-size: 2.2rem; /* Tamanho do texto dos links */
+  font-family: 'Verdana', sans-serif; /* Outra fonte legível */
+  font-weight: bold; /* Deixa o texto em negrito */
+  transition: color 0.3s ease, transform 0.3s ease; /* Transição suave para efeitos de hover */
+  display: inline-block; /* Necessário para aplicar transformações */
+}
+
+/* Efeito de hover para os links */
+.linkCategoria:hover {
+  color: #ffeb3b; /* Amarelo vibrante no hover (exemplo, você pode mudar) */
+  transform: scale(1.05); /* Leve aumento de tamanho no hover */
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* Sombra brilhante no hover */
+}
+
+/* Responsividade básica para telas menores */
+@media (max-width: 768px) {
+  .tituloCategorias {
+    font-size: 2.8rem;
+    margin-top: 50px;
+    margin-bottom: 40px;
+  }
+
+  .linkCategoria {
+    font-size: 1.8rem;
+  }
+
+  .listaCategorias {
+    padding: 15px;
+    max-width: 90%; /* Ajusta a largura máxima em telas menores */
+  }
+}
+
+@media (max-width: 480px) {
+  .tituloCategorias {
+    font-size: 2.2rem;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .linkCategoria {
+    font-size: 1.5rem;
+    margin-bottom: 15px; /* Reduz o espaçamento em telas menores */
+  }
+
+  .listaCategorias li {
+    margin-bottom: 20px;
+  }
+}

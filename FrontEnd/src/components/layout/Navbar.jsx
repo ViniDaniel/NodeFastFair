@@ -5,8 +5,12 @@ import SidebarMenu from "./SidebarMenu";
 import { useContext, useState } from "react";
 import { FeiranteContext } from "../context/FeiranteContext";
 import { FaBars } from "react-icons/fa";
+import {ClienteContext} from "../context/ClienteContext";
+
+
 
 function NavBar() {
+  const {cliente} = useContext(ClienteContext)
   const { feirante } = useContext(FeiranteContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -15,13 +19,13 @@ function NavBar() {
       <div className={styles.left}>
         <img src={logo} alt="Fast&Fair" className={styles.logo} />
         <ul className={styles.list}>
-          {!feirante ? (
+          {cliente ? (
             <>
               <li>
                 <Link to="/">Início</Link>
               </li>
               <li>
-                <Link to="/produtos">Produtos</Link>
+                <Link to="/produtos/vitrine">Produtos</Link>
               </li>
               <li>
                 <Link to="/sobre">Sobre</Link>
@@ -29,8 +33,11 @@ function NavBar() {
               <li>
                 <Link to="/suporte">Suporte</Link>
               </li>
+              <li>
+                <Link to="/perfilCliente" >{cliente.nome}</Link>
+              </li>
             </>
-          ) : (
+          ) : feirante ? (
             <>
               <li>
                 <Link to="/feirante/descricao">Descrição</Link>
@@ -43,6 +50,23 @@ function NavBar() {
               </li>
               <li>
                 <Link to="/feirante/perfilFeirante">Perfil</Link>
+              </li>
+              
+            </>
+          ) : (
+            // Navbar para Usuários Não Logados
+            <>
+              <li>
+                <Link to="/">Início</Link>
+              </li>
+              <li>
+                <Link to="/produtos/vitrine">Produtos</Link>
+              </li>
+              <li>
+                <Link to="/sobre">Sobre</Link>
+              </li>
+              <li>
+                <Link to="/suporte">Suporte</Link>
               </li>
             </>
           )}

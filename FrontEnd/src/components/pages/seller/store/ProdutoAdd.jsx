@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import styles from "../../../../styles/pages_styles/Cadastro.module.css";
 import FormCategoriaSelect from "./FormCategoriaSelect";
 import {
-  isValidImagem,
   isValidCategoria,
   isValidNomeProduto,
   isValidPeso,
@@ -22,8 +21,9 @@ function ProdutoAdd() {
     peso: "",
     quantidade: "",
     categoria: "",
-    imagem: [],
   });
+
+  const [imagem, setImagem] = useState(null);
 
   const [error, setError] = useState();
 
@@ -32,6 +32,10 @@ function ProdutoAdd() {
   function handleChange(e) {
     const { name, value } = e.target;
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
+  }
+
+  function handleImagemChange(e) {
+    setImagem(e.target.files[0]);
   }
 
   async function handleSubmit(e) {
@@ -45,21 +49,27 @@ function ProdutoAdd() {
     if (!isValidPeso(form.peso)) return setError("Digite o peso do produto");
     if (!isValidQuantidade(form.quantidade))
       return setError("Digite a quantidade atual de estoque");
-    if (!isValidImagem(form.imagem))
-      return setError("Coloque a foto do seu produto");
     if (!isValidDescricao(form.descricao))
       return setError("Digite no máximo 100 letras");
 
     const precoFormatadoParaAPI = parseFloat(form.preco.replace(",", "."));
-    const formParaEnviar = {
-      ...form,
-      preco: precoFormatadoParaAPI,
-    };
+
+    const formData = new FormData();
+    formData.append("nome", form.nome);
+    formData.append("descricao", form.descricao);
+    formData.append("preco", precoFormatadoParaAPI);
+    formData.append("peso", form.peso);
+    formData.append("quantidade", form.quantidade);
+    formData.append("categoria", form.categoria);
+    if (imagem) {
+      formData.append("imagem", imagem);
+    }
 
     try {
-      await apiFeirante.post(`/produtos/${feirante._id}`, formParaEnviar, {
+      await apiFeirante.post(`/produtos/${feirante._id}`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "multipart/form-data",
         },
       });
       alert("Produto cadastrado com sucesso!");
@@ -71,6 +81,7 @@ function ProdutoAdd() {
         setError("Erro ao cadastrar produto");
       }
     }
+    
   }
   return (
     <div>
@@ -144,10 +155,10 @@ function ProdutoAdd() {
               Imagem:
             </label>
             <input
-              type="text"
+              type="file"
               name="imagem"
-              value={form.imagem}
-              onChange={handleChange}
+              accept="image/*"
+              onChange={handleImagemChange}
               className={styles.input}
             />
           </div>

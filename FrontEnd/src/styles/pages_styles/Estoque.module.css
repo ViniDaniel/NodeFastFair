@@ -57,6 +57,17 @@
 .button:hover {
   color: rgb(80, 0, 0);
 }
+
+.imagem_produto {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+
 /* Considerar media queries para responsividade */
 @media (max-width: 1200px) {
   .produto_item {

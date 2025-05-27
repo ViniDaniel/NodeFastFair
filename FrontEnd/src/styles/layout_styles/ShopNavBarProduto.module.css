@@ -1,0 +1,39 @@
+.navbar {
+  background-color: #bbbbbb;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* <-- isso distribui entre esquerda e direita */
+  margin-top: 20px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+
+.list {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding-left: 4.5em;
+  margin: 0;
+}
+
+.list li a {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.list li a:hover {
+  color: #0c6300;
+}
+

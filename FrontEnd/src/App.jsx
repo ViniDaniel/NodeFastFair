@@ -24,6 +24,14 @@ import EstoqueFeirante from "./components/pages/seller/store/EstoqueFeirante";
 import ProdutoAtt from "./components/pages/seller/store/ProdutoAtt";
 import AddDescricao from "./components/pages/seller/custom/AddDescricao";
 import  DescricaoFeirante  from "./components/pages/seller/custom/DescricaoFeirante";
+import CategoriasProduto from "./components/pages/client/shop/CategoriasProduto";
+import ProdutoFeirante from "./components/pages/client/shop/produtos/ProdutoFeirante";
+import Frutas from "./components/pages/client/shop/categorias/Frutas";
+import Graos from "./components/pages/client/shop/categorias/Graos";
+import Legumes from "./components/pages/client/shop/categorias/Legumes";
+import Temperos from "./components/pages/client/shop/categorias/Temperos";
+import Verduras from "./components/pages/client/shop/categorias/Verduras";
+import VitrineProdutos from "./components/pages/client/shop/produtos/VitrineProdutos";
 
 function App() {
   return (
@@ -70,6 +78,14 @@ function App() {
               <Route path="/feirante/estoque" element={<EstoqueFeirante />} ></Route>
               <Route path="/feirante/adicionar_descricao/" element={<AddDescricao />}></Route>
               <Route path="/feirante/descricao" element={<DescricaoFeirante />}></Route>
+              <Route path="/produtos/vitrine" element={<VitrineProdutos />} ></Route>
+              <Route path="/produtos/categorias" element={<CategoriasProduto />} ></Route>
+              <Route path="/produtos/cliente/feirantes" element={<ProdutoFeirante />}></Route>
+              <Route path="/produtos/categorias/frutas" element={<Frutas />} ></Route>
+              <Route path="/produtos/categorias/graos" element={<Graos />} ></Route>
+              <Route path="/produtos/categorias/legumes" element={<Legumes />} ></Route>
+              <Route path="/produtos/categorias/temperos" element={<Temperos />}></Route>
+              <Route path="/produtos/categorias/verduras" element={<Verduras />} ></Route>
             </Routes>
           </Container>
           <Footer />

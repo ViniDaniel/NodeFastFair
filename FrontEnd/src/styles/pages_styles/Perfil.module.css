@@ -1,10 +1,8 @@
 .container{
     font-size: 30px;
     justify-content: space-between;
-    padding: 3em;
+    margin-left: 2%;
     color: black    ;
-    text-shadow: 1px 1px 0 white,
-               -1px -1px 0 white,
 
 }
 
@@ -13,7 +11,8 @@ text-align: left;
 background-color: white;
 border-radius: 10px;
 padding: 1em;
-max-width: 40%;
+max-width: 50%;
+word-wrap: break-word;
 
 }
 
@@ -22,8 +21,10 @@ max-width: 40%;
     background-color: white;
     border-radius: 10px;
     padding: 1em;
-    max-width: 40%;
+    max-width: 50%;
     margin-top: 10%;
+    word-wrap: break-word;
+    margin-bottom: 10px;
 }
 
 h1 {
@@ -59,4 +60,11 @@ h1 {
 .deslogar:hover{
     background-color: #bb1307;
     font-weight: bold;
+}
+
+.card_button_cliente{
+    text-align: right;
+    margin-right: 10px;
+    
+    
 }

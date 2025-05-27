@@ -1,0 +1,179 @@
+
+.cardProduto {
+  display: flex; 
+  align-items: center; 
+  background-color: transparent; 
+  padding: 20px 0; 
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 800px; 
+  margin-left: auto;
+  margin-right: auto; 
+  background-color: rgb(105, 105, 105);
+  border-radius: 1em;
+}
+
+/* Estilo para a imagem do produto */
+.imagem_produto {
+  width: 100%; 
+  max-width: 200px; 
+  height: 180px; 
+  object-fit: cover;
+  border-radius: 8px; 
+  margin-right: 30px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para a imagem */
+}
+
+/* Container do texto e botão do produto */
+.infoProduto {
+  flex-grow: 1; 
+  text-align: left; 
+}
+
+/* Estilo para o nome do produto (h2) */
+/* Estilo para o nome do produto (h2) */
+.nomeProduto {
+  font-size: 2.2rem;
+  color: #ffffff;
+  margin-bottom: 5px;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  /* Não precisa de 'display: flex' aqui se o span for inline */
+}
+
+/* Estilo para o peso do produto (p dentro do h2) */
+.pesoProduto {
+  font-size: 1.6rem; /* Tamanho do peso */
+  color: #ffffff; /* Verde um pouco mais escuro para o peso */
+  /* margin-top: 0; REMOVER este, pois o span está dentro do h2 */
+  font-weight: normal;
+  /* REMOVER 'display: block;' -- este é o ponto crucial! */
+  margin-right: 10px; /* Adiciona um pequeno espaço entre o peso e o nome */
+  /* Opcional: ajustar alinhamento vertical se necessário */
+  vertical-align: middle;
+}
+
+/* Mantenha os outros estilos do CardProduto.module.css como estão */
+/* Estilo para o preço */
+.precoProduto {
+  font-size: 1.8rem; /* Tamanho do preço */
+  color: #ffcc80; /* Laranja claro para o preço para destaque */
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 20px; /* Espaço antes do botão */
+}
+
+/* Estilo para o botão "Ver Detalhes" */
+.btnDetalhes {
+  background-color: #4caf50; /* Verde escuro para o botão */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  min-width: 150px; /* Largura mínima para o botão */
+  display: inline-block; /* Permite espaçamento e transformações */
+}
+
+.btnDetalhes:hover {
+  background-color: #388e3c; /* Verde mais escuro no hover */
+  transform: translateY(-2px);
+}
+
+.btnDetalhes:active {
+  transform: translateY(0);
+}
+
+/* Estilos para a seção de detalhes (quando expandida) */
+.detalhesProduto {
+  margin-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3); /* Linha divisória clara */
+  padding-top: 15px;
+  text-align: left;
+  width: 100%;
+  color: #e8f5e9; /* Cor do texto claro para os detalhes */
+}
+
+.detalhesProduto p {
+  margin-bottom: 10px;
+}
+
+.detalhesProduto label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.detalhesProduto input[type="number"] {
+  width: 80px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-left: 10px;
+  background-color: #fff;
+  color: #333;
+}
+
+.btnAdicionarCarrinho {
+  background-color: #2196f3; /* Azul para adicionar ao carrinho */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+.btnAdicionarCarrinho:hover {
+  background-color: #1976d2; /* Azul mais escuro no hover */
+}
+
+/* Responsividade para o CardProduto */
+@media (max-width: 768px) {
+  .cardProduto {
+    flex-direction: column; /* Em telas menores, a imagem e o texto ficam empilhados */
+    text-align: center;
+    padding: 15px 0;
+  }
+  .imagem_produto {
+    margin-right: 0;
+    margin-bottom: 20px; /* Espaço abaixo da imagem quando empilhada */
+    max-width: 150px; /* Reduz a imagem em telas menores */
+    height: 140px;
+  }
+  .infoProduto {
+    text-align: center; /* Centraliza o texto quando empilhado */
+  }
+  .nomeProduto {
+    font-size: 1.8rem;
+  }
+  .pesoProduto {
+    font-size: 1.3rem;
+  }
+  .precoProduto {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nomeProduto {
+    font-size: 1.6rem;
+  }
+  .pesoProduto {
+    font-size: 1.2rem;
+  }
+  .precoProduto {
+    font-size: 1.3rem;
+  }
+  .btnDetalhes,
+  .btnAdicionarCarrinho {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+}
