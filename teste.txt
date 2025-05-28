@@ -43,6 +43,22 @@ babu@b.com
 123321c
 
 
+feira
+
+Feira de Marabá
+
+maraba@m.com
+
+senha
+1234n6
+
+-----------------------------
+Feira da porra loca
+porra@loca.com
+
+senha
+xibiu1
+-------------------------------------------
 dados do .env para facilar no trabalho em sala
 JWT_SECRET=bnghj5421warujy5t4102
 JWT_EXPIRES_IN=1d

@@ -3,13 +3,21 @@ const authFeirante = require("../middlewares/authFeirante");
 const produtoController = require("../controllers/produtoController");
 const upload = require("../middlewares/upload");
 
+
+router
+  .route("/produtos/categorias/:nome")
+  .get((req, res) => produtoController.getByCategoria(req, res));
 //routa de criação de produto
 router
   .route("/produtos/:feiranteId")
-  .post(authFeirante, upload.single("imagem"), (req, res) => produtoController.create(req, res));
+  .post(authFeirante, upload.single("imagem"), (req, res) =>
+    produtoController.create(req, res)
+  );
 
 //rota da lista de produtos
-router.route("/produtos/").get((req, res) => produtoController.getAll(req, res));
+router
+  .route("/produtos/")
+  .get((req, res) => produtoController.getAll(req, res));
 
 //rota da busca unitaria de produto
 router
@@ -23,12 +31,11 @@ router
 //rta de delete do produto
 router
   .route("/produtos/:feiranteId/:produtoId")
-  .delete(authFeirante,(req, res) => produtoController.delete(req, res));
+  .delete(authFeirante, (req, res) => produtoController.delete(req, res));
 
 //rota de update
 router
   .route("/produtos/:feiranteId/:produtoId")
-  .put(authFeirante,(req, res) => produtoController.update(req, res));
+  .put(authFeirante, (req, res) => produtoController.update(req, res));
 
-
-  module.exports = router;
+module.exports = router;

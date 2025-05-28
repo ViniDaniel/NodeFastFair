@@ -100,13 +100,15 @@ Content-Type: application/json
 ###
 POST http://localhost:7000/api/produtos
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzBkNjg5YjA5ZDc1YWQxODM5MDljZCIsImlhdCI6MTc0ODM5MDg0OCwiZXhwIjoxNzQ4NDc3MjQ4fQ.p3TlK1WqVQm0rqq4JhbLE8cM3rdAzHVbkF_ZACFqEY4
 
 {
-    "nome": "Pera",
-    "categoria": "68102a2e7752426bccaa05a1",
+    "nome": "Emugel",
+    "categoria": "68102a2e7752426bddaa05ab",
     "descricao": "Fruta meio verde,  meio amarela",
     "preco": 7.90,
     "peso": 0.5,
+    "quantidade": 5,
     "imagem": "https://www.naturaldaterra.com.br/_next/image?url=https%3A%2F%2Fnaturalterra.vtexassets.com%2Farquivos%2Fids%2F165417%2FPera-Williams-Unidade.jpg%3Fv%3D638671094105730000&w=1440&q=75",
     "status": "Ativo"
 }

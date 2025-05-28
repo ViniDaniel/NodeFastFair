@@ -1,22 +1,16 @@
+const {
+  CategoriaProduto: CategoriaModel,
+} = require("../models/CategoriaProduto");
 const { Produto: ProdutoModel } = require("../models/Produto");
 require("../models/CategoriaProduto"); // importa só pra registrar
-
 
 const produtoController = {
   create: async (req, res) => {
     try {
-      const {
-        nome,
-        categoria,
-        descricao,
-        preco,
-        peso,
-        quantidade,
-        status,
-      } = req.body;
+      const { nome, categoria, descricao, preco, peso, quantidade, status } =
+        req.body;
 
       const imagemPath = req.file ? req.file.path : null;
-
 
       const produto = {
         feiranteId: req.user.id,
@@ -90,6 +84,32 @@ const produtoController = {
       return res
         .status(500)
         .json({ message: "Produto não encontrado!", error: error.message });
+    }
+  },
+
+  getByCategoria: async (req, res) => {
+    try {
+      const { nome } = req.params;
+
+      const categoria = await CategoriaModel.findOne({
+        nome: { $regex: new RegExp(`^${nome}$`, "i") },
+      });
+
+      if (!categoria) {
+        return res.status(404).json({ message: "Categoria não encontrada" });
+      }
+
+      const produto = await ProdutoModel.find({ categoria: categoria._id })
+        .populate("feiranteId")
+        .populate("categoria");
+
+      return res.status(200).json(produto);
+    } catch (error) {
+      console.log(error);
+
+      return res
+        .status(500)
+        .json({ message: "Erro interno", error: error.message });
     }
   },
 
