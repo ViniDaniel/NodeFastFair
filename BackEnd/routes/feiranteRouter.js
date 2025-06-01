@@ -13,6 +13,7 @@ router
   .route("/feirantes")
   .get((req, res) => feiranteController.getAll(req, res));
 
+
 //Busca individual
 router
   .route("/feirantes/:id")

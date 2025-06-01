@@ -20,7 +20,7 @@ router
 router
   .route("/feirante/descricao/:feiranteId")
   .get(authFeirante, (req, res) => descricaoFeiranteController.get(req, res));
-
+  
 router
   .route("/feirante/descricao/:feiranteId/:descricaoFeiranteId")
   .delete(authFeirante, (req, res) =>

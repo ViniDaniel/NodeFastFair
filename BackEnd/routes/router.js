@@ -22,4 +22,8 @@ router.use("/", descricaoFeiranteRouter)
 const pesquisaRouter = require("./pesquisaRouter")
 router.use("/", pesquisaRouter)
 
+
+const colaboradorRouter = require("./colaboradorRouter")
+router.use("/", colaboradorRouter)
+
 module.exports = router;
