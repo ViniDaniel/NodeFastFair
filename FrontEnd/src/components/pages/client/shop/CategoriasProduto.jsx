@@ -9,8 +9,8 @@ function CategoriasProduto() {
     <div>
       <ShopNavBar />
       <div className={styles.categoriasContainer}>
-      <h1 className={styles.tituloCategorias}>Categorias</h1> {/* Adicionado classe ao título */}
-      <div className={styles.listaCategorias}> {/* Adicionado container para a lista */}
+      <h1 className={styles.tituloCategorias}>Categorias</h1> 
+      <div className={styles.listaCategorias}>
         <ul>
           <li>
             <Link to="/produtos/categorias/frutas" className={styles.linkCategoria}> <GiFruitBowl /> Frutas <GiFruitBowl /></Link>

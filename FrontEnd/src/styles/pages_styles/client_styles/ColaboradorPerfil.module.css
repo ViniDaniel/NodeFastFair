@@ -1,0 +1,126 @@
+/* ColaboradorPerfil.module.css */
+
+.div {
+  background-color: #4caf50; /* Fundo verde para a área principal do perfil */
+  min-height: calc(
+    100vh - var(--altura-menu-superior) - 150px
+  ); /* Ajusta altura mínima */
+  padding: 40px 20px;
+  color: #333; /* Cor do texto padrão para este fundo */
+  text-align: center; /* Centraliza o título principal */
+}
+
+.h1 {
+  font-size: 3.5em; /* Tamanho grande para o nome do feirante */
+  color: #2f4f4f; /* Cor verde escura forte para o nome */
+  margin-bottom: 30px;
+  font-weight: 800;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center; /* Centraliza os botões */
+  gap: 15px; /* Espaçamento entre os botões */
+  margin-bottom: 40px; /* Espaço abaixo do grupo de botões */
+  flex-wrap: wrap; /* Permite que os botões quebrem linha em telas menores */
+}
+
+.button {
+  background-color: #2f4f4f; /* Cor de fundo para os botões (verde escuro) */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 25px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 600;
+}
+
+.button:hover {
+  background-color: #3e6d3e; /* Escurece um pouco ao passar o mouse */
+  transform: translateY(-2px);
+}
+
+.button.active {
+  /* Estilo para o botão da aba ativa */
+  background-color: #fff; /* Fundo branco */
+  color: #4caf50; /* Texto verde vibrante */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  transform: translateY(0); /* Remove o efeito de levantar para o ativo */
+}
+
+.paginas {
+  background-color: #fff; /* Fundo branco para a área de conteúdo das abas */
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada */
+  padding: 40px;
+  margin: 0 auto; /* Centraliza as páginas */
+  max-width: 900px; /* Limita a largura máxima da área de conteúdo */
+  text-align: left; /* Alinha o texto das abas à esquerda */
+}
+
+.h2 {
+  font-size: 2em; /* Tamanho dos subtítulos de cada aba */
+  color: #2f4f4f; /* Cor verde escura para os subtítulos */
+  margin-bottom: 25px;
+  text-align: center; /* Centraliza o título de cada aba */
+  font-weight: 700;
+}
+
+/* Estilos específicos para as áreas de conteúdo das abas */
+
+.perfil p {
+  word-wrap: break-word;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  color: #555; /* Cor de texto para os detalhes do perfil */
+}
+
+.perfil strong {
+  color: #333; /* Destaca os títulos dos campos do perfil */
+}
+
+.descricao {
+  max-width: 1000px;
+  word-wrap: break-word;
+}
+
+/* ... (seus outros estilos para .div, .h1, .buttonGroup, .button, .paginas, .h2) ... */
+.div_produto {
+  word-wrap: break-word;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.produtos {
+  display: grid;
+  /* A mudança está aqui: Aumente o valor mínimo para um card. */
+  /* Exemplo 1: minmax(320px, 1fr) */
+  /* Exemplo 2: minmax(350px, 1fr) para cards ainda mais largos */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(320px, 1fr)
+  ); /* Agora os cards tentarão ter no mínimo 320px */
+  gap: 20px; /* Espaçamento entre os cards de produto */
+  justify-items: center; /* Centraliza os itens no grid */
+  padding-top: 20px; /* Espaçamento acima do grid */
+  /* Adicione um padding horizontal para evitar que os cards toquem nas bordas em telas menores */
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media (min-width: 1200px) {
+  .produtos {
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .produtos {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

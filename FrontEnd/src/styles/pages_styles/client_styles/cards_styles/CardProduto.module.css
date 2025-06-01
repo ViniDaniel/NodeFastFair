@@ -1,0 +1,222 @@
+/* CardProduto.module.css */
+
+.cardProduto {
+  display: flex;
+  align-items: center;
+  background-color: #4CAF50; /* Verde vibrante do seu site como fundo do card */
+  padding: 20px 25px; /* Padding interno, um pouco mais generoso nas laterais */
+  margin-bottom: 25px; /* Espaçamento entre os cards */
+  width: 100%;
+  max-width: 800px;
+  /* margin-left: auto; margin-right: auto; // Já está sendo centralizado pelo grid em ColaboradorPerfil */
+  border-radius: 12px; /* Bordas mais arredondadas */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra mais forte para um efeito de profundidade */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições para hover */
+  position: relative; /* Para posicionamento futuro se precisar */
+  overflow: hidden; /* Garante que elementos arredondados fiquem dentro do card */
+}
+
+.cardProduto:hover {
+  transform: translateY(-8px); /* Efeito de "levantar" mais acentuado no hover */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* Sombra mais intensa no hover */
+}
+
+/* Estilo para a imagem do produto */
+.imagem_produto {
+  width: 100%;
+  max-width: 180px; /* Reduz um pouco a largura da imagem */
+  height: 160px; /* Reduz um pouco a altura da imagem */
+  object-fit: cover;
+  border-radius: 10px; /* Bordas levemente mais arredondadas na imagem */
+  margin-right: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); /* Sombra na imagem */
+  border: 3px solid #fff; /* Borda branca na imagem para destacar */
+}
+
+/* Container do texto e botão do produto */
+.infoProduto {
+  flex-grow: 1;
+  text-align: left;
+  display: flex; /* Adiciona flex para organizar nome, peso, preço e botão */
+  flex-direction: column; /* Organiza os itens em coluna */
+  justify-content: center; /* Centraliza verticalmente o conteúdo */
+}
+
+/* Estilo para o nome do produto (h2) e peso */
+.nomeProduto {
+  font-size: 2.2rem; /* Tamanho do nome */
+  color: #fff; /* Nome em branco puro para contraste */
+  margin-bottom: 8px; /* Espaçamento abaixo do bloco nome+peso */
+  font-family: 'Roboto', sans-serif; /* Sugestão de fonte mais moderna */
+  font-weight: 700; /* Mais negrito */
+  /* Remove flex aqui, vamos controlar dentro do h2 com span */
+  display: block; /* Garante que o h2 ocupe sua própria linha */
+  line-height: 1.2; /* Ajusta a altura da linha */
+}
+
+/* Estilo para o peso do produto (span dentro do h2) */
+.pesoProduto {
+  font-size: 1.4rem; /* Tamanho do peso */
+  color: #c8e6c9; /* Um verde bem claro para o peso, sutilmente diferente do nome */
+  font-weight: 500; /* Menos negrito que o nome */
+  margin-left: 10px; /* Espaço à esquerda do peso em relação ao nome */
+  display: inline-block; /* Crucial para que fique na mesma linha e aceite margin/padding */
+  vertical-align: middle; /* Ajuda a alinhar com o nome */
+}
+
+/* Estilo para o preço */
+.precoProduto {
+  font-size: 2.2rem; /* Aumenta um pouco o preço */
+  color: #ffcc80; /* Laranja claro forte para o preço */
+  font-weight: 900; /* Bem negrito para destaque máximo */
+  margin-top: 15px; /* Espaço acima do preço */
+  margin-bottom: 25px; /* Mais espaço antes do botão */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Sombra sutil para o preço */
+}
+
+/* Estilo para o botão "Ver Detalhes" */
+.btnDetalhes {
+  background-color: #2F4F4F; /* Verde escuro forte para o botão */
+  color: white;
+  padding: 12px 25px; /* Aumenta o padding do botão */
+  border: none;
+  border-radius: 30px; /* Bordas super arredondadas para um visual moderno */
+  cursor: pointer;
+  font-size: 1.1rem; /* Aumenta um pouco a fonte do botão */
+  font-weight: bold;
+  letter-spacing: 0.5px; /* Espaçamento entre letras */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  min-width: 180px; /* Aumenta a largura mínima do botão */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra no botão */
+}
+
+.btnDetalhes:hover {
+  background-color: #1a361a; /* Verde ainda mais escuro no hover */
+  transform: translateY(-3px); /* Efeito de levantar mais forte */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra mais forte no hover */
+}
+
+.btnDetalhes:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para a seção de detalhes (quando expandida - se aplicável) */
+.detalhesProduto {
+  margin-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.4); /* Linha divisória mais visível */
+  padding-top: 20px;
+  text-align: left;
+  width: 100%;
+  color: #e0ffe0; /* Verde muito claro para os detalhes */
+  font-size: 1em;
+}
+
+.detalhesProduto p {
+  margin-bottom: 8px;
+}
+
+.detalhesProduto label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.detalhesProduto input[type="number"] {
+  width: 90px; /* Aumenta um pouco a largura do input */
+  padding: 10px; /* Aumenta o padding do input */
+  border: 1px solid #ccc;
+  border-radius: 6px; /* Mais arredondado */
+  font-size: 1.1rem;
+  margin-left: 10px;
+  background-color: #f0f0f0; /* Fundo levemente cinza no input */
+  color: #333;
+}
+
+.btnAdicionarCarrinho {
+  background-color: #2196f3; /* Azul para adicionar ao carrinho */
+  color: white;
+  padding: 12px 25px; /* Aumenta o padding do botão */
+  border: none;
+  border-radius: 30px; /* Bordas super arredondadas */
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  margin-top: 20px; /* Mais espaço acima */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btnAdicionarCarrinho:hover {
+  background-color: #1976d2; /* Azul mais escuro no hover */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsividade para o CardProduto */
+@media (max-width: 768px) {
+  .cardProduto {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px; /* Ajusta padding */
+    margin-bottom: 20px;
+    max-width: 90%; /* Ocupa mais largura em telas menores */
+  }
+  .imagem_produto {
+    margin-right: 0;
+    margin-bottom: 25px; /* Mais espaço abaixo da imagem */
+    max-width: 200px; /* Aumenta um pouco a imagem em telas médias */
+    height: 180px;
+    border-width: 2px; /* Borda mais fina */
+  }
+  .infoProduto {
+    text-align: center;
+    align-items: center; /* Centraliza os itens no flex-container vertical */
+  }
+  .nomeProduto {
+    font-size: 2rem;
+  }
+  .pesoProduto {
+    font-size: 1.3rem;
+    margin-left: 0; /* Remove margem esquerda quando empilhado */
+    display: block; /* Volta a ser bloco para ficar abaixo do nome */
+    margin-top: 5px; /* Espaço acima do peso */
+  }
+  .precoProduto {
+    font-size: 1.8rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .btnDetalhes,
+  .btnAdicionarCarrinho {
+    padding: 10px 20px;
+    font-size: 1rem;
+    min-width: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardProduto {
+    padding: 15px;
+  }
+  .imagem_produto {
+    max-width: 150px;
+    height: 130px;
+    margin-bottom: 20px;
+  }
+  .nomeProduto {
+    font-size: 1.8rem;
+  }
+  .pesoProduto {
+    font-size: 1.1rem;
+  }
+  .precoProduto {
+    font-size: 1.6rem;
+  }
+  .btnDetalhes,
+  .btnAdicionarCarrinho {
+    padding: 8px 18px;
+    font-size: 0.95rem;
+    min-width: 140px;
+  }
+}

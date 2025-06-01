@@ -1,0 +1,80 @@
+/* CardDescricao.module.css */
+
+.div {
+  background-color: #f8f8f8; /* Fundo branco/cinza claro para o card de descrição */
+  border-radius: 8px; /* Bordas arredondadas */
+  padding: 30px; /* Espaçamento interno generoso */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra mais suave para destaque */
+  margin: 40px auto; /* Centraliza o card na página e adiciona margem superior/inferior */
+  max-width: 800px; /* Limita a largura máxima para boa legibilidade */
+  color: #333; /* Cor de texto principal escura */
+  line-height: 1.6; /* Espaçamento entre linhas para melhor leitura */
+}
+
+.h3 {
+  font-size: 2.2em; /* Tamanho do título "Sobre o Feirante" */
+  color: #2F4F4F; /* Cor verde escura para os títulos, similar ao cabeçalho */
+  margin-bottom: 25px; /* Espaçamento abaixo do título principal */
+  text-align: center; /* Centraliza o título principal */
+  font-weight: 700;
+}
+
+.descricao {
+  margin-bottom: 30px; /* Espaçamento abaixo da descrição */
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee; /* Linha divisória */
+}
+
+.p {
+  font-size: 1.1em; /* Tamanho do parágrafo da descrição */
+  text-align: justify; /* Justifica o texto para um bloco mais limpo */
+}
+
+.topicos,
+.enderecos,
+.contato,
+.capa {
+  margin-top: 30px; /* Espaçamento entre as seções */
+  padding-top: 20px;
+  border-top: 1px solid #eee; /* Linha divisória acima de cada seção */
+}
+
+.h4 {
+  font-size: 1.6em; /* Tamanho dos subtítulos (Tópicos, Endereços, Contatos, Capa) */
+  color: #4CAF50; /* Verde vibrante para os subtítulos */
+  margin-bottom: 15px; /* Espaçamento abaixo dos subtítulos */
+  text-align: left; /* Alinha os subtítulos à esquerda */
+  font-weight: 600;
+}
+
+.ul {
+  list-style: none; /* Remove marcadores de lista padrão */
+  padding: 0; /* Remove padding padrão da lista */
+  margin: 0; /* Remove margem padrão da lista */
+}
+
+.li {
+  font-size: 1.05em; /* Tamanho do texto dos itens da lista */
+  margin-bottom: 8px; /* Espaçamento entre os itens da lista */
+  color: #555; /* Cor de texto um pouco mais clara para os itens */
+}
+
+.li strong {
+  color: #333; /* Destaca o tipo de contato (ex: Email, Telefone) */
+}
+
+.sem_resgistro {
+  font-style: italic; /* Texto em itálico para "Nenhum..." */
+  color: #888; /* Cor mais suave para mensagens de "não disponível" */
+  font-size: 1em;
+  padding-left: 10px; /* Um pequeno indent para alinhar com os itens da lista */
+}
+
+.img {
+  max-width: 100%; /* Garante que a imagem não ultrapasse a largura do container */
+  height: auto; /* Mantém a proporção da imagem */
+  display: block; /* Remove espaço extra abaixo da imagem */
+  border-radius: 6px; /* Bordas levemente arredondadas para a imagem */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para a imagem */
+  margin-top: 15px; /* Espaçamento acima da imagem */
+}

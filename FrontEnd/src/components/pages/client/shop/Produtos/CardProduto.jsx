@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "../../../../../styles/pages_styles/client_styles/CardProduto.module.css"
+import styles from "../../../../../styles/pages_styles/client_styles/cards_styles/CardProduto.module.css"
 function CardProduto({ produto }) {
   const [detalhes, setDetalhes] = useState(false);
 

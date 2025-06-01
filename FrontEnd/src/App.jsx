@@ -25,13 +25,15 @@ import ProdutoAtt from "./components/pages/seller/store/ProdutoAtt";
 import AddDescricao from "./components/pages/seller/custom/AddDescricao";
 import  DescricaoFeirante  from "./components/pages/seller/custom/DescricaoFeirante";
 import CategoriasProduto from "./components/pages/client/shop/CategoriasProduto";
-import ProdutoFeirante from "./components/pages/client/shop/produtos/ProdutoFeirante";
+import Colaboradores from "./components/pages/client/shop/colaboradores/Colaboradores";
 import Frutas from "./components/pages/client/shop/categorias/Frutas";
 import Graos from "./components/pages/client/shop/categorias/Graos";
 import Legumes from "./components/pages/client/shop/categorias/Legumes";
 import Temperos from "./components/pages/client/shop/categorias/Temperos";
 import Verduras from "./components/pages/client/shop/categorias/Verduras";
 import PesquisaProdutos from "./components/pages/client/shop/Produtos/PesquisaProdutos";
+import ColaboradorPerfil from "./components/pages/client/shop/colaboradores/ColaboradorPerfil";
+import Carrinho from "./components/pages/client/shop/carrinho";
 
 
 function App() {
@@ -80,13 +82,15 @@ function App() {
               <Route path="/feirante/adicionar_descricao/" element={<AddDescricao />}></Route>
               <Route path="/feirante/descricao" element={<DescricaoFeirante />}></Route>
               <Route path="/produtos/categorias" element={<CategoriasProduto />} ></Route>
-              <Route path="/produtos/cliente/feirantes" element={<ProdutoFeirante />}></Route>
+              <Route path="/colaboradores" element={<Colaboradores />}></Route>
               <Route path="/produtos/categorias/frutas" element={<Frutas />} ></Route>
               <Route path="/produtos/categorias/graos" element={<Graos />} ></Route>
               <Route path="/produtos/categorias/legumes" element={<Legumes />} ></Route>
               <Route path="/produtos/categorias/temperos" element={<Temperos />}></Route>
               <Route path="/produtos/categorias/verduras" element={<Verduras />} ></Route>
               <Route path="/produtos/pesquisa" element={<PesquisaProdutos />} ></Route>
+              <Route path="/public/colaborador/:id" element={<ColaboradorPerfil />} ></Route>
+              <Route path="/cliente/carrinho"  element={<Carrinho />}></Route>
             </Routes>
           </Container>
           <Footer />

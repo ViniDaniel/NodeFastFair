@@ -1,0 +1,33 @@
+/* CardColaboradores.module.css */
+
+.div {
+  background-color: #555; /* Um cinza escuro para o fundo do card, similar ao da imagem */
+  border-radius: 8px; /* Bordas arredondadas */
+  padding: 15px 25px; /* Espaçamento interno */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */
+  width: 100%; /* Ocupa a largura total disponível no flex-container */
+  max-width: 400px; /* Limita a largura máxima do card para não ficar muito largo */
+  text-align: left; /* Alinha o texto à esquerda dentro do card */
+  transition: transform 0.2s ease-in-out; /* Transição suave ao passar o mouse */
+  display: flex; /* Para alinhar o conteúdo */
+  align-items: center; /* Centraliza verticalmente o link */
+  justify-content: center; /* Centraliza horizontalmente o link */
+}
+
+.div:hover {
+  transform: translateY(-5px); /* Efeito de "levantar" ao passar o mouse */
+}
+
+.link {
+  color: white; /* Cor do texto do link */
+  text-decoration: none; /* Remove o sublinhado padrão do link */
+  font-size: 1.5em; /* Tamanho da fonte para o nome do feirante */
+  font-weight: 600; /* Um pouco mais negrito */
+  display: block; /* Para o link ocupar todo o espaço do card */
+  width: 100%; /* Ocupa a largura total do div */
+  text-align: center; /* Centraliza o nome do feirante no card */
+}
+
+.link:hover {
+  color: #aaddaa; /* Mudar a cor do texto ao passar o mouse */
+}

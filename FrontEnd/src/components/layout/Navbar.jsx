@@ -28,6 +28,9 @@ function NavBar() {
                 <Link to="/produtos/categorias">Categorias</Link>
               </li>
               <li>
+                <Link to="/colaboradores" >Colaboradores</Link>
+              </li>
+              <li>
                 <Link to="/sobre">Sobre</Link>
               </li>
               <li>
@@ -61,6 +64,9 @@ function NavBar() {
               </li>
               <li>
                 <Link to="/produtos/categorias">Categorias</Link>
+              </li>
+               <li>
+                <Link to="/colaboradores" >Colaboradores</Link>
               </li>
               <li>
                 <Link to="/sobre">Sobre</Link>
