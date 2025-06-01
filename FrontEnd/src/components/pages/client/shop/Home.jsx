@@ -1,10 +1,10 @@
-import styles from "../../../../../styles/pages_styles/client_styles/VitrineProdutos.module.css";
-import ShopNavBar from "../../../../layout/ShopNavBar";
-import CardProduto from "./CardProduto";
-import api from "../../../../services/api";
+import styles from "../../../../styles/pages_styles/Home.module.css";
+import ShopNavBar from "../../../layout/ShopNavBar";
+import CardProduto from "./Produtos/CardProduto";
+import api from "../../../services/api";
 import { useState, useEffect } from "react";
 
-function VitrineProdutos() {
+function Home() {
   const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {
@@ -35,4 +35,4 @@ function VitrineProdutos() {
   );
 }
 
-export default VitrineProdutos;
+export default Home;

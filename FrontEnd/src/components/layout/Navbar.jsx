@@ -25,7 +25,7 @@ function NavBar() {
                 <Link to="/">Início</Link>
               </li>
               <li>
-                <Link to="/produtos/vitrine">Produtos</Link>
+                <Link to="/produtos/categorias">Categorias</Link>
               </li>
               <li>
                 <Link to="/sobre">Sobre</Link>
@@ -60,7 +60,7 @@ function NavBar() {
                 <Link to="/">Início</Link>
               </li>
               <li>
-                <Link to="/produtos/vitrine">Produtos</Link>
+                <Link to="/produtos/categorias">Categorias</Link>
               </li>
               <li>
                 <Link to="/sobre">Sobre</Link>

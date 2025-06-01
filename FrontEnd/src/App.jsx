@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./components/pages/client/Home";
+import Home from "./components/pages/client/shop/Home";
 import NavBar from "./components/layout/Navbar";
 import Container from "./components/layout/Container";
 import LoginCliente from "./components/pages/client/LoginCliente";
@@ -31,7 +31,8 @@ import Graos from "./components/pages/client/shop/categorias/Graos";
 import Legumes from "./components/pages/client/shop/categorias/Legumes";
 import Temperos from "./components/pages/client/shop/categorias/Temperos";
 import Verduras from "./components/pages/client/shop/categorias/Verduras";
-import VitrineProdutos from "./components/pages/client/shop/produtos/VitrineProdutos";
+import PesquisaProdutos from "./components/pages/client/shop/Produtos/PesquisaProdutos";
+
 
 function App() {
   return (
@@ -78,7 +79,6 @@ function App() {
               <Route path="/feirante/estoque" element={<EstoqueFeirante />} ></Route>
               <Route path="/feirante/adicionar_descricao/" element={<AddDescricao />}></Route>
               <Route path="/feirante/descricao" element={<DescricaoFeirante />}></Route>
-              <Route path="/produtos/vitrine" element={<VitrineProdutos />} ></Route>
               <Route path="/produtos/categorias" element={<CategoriasProduto />} ></Route>
               <Route path="/produtos/cliente/feirantes" element={<ProdutoFeirante />}></Route>
               <Route path="/produtos/categorias/frutas" element={<Frutas />} ></Route>
@@ -86,6 +86,7 @@ function App() {
               <Route path="/produtos/categorias/legumes" element={<Legumes />} ></Route>
               <Route path="/produtos/categorias/temperos" element={<Temperos />}></Route>
               <Route path="/produtos/categorias/verduras" element={<Verduras />} ></Route>
+              <Route path="/produtos/pesquisa" element={<PesquisaProdutos />} ></Route>
             </Routes>
           </Container>
           <Footer />

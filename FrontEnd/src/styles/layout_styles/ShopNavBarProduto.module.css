@@ -1,39 +1,105 @@
-.navbar {
-  background-color: #bbbbbb;
-  padding: 10px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Altura do seu menu superior (ajuste este valor conforme a realidade) */
+:root {
+  --altura-menu-superior: 75px; /* Exemplo: 50px. Você precisará medir ou estimar. */
+}
+
+/* Container geral para a barra de navegação (onde está a busca) */
+.navbarContainer {
+  
+  padding: 10px 0;
+
   position: sticky;
-  top: 0;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* <-- isso distribui entre esquerda e direita */
-  margin-top: 20px;
-}
-
-.left {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+  /* A mudança principal está aqui: */
+  top: var(--altura-menu-superior); /* Gruda abaixo do menu superior */
+  z-index: 999; /* Garante que ele fique acima do conteúdo, mas não do menu superior */
+  max-width: calc(100% - 250px);
+  margin-left: 7em;
 }
 
 
-.list {
+.navbar {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Formulário de busca */
+.searchForm {
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+.searchForm input {
+  flex-grow: 1;
+  padding: 12px 15px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+}
+
+.searchForm input::placeholder {
+  color: #888;
+}
+
+.searchForm button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.searchForm button:hover {
+  background-color: #45a049;
+}
+
+/* Caixa de sugestões */
+.sugestoesBox {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 480px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
   list-style: none;
-  display: flex;
-  gap: 20px;
-  padding-left: 4.5em;
+  padding: 0;
   margin: 0;
+  text-align: left;
 }
 
-.list li a {
-  color: black;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
+.sugestoesBox li {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #333;
+  border-bottom: 1px solid #eee;
 }
 
-.list li a:hover {
-  color: #0c6300;
+.sugestoesBox li:last-child {
+  border-bottom: none;
 }
 
+.sugestoesBox li:hover {
+  background-color: #f0f0f0;
+}

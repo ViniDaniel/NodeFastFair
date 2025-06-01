@@ -1,10 +1,4 @@
 body {
   text-align: center;
-  background: linear-gradient(
-    180deg,
-    #183826 0%,
-    #2f7528 40%,
-    #4fa94f 70%,
-    #a8e6a3 100%
-  );
+  background-color: #388e3c;;
 }
