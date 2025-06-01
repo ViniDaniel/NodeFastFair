@@ -19,4 +19,7 @@ router.use("/", categoriaProdutoRouter)
 const descricaoFeiranteRouter = require("./descricaoFeiranteRouter")
 router.use("/", descricaoFeiranteRouter)
 
+const pesquisaRouter = require("./pesquisaRouter")
+router.use("/", pesquisaRouter)
+
 module.exports = router;
