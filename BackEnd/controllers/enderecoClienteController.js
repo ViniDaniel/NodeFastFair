@@ -15,7 +15,7 @@ const enderecoClienteController = {
       } = req.body;
 
       const enderecoCliente = {
-        clienteId: req.user.id,
+        clienteId: req.cliente.id,
         cep,
         endereco,
         numeroCasa,
@@ -26,7 +26,7 @@ const enderecoClienteController = {
         referencia,
       };
 
-      const jaExiste = await EnderecoModel.findOne({ clienteId: req.user.id });
+      const jaExiste = await EnderecoModel.findOne({ clienteId: req.cliente.id });
       if (jaExiste) {
         return res.status(400).json({ message: "Endereço já cadastrado." });
       }
@@ -105,7 +105,7 @@ const enderecoClienteController = {
       } = req.body;
 
       const enderecoCliente = {
-        clienteId: req.user.id,
+        clienteId: req.cliente.id,
         cep,
         endereco,
         numeroCasa,
@@ -116,7 +116,7 @@ const enderecoClienteController = {
         referencia,
       };
       const updateEnderecoCliente = await EnderecoModel.findOneAndUpdate(
-        { clienteId: req.user.id },
+        { clienteId: req.cliente.id },
         enderecoCliente,
         { new: true }
       );

@@ -79,7 +79,7 @@ const clienteController = {
         genero,
       };
 
-      const clienteId = req.user.id
+      const clienteId = req.cliente.id
 
       const updateCliente = await ClienteModel.findByIdAndUpdate(clienteId, cliente, {
         new: true,
