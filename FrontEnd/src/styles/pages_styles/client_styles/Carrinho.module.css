@@ -1,0 +1,196 @@
+/* Carrinho.module.css */
+
+.div {
+  background-color: #4CAF50; /* Fundo verde vibrante para a página do carrinho */
+  min-height: calc(100vh - var(--altura-menu-superior) - 150px); /* Ajusta altura mínima considerando cabeçalho e rodapé */
+  padding: 40px 20px; /* Espaçamento interno */
+  color: white; /* Cor do texto padrão */
+  text-align: center; /* Centraliza o título principal */
+}
+
+.logado,
+.loading,
+.vazio {
+  font-size: 1.5em;
+  color: #eee;
+  margin-top: 50px;
+}
+
+.h1 {
+  font-size: 3em; /* Tamanho do título "Seu carrinho" */
+  color: #2F4F4F; /* Cor verde escura forte para o título */
+  margin-bottom: 40px; /* Espaçamento abaixo do título */
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.carrinho {
+  background-color: #f8f8f8; /* Fundo claro para o container do carrinho */
+  border-radius: 12px; /* Bordas arredondadas */
+  padding: 30px; /* Espaçamento interno generoso */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra suave */
+  max-width: 800px; /* Limita a largura máxima do carrinho */
+  margin: 0 auto; /* Centraliza o container */
+  text-align: left; /* Alinha o texto interno à esquerda */
+}
+
+.ul {
+  list-style: none; /* Remove marcadores de lista padrão */
+  padding: 0;
+  margin: 0;
+}
+
+.li {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os itens quebrem linha */
+  justify-content: space-between; /* Espaço entre o texto e os botões */
+  align-items: center; /* Alinha verticalmente os itens */
+  background-color: #fff; /* Fundo branco para cada item do carrinho */
+  border: 1px solid #eee; /* Borda suave */
+  border-radius: 8px; /* Bordas arredondadas para itens */
+  padding: 15px 20px;
+  margin-bottom: 15px; /* Espaço entre os itens da lista */
+  font-size: 1.1em;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Sombra sutil para itens */
+}
+
+.li > *:not(:last-child) { /* Espaçamento entre os elementos dentro do li (exceto o último) */
+  margin-right: 15px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 10px; /* Espaço entre os botões de + e - */
+  margin-top: 10px; /* Espaço acima do grupo de botões */
+}
+
+.button_d,
+.burron_a {
+  background-color: #2F4F4F; /* Verde escuro para botões de quantidade */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Botões redondos */
+  width: 40px; /* Largura e altura para fazer um círculo */
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button_d:hover,
+.burron_a:hover {
+  background-color: #3e6d3e; /* Escurece no hover */
+}
+
+.button_r {
+  background-color: #e74c3c; /* Vermelho para o botão remover */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 0.9em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.3s ease;
+  margin-top: 10px; /* Espaço acima do botão remover */
+}
+
+.button_r:hover {
+  background-color: #c0392b; /* Vermelho mais escuro no hover */
+}
+
+.finalizar {
+  margin-top: 30px; /* Espaço acima da seção de total/finalizar */
+  border-top: 1px solid #eee; /* Linha divisória */
+  padding-top: 20px;
+  text-align: right; /* Alinha o total e o botão à direita */
+}
+
+.finalizar p {
+  font-size: 1.6em;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.button_finzalizar {
+  background-color: #4CAF50; /* Verde vibrante para finalizar pedido */
+  color: white;
+  border: none;
+  border-radius: 30px; /* Botão arredondado */
+  padding: 15px 30px;
+  font-size: 1.2em;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button_finzalizar:hover {
+  background-color: #388e3c; /* Verde mais escuro no hover */
+  transform: translateY(-3px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .h1 {
+    font-size: 2.5em;
+  }
+  .carrinho {
+    padding: 20px;
+  }
+  .li {
+    flex-direction: column; /* Empilha os itens verticalmente em telas menores */
+    align-items: flex-start; /* Alinha à esquerda quando empilhado */
+    font-size: 1em;
+  }
+  .li > *:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 10px; /* Espaçamento entre os elementos quando empilhados */
+  }
+  .buttonGroup {
+    margin-top: 0;
+    width: 100%; /* Ocupa largura total */
+    justify-content: flex-start; /* Alinha os botões à esquerda */
+  }
+  .button_r {
+    width: 100%; /* Ocupa largura total */
+    justify-content: center;
+  }
+  .finalizar {
+    text-align: center; /* Centraliza o total e o botão finalizar em telas menores */
+  }
+}
+
+@media (max-width: 480px) {
+  .h1 {
+    font-size: 2em;
+  }
+  .carrinho {
+    padding: 15px;
+  }
+  .button_d,
+  .burron_a {
+    width: 35px;
+    height: 35px;
+    font-size: 1em;
+  }
+  .button_r {
+    padding: 6px 12px;
+    font-size: 0.8em;
+  }
+  .finalizar p {
+    font-size: 1.4em;
+  }
+  .button_finzalizar {
+    padding: 12px 20px;
+    font-size: 1em;
+  }
+}
