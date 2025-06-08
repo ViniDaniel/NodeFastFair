@@ -6,7 +6,7 @@ import { FaMinusCircle, FaPlusCircle, FaTrash } from "react-icons/fa";
 import styles from "../../../../styles/pages_styles/client_styles/Carrinho.module.css";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
-const PUBLIC_KEY = "TEST-c0cd4962-263a-40d8-b7fa-b7d54cbf50ba";
+const PUBLIC_KEY = "APP_USR-c0cd4962-263a-40d8-b7fa-b7d54cbf50ba";
 
 function Carrinho() {
   const { cliente } = useContext(ClienteContext);
