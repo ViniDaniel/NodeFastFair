@@ -4,11 +4,11 @@ const cors = require("cors");
 const app = express();
 const routes = require("./routes/router");
 
-const allowedOrigins = process.env.FRONTEND_URL.split(",");
+//const allowedOrigins = process.env.FRONTEND_URL.split(",");
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: "https://node-fast-fair.vercel.app/",
   })
 );
 //evita erro com a conexção do front com o back
