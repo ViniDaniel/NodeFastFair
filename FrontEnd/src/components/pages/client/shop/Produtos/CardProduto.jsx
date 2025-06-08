@@ -32,7 +32,7 @@ function CardProduto({ produto }) {
       {produto.imagem?.map((img, idx) => (
         <img
           key={idx}
-          src={`http://localhost:7000/${img}`}
+          src={`https://nodefastfair.onrender.com/${img}`}
           alt={`${produto.nome} ${idx}`}
           className={styles.imagem_produto}
         />

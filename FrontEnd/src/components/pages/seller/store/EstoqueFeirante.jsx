@@ -83,7 +83,7 @@ function EstoqueFeirante() {
                   {item.imagem?.map((img, idx) => (
                     <img
                       key={idx}
-                      src={`http://localhost:7000/${img}`}
+                      src={`https://nodefastfair.onrender.com/${img}`}
                       alt={`${item.nome} ${idx}`}
                       className={styles.imagem_produto}
                     />
