@@ -45,70 +45,79 @@ const pedidoController = {
     try {
       console.log("Webhook recebido:", JSON.stringify(req.body, null, 2));
 
-      const data = req.body;
+      const body = req.body;
 
-      if (!data || !data.type || !data.data?.id) {
-        console.error("Corpo inválido:", req.body);
+      let paymentId = null;
+
+      // CASO 1 - Webhook padrão do Checkout Pro ou Transparente (data.id)
+      if (body.type === "payment" && body.data?.id) {
+        paymentId = body.data.id;
+      }
+      // CASO 2 - Webhook do tipo "topic: payment" (resource = id)
+      else if (body.topic === "payment" && body.resource) {
+        paymentId = body.resource;
+      }
+      // CASO 3 - Webhook "merchant_order" (ignorar ou implementar futuramente)
+      else if (body.topic === "merchant_order") {
+        console.log("Webhook merchant_order recebido, ignorado por enquanto.");
+        return res.sendStatus(200);
+      } else {
+        console.error("Corpo inválido:", body);
         return res.sendStatus(400);
       }
 
-      if (data.type === "payment") {
-        let pagamento;
-        try {
-          pagamento = await payment.get({ id: data.data.id });
-        } catch (erroPagamento) {
-          // Se for erro de pagamento não encontrado, ignora e retorna 200
-          if (
-            erroPagamento?.status === 404 ||
-            erroPagamento?.message === "Payment not found"
-          ) {
-            console.warn(
-              "Pagamento não encontrado (simulação ou ID inválido). Ignorando."
-            );
-            return res.sendStatus(200);
-          }
-          // Se for outro erro, loga e retorna 500
-          console.error("Erro inesperado ao buscar pagamento:", erroPagamento);
-          return res.sendStatus(500);
+      let pagamento;
+      try {
+        pagamento = await payment.get({ id: paymentId });
+      } catch (erroPagamento) {
+        if (erroPagamento?.status === 404) {
+          console.warn("Pagamento não encontrado:", paymentId);
+          return res.sendStatus(200);
+        }
+        console.error("Erro ao buscar pagamento:", erroPagamento);
+        return res.sendStatus(500);
+      }
+
+      if (pagamento.body.status === "approved") {
+        const { clienteId, carrinhoId } = pagamento.body.metadata;
+
+        if (!clienteId || !carrinhoId) {
+          console.warn("Metadata ausente no pagamento:", pagamento.body);
+          return res.sendStatus(200);
         }
 
-        if (pagamento.body.status === "approved") {
-          const { clienteId, carrinhoId } = pagamento.body.metadata;
+        const carrinho = await Carrinho.findById(carrinhoId).populate(
+          "itens.produtoId"
+        );
+        if (!carrinho) return res.sendStatus(200);
 
-          const carrinho = await Carrinho.findById(carrinhoId).populate(
-            "itens.produtoId"
-          );
+        const produtos = carrinho.itens.map((item) => ({
+          produtoId: item.produtoId._id,
+          quantidade: item.quantidade,
+        }));
 
-          if (!carrinho) return res.sendStatus(200); // Já tratado ou carrinho removido
+        const total = carrinho.itens.reduce((acc, item) => {
+          return acc + item.produtoId.preco * item.quantidade;
+        }, 0);
 
-          const produtos = carrinho.itens.map((item) => ({
-            produtoId: item.produtoId._id,
-            quantidade: item.quantidade,
-          }));
+        const pedido = new PedidoModel({
+          clienteId,
+          produtos,
+          total,
+          status: "confirmado",
+          pagamentoId: pagamento.body.id,
+        });
 
-          const total = carrinho.itens.reduce((acc, item) => {
-            return acc + item.produtoId.preco * item.quantidade;
-          }, 0);
+        await pedido.save();
+        await Carrinho.findByIdAndDelete(carrinhoId);
 
-          const pedido = new PedidoModel({
-            clienteId,
-            produtos,
-            total,
-            status: "confirmado",
-            pagamentoId: pagamento.body.id,
-          });
-
-          await pedido.save();
-          await Carrinho.findByIdAndDelete(carrinhoId);
-
-          console.log("Pedido criado com sucesso:", pedido._id);
-          console.log("Carrinho removido:", carrinhoId);
-        }
+        console.log("Pedido criado com sucesso:", pedido._id);
+        console.log("Carrinho removido:", carrinhoId);
       }
 
       return res.sendStatus(200);
     } catch (error) {
-      console.error("Erro no webhook do Mercado Pago:", error);
+      console.error("Erro inesperado no webhook:", error);
       return res.sendStatus(500);
     }
   },
