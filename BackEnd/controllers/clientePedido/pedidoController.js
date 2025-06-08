@@ -1,41 +1,8 @@
 const { Pedido: PedidoModel } = require("../../models/Pedido")
-const { Produto: ProdutoModel } = require("../../models/Produto");
+const { payment } = require("../../api/mercadoPago");
+const { Carrinho } = require("../../models/Carrinho");
 
 const pedidoController = {
-  // Criar novo pedido
-  create: async (req, res) => {
-    try {
-      const { clienteId, produtos } = req.body;
-
-      if (!clienteId || !produtos || !Array.isArray(produtos) || produtos.length === 0) {
-        return res.status(400).json({ message: "Dados incompletos para criar o pedido." });
-      }
-
-      let total = 0;
-
-      // Valida cada produto e calcula o total
-      for (let item of produtos) {
-        const produto = await ProdutoModel.findById(item.produtoId);
-        if (!produto) {
-          return res.status(404).json({ message: `Produto não encontrado: ${item.produtoId}` });
-        }
-
-        total += produto.preco * item.quantidade;
-      }
-
-      const novoPedido = new PedidoModel({
-        clienteId,
-        produtos,
-        total,
-      });
-
-      await novoPedido.save();
-      return res.status(201).json(novoPedido);
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: "Erro ao criar o pedido.", error: error.message });
-    }
-  },
 
   // Buscar todos os pedidos de um cliente
   getByCliente: async (req, res) => {
@@ -71,6 +38,48 @@ const pedidoController = {
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Erro ao atualizar o pedido." });
+    }
+  },
+  webhook: async (req, res) => {
+    try {
+      const data = req.body;
+
+      if (data.type === "payment") {
+        const pagamento = await payment.get({ id: data.data.id });
+
+        if (pagamento.body.status === "approved") {
+          const { clienteId, carrinhoId } = pagamento.body.metadata;
+
+          const carrinho = await Carrinho.findById(carrinhoId).populate("itens.produtoId");
+
+          if (!carrinho) return res.sendStatus(200); // Já tratado ou carrinho removido
+
+          const produtos = carrinho.itens.map((item) => ({
+            produtoId: item.produtoId._id,
+            quantidade: item.quantidade,
+          }));
+
+          const total = carrinho.itens.reduce((acc, item) => {
+            return acc + item.produtoId.preco * item.quantidade;
+          }, 0);
+
+          const pedido = new PedidoModel({
+            clienteId,
+            produtos,
+            total,
+            status: "pago",
+            pagamentoId: pagamento.body.id,
+          });
+
+          await pedido.save();
+          await Carrinho.findByIdAndDelete(carrinhoId);
+        }
+      }
+
+      return res.sendStatus(200);
+    } catch (error) {
+      console.error("Erro no webhook do Mercado Pago:", error);
+      return res.sendStatus(500);
     }
   },
 };

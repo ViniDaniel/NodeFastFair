@@ -36,4 +36,7 @@ router
     carrinhoController.diminuirQuantidade(req, res)
   );
 
+  router.post("/cliente/carrinho/gerar-preferencia", authCliente, carrinhoController.gerarPreferencia);
+
+
 module.exports = router;

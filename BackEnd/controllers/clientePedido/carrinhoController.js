@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const { Carrinho: CarrinhoModel } = require("../../models/Carrinho");
 const { Pedido: PedidoModel } = require("../../models/Pedido");
+const { Cliente: ClienteModel } = require("../../models/Cliente");
+const { preference, payment } = require("../../api/mercadoPago");
+
 
 const carrinhoController = {
   adicionarProduto: async (req, res) => {
@@ -145,9 +148,14 @@ const carrinhoController = {
     }
   },
 
-  finalizarPedido: async (req, res) => {
+  /*finalizarPedido: async (req, res) => {
     try {
       const clienteId = req.cliente.id;
+      const { cardToken, installments } = req.body;
+
+      const cliente = await ClienteModel.findById(clienteId);
+      if (!cliente)
+        return res.status(404).json({ message: "Cliente não encontrado" });
 
       const carrinho = await CarrinhoModel.findOne({ clienteId }).populate(
         "itens.produtoId"
@@ -156,21 +164,47 @@ const carrinhoController = {
         return res.status(400).json({ message: "Carrinho vazio" });
       }
 
-      const produtos = carrinho.itens.map((item) => ({
-        produtoId: item.produtoId._id,
-        quantidade: item.quantidade,
-      }));
-
       let total = 0;
       carrinho.itens.forEach((item) => {
         total += item.produtoId.preco * item.quantidade;
       });
 
+      const pagamento = await payment.create({
+        body: {
+          transaction_amount: total,
+          token: cardToken,
+          description: "Compra na Feira Online",
+          installments: installments,
+          payer: {
+            email: cliente.email,
+          },
+          application_fee_amount: total * 0.1,
+          metadata: {
+            clienteId: clienteId,
+            carrinhoId: carrinho._id.toString(),
+          },
+        },
+      });
+
+      if (pagamento.status !== "approved") {
+        return res.status(400).json({
+          message: "Pagamento não aprovado",
+          status: pagamento.status,
+          detalhes: pagamento.status_detail,
+        });
+      }
+
+      const produtos = carrinho.itens.map((item) => ({
+        produtoId: item.produtoId._id,
+        quantidade: item.quantidade,
+      }));
+
       const pedido = new PedidoModel({
         clienteId,
         produtos,
         total,
-        status: "pendente",
+        status: "pago",
+        pagamentoId: pagamento.id,
       });
 
       await pedido.save();
@@ -184,6 +218,54 @@ const carrinhoController = {
       return res
         .status(500)
         .json({ message: "Erro ao finalizar pedido", error: error.message });
+    }
+  },*/
+
+  gerarPreferencia: async (req, res) => {
+    try {
+      const clienteId = req.cliente.id;
+
+      const carrinho = await CarrinhoModel.findOne({ clienteId }).populate(
+        "itens.produtoId"
+      );
+      if (!carrinho || carrinho.itens.length === 0) {
+        return res.status(400).json({ message: "Carrinho vazio" });
+      }
+
+      const items = carrinho.itens.map((item) => ({
+        title: item.produtoId.nome,
+        quantity: item.quantidade,
+        unit_price: Number(item.produtoId.preco) || 0,
+        currency_id: "BRL",
+      }));
+
+      const preferencia = {
+        items,
+        payer: {
+          email: req.cliente.email,
+        },
+        metadata: {
+          clienteId: clienteId,
+          carrinhoId: carrinho._id.toString(),
+        },
+        back_urls: {
+          success: "https://seusite.com/sucesso",
+          failure: "https://seusite.com/erro",
+          pending: "https://seusite.com/pendente",
+        },
+        notification_url: "https://seusite.com/api/pedidos/webhook",
+
+        auto_return: "approved",
+      };
+
+      const result = await preference.create({ body: preferencia });
+
+      return res.status(200).json({ preferenceId: result.id });
+    } catch (error) {
+      console.error("Erro ao criar preferência:", error);
+      return res
+        .status(500)
+        .json({ message: "Erro ao criar preferência", error: error.message });
     }
   },
 };
