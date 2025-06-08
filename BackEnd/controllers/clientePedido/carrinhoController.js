@@ -4,7 +4,6 @@ const { Pedido: PedidoModel } = require("../../models/Pedido");
 const { Cliente: ClienteModel } = require("../../models/Cliente");
 const { preference, payment } = require("../../api/mercadoPago");
 
-
 const carrinhoController = {
   adicionarProduto: async (req, res) => {
     try {
@@ -250,24 +249,39 @@ const carrinhoController = {
         },
         external_reference: `cliente_${clienteId}_carrinho_${carrinho._id}`,
         back_urls: {
-          success: "https://node-fast-fair.vercel.app/cliente/pedidos/confirmados",
+          success:
+            "https://node-fast-fair.vercel.app/cliente/pedidos/confirmados",
           failure: "https://node-fast-fair.vercel.app/cliente/pedido/erro",
           pending: "https://node-fast-fair.vercel.app/cliente/pedido/pendente",
         },
-        notification_url: "https://nodefastfair.onrender.com/api/pedidos/webhook",
-
-
+        notification_url:
+          "https://nodefastfair.onrender.com/api/pedidos/webhook",
         auto_return: "approved",
+
+        statement_descriptor: "Fast&Fair", // Nome que aparece na fatura
+        expires: true,
+        expiration_date_from: new Date().toISOString(),
+        expiration_date_to: new Date(
+          Date.now() + 24 * 60 * 60 * 1000
+        ).toISOString(), // 24h
       };
 
       const result = await preference.create({ body: preferencia });
 
-      return res.status(200).json({ preferenceId: result.id });
+      return res.status(200).json({
+        preferenceId: result.id,
+        sandbox_init_point: result.sandbox_init_point, // Para testes
+        init_point: result.init_point,
+      });
     } catch (error) {
       console.error("Erro ao criar preferência:", error);
       return res
         .status(500)
-        .json({ message: "Erro ao criar preferência", error: error.message });
+        .json({
+          message: "Erro ao criar preferência",
+          error: error.message,
+          details: error.cause || error.stack,
+        });
     }
   },
 };

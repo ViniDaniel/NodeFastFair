@@ -1,9 +1,8 @@
-const { Pedido: PedidoModel } = require("../../models/Pedido")
+const { Pedido: PedidoModel } = require("../../models/Pedido");
 const { payment } = require("../../api/mercadoPago");
 const { Carrinho } = require("../../models/Carrinho");
 
 const pedidoController = {
-
   // Buscar todos os pedidos de um cliente
   getByCliente: async (req, res) => {
     try {
@@ -16,7 +15,9 @@ const pedidoController = {
       return res.status(200).json(pedidos);
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ message: "Erro ao buscar os pedidos.", error: error.message });
+      return res
+        .status(500)
+        .json({ message: "Erro ao buscar os pedidos.", error: error.message });
     }
   },
 
@@ -43,6 +44,10 @@ const pedidoController = {
   webhook: async (req, res) => {
     try {
       const data = req.body;
+      console.log("=== WEBHOOK RECEBIDO ===");
+      console.log("Body:", JSON.stringify(data, null, 2));
+      console.log("Query:", req.query);
+      console.log("========================");
 
       if (data.type === "payment") {
         const pagamento = await payment.get({ id: data.data.id });
@@ -50,7 +55,9 @@ const pedidoController = {
         if (pagamento.body.status === "approved") {
           const { clienteId, carrinhoId } = pagamento.body.metadata;
 
-          const carrinho = await Carrinho.findById(carrinhoId).populate("itens.produtoId");
+          const carrinho = await Carrinho.findById(carrinhoId).populate(
+            "itens.produtoId"
+          );
 
           if (!carrinho) return res.sendStatus(200); // Já tratado ou carrinho removido
 
@@ -73,12 +80,16 @@ const pedidoController = {
 
           await pedido.save();
           await Carrinho.findByIdAndDelete(carrinhoId);
+
+          console.log("Pedido criado com sucesso:", pedido._id);
+          console.log("Carrinho removido:", carrinhoId);
         }
       }
 
       return res.sendStatus(200);
     } catch (error) {
       console.error("Erro no webhook do Mercado Pago:", error);
+      console.error("Stack:", error.stack);
       return res.sendStatus(500);
     }
   },
