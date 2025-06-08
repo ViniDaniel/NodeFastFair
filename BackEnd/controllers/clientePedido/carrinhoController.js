@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const { Carrinho: CarrinhoModel } = require("../../models/Carrinho");
-const { Pedido: PedidoModel } = require("../../models/Pedido");
-const { Cliente: ClienteModel } = require("../../models/Cliente");
-const { preference, payment } = require("../../api/mercadoPago");
+const { preference } = require("../../api/mercadoPago");
 
 const carrinhoController = {
   adicionarProduto: async (req, res) => {

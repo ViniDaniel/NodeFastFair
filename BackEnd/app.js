@@ -14,6 +14,7 @@ app.use(
 //evita erro com a conexção do front com o back
 
 app.use(express.json()); //para receber dados em json
+app.use(express.urlencoded({ extended: true }));
 
 const conn = require("./db/conn"); //conexão com o banco de dados
 conn(); //chama a função de conexão com o banco de dados

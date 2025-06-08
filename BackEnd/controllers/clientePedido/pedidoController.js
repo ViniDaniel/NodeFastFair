@@ -43,11 +43,13 @@ const pedidoController = {
   },
   webhook: async (req, res) => {
     try {
+      console.log("Webhook recebido:", JSON.stringify(req.body, null, 2));
+
       const data = req.body;
-      console.log("=== WEBHOOK RECEBIDO ===");
-      console.log("Body:", JSON.stringify(data, null, 2));
-      console.log("Query:", req.query);
-      console.log("========================");
+      if (!data || !data.type || !data.data?.id) {
+        console.error("Corpo inválido:", req.body);
+        return res.sendStatus(400);
+      }
 
       if (data.type === "payment") {
         const pagamento = await payment.get({ id: data.data.id });
@@ -55,6 +57,15 @@ const pedidoController = {
         if (pagamento.body.status === "approved") {
           const { clienteId, carrinhoId } = pagamento.body.metadata;
 
+         
+          const pedidoExistente = await PedidoModel.findOne({
+            pagamentoId: pagamento.body.id,
+          });
+          if (pedidoExistente) {
+            console.log("Pagamento já processado:", pagamento.body.id);
+            return res.sendStatus(200);
+          }
+          
           const carrinho = await Carrinho.findById(carrinhoId).populate(
             "itens.produtoId"
           );
