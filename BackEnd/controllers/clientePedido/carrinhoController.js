@@ -243,11 +243,6 @@ const carrinhoController = {
         payer: {
           email: req.cliente.email,
         },
-        metadata: {
-          clienteId: clienteId,
-          carrinhoId: carrinho._id.toString(),
-        },
-        external_reference: `cliente_${clienteId}_carrinho_${carrinho._id}`,
         back_urls: {
           success:
             "https://node-fast-fair.vercel.app/cliente/pedidos/confirmados",
@@ -256,6 +251,11 @@ const carrinhoController = {
         },
         notification_url:
           "https://nodefastfair.onrender.com/api/pedidos/webhook",
+        metadata: {
+          clienteId: clienteId,
+          carrinhoId: carrinho._id.toString(),
+        },
+        external_reference: `cliente_${clienteId}_carrinho_${carrinho._id}`,
         auto_return: "approved",
 
         statement_descriptor: "Fast&Fair", // Nome que aparece na fatura
