@@ -33,7 +33,7 @@ import Temperos from "./components/pages/client/shop/categorias/Temperos";
 import Verduras from "./components/pages/client/shop/categorias/Verduras";
 import PesquisaProdutos from "./components/pages/client/shop/Produtos/PesquisaProdutos";
 import ColaboradorPerfil from "./components/pages/client/shop/colaboradores/ColaboradorPerfil";
-import Carrinho from "./components/pages/client/shop/carrinho";
+import Carrinho from "./components/pages/client/shop/Carrinho";
 import PedidosPagos from "./components/pages/client/shop/pedidos/PedidosPagos";
 import PedidoErro from "./components/pages/client/shop/pedidos/PedidoErro";
 import PedidoPendente from "./components/pages/client/shop/pedidos/PedidoPendente";
