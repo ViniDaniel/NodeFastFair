@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiFeirante = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: "https://nodefastfair.onrender.com/api",
 })
 
 apiFeirante.interceptors.request.use((config) => {
@@ -13,3 +13,7 @@ apiFeirante.interceptors.request.use((config) => {
 });
 
 export default apiFeirante;
+
+/*baseURL: "https://nodefastfair.onrender.com/api"
+baseURL: "http://localhost:7000/api"
+*/

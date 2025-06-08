@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiCliente = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: "https://nodefastfair.onrender.com/api",
 })
 
 apiCliente.interceptors.request.use((config) => {
@@ -15,3 +15,7 @@ apiCliente.interceptors.request.use((config) => {
 });
 
 export default apiCliente;
+
+/*baseURL: "https://nodefastfair.onrender.com/api"
+baseURL: "http://localhost:7000/api"
+*/
