@@ -248,6 +248,7 @@ const carrinhoController = {
           clienteId: clienteId,
           carrinhoId: carrinho._id.toString(),
         },
+        external_reference: `cliente_${clienteId}_carrinho_${carrinho._id}`,
         back_urls: {
           success: "https://node-fast-fair.vercel.app/cliente/pedidos/confirmados",
           failure: "https://node-fast-fair.vercel.app/cliente/pedido/erro",
