@@ -96,7 +96,7 @@ useEffect(() => {
         },
       });
       console.log("Atualizado com sucesso", response.data);
-      navigate("/perfilFeirante");
+      navigate("/feirante/perfilFeirante");
     } catch (err) {
       if (err.response && err.response.data?.message) {
         setError(err.response.data.message);

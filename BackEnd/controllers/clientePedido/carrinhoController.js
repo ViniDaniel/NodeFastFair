@@ -249,11 +249,12 @@ const carrinhoController = {
           carrinhoId: carrinho._id.toString(),
         },
         back_urls: {
-          success: "http://localhost:5173/pedido/sucesso",
-          failure: "https://seusite.com/pedido/erro",
-          pending: "https://seusite.com/pedido/pendente",
+          success: "http://localhost:5173/cliente/pedidos/confirmados",
+          failure: "http://localhost:5173/cliente/pedido/erro",
+          pending: "http://localhost:5173/cliente/pedido/pendente",
         },
-        notification_url: "https://seusite.com/api/pedidos/webhook",
+        notification_url: "https://<ngrok-id>.ngrok.io/api/pedidos/webhook",
+
 
         auto_return: "approved",
       };

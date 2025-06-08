@@ -80,6 +80,7 @@ function Carrinho() {
     );
   if (!carrinho) return <p className={styles.loading}>Carregando...</p>;
 
+
   return (
     <div className={styles.div}>
       <h1 className={styles.h1}>Seu carrinho</h1>
@@ -118,13 +119,18 @@ function Carrinho() {
             ))}
           </ul>
           {!preferenceId ? (
-            <button
-              onClick={criarPreferencia}
-              className={styles.button_finzalizar}
-              disabled={!carrinho.itens.length}
-            >
-              Finalizar Pedido
-            </button>
+            <>
+              <p className={styles.total}>
+                Total: R$ {formatPreco(carrinho.total)}
+              </p>
+              <button
+                onClick={criarPreferencia}
+                className={styles.button_finzalizar}
+                disabled={!carrinho.itens.length}
+              >
+                Finalizar Pedido
+              </button>
+            </>
           ) : (
             <Wallet initialization={{ preferenceId }} />
           )}
