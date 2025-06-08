@@ -46,26 +46,35 @@ const pedidoController = {
       console.log("Webhook recebido:", JSON.stringify(req.body, null, 2));
 
       const data = req.body;
+
       if (!data || !data.type || !data.data?.id) {
         console.error("Corpo inválido:", req.body);
         return res.sendStatus(400);
       }
 
       if (data.type === "payment") {
-        const pagamento = await payment.get({ id: data.data.id });
+        let pagamento;
+        try {
+          pagamento = await payment.get({ id: data.data.id });
+        } catch (erroPagamento) {
+          // Se for erro de pagamento não encontrado, ignora e retorna 200
+          if (
+            erroPagamento?.status === 404 ||
+            erroPagamento?.message === "Payment not found"
+          ) {
+            console.warn(
+              "Pagamento não encontrado (simulação ou ID inválido). Ignorando."
+            );
+            return res.sendStatus(200);
+          }
+          // Se for outro erro, loga e retorna 500
+          console.error("Erro inesperado ao buscar pagamento:", erroPagamento);
+          return res.sendStatus(500);
+        }
 
         if (pagamento.body.status === "approved") {
           const { clienteId, carrinhoId } = pagamento.body.metadata;
 
-         
-          const pedidoExistente = await PedidoModel.findOne({
-            pagamentoId: pagamento.body.id,
-          });
-          if (pedidoExistente) {
-            console.log("Pagamento já processado:", pagamento.body.id);
-            return res.sendStatus(200);
-          }
-          
           const carrinho = await Carrinho.findById(carrinhoId).populate(
             "itens.produtoId"
           );
@@ -100,7 +109,6 @@ const pedidoController = {
       return res.sendStatus(200);
     } catch (error) {
       console.error("Erro no webhook do Mercado Pago:", error);
-      console.error("Stack:", error.stack);
       return res.sendStatus(500);
     }
   },
