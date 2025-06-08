@@ -4,11 +4,21 @@ const cors = require("cors");
 const app = express();
 const routes = require("./routes/router");
 
+const allowedOrigins = process.env.FRONTEND_URL.split(",");
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
   })
 );
+
 //evita erro com a conexção do front com o back
 
 app.use(express.json()); //para receber dados em json

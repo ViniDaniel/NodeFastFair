@@ -249,11 +249,11 @@ const carrinhoController = {
           carrinhoId: carrinho._id.toString(),
         },
         back_urls: {
-          success: "http://localhost:5173/cliente/pedidos/confirmados",
-          failure: "http://localhost:5173/cliente/pedido/erro",
-          pending: "http://localhost:5173/cliente/pedido/pendente",
+          success: "https://node-fast-fair.vercel.app/cliente/pedidos/confirmados",
+          failure: "https://node-fast-fair.vercel.app/cliente/pedido/erro",
+          pending: "https://node-fast-fair.vercel.app/cliente/pedido/pendente",
         },
-        notification_url: "https://<ngrok-id>.ngrok.io/api/pedidos/webhook",
+        notification_url: "https://nodefastfair.onrender.com/api/pedidos/webhook",
 
 
         auto_return: "approved",
