@@ -66,12 +66,7 @@ function ProdutoAdd() {
     }
 
     try {
-      await apiFeirante.post(`/produtos/${feirante._id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await apiFeirante.post(`/produtos/${feirante._id}`, formData);
       alert("Produto cadastrado com sucesso!");
       navigate("/feirante/estoque", { state: { from: "cadastro" } });
     } catch (error) {

@@ -27,17 +27,11 @@ function ProdutoAtt() {
   const navigate = useNavigate();
   const { produtoId } = useParams();
 
-
   useEffect(() => {
     async function fetchProdutos() {
       try {
         const response = await apiFeirante.get(
-          `/produtos/${feirante._id}/${produtoId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
+          `/produtos/${feirante._id}/${produtoId}`
         );
         console.log("DADOS RECEBIDOS:", response.data);
         const produto = response.data;
@@ -51,7 +45,7 @@ function ProdutoAtt() {
         });
       } catch (error) {
         setError("Erro ao carregar o produto");
-        console.log(error)
+        console.log(error);
       }
     }
     if (feirante?._id && produtoId) {
@@ -85,12 +79,7 @@ function ProdutoAtt() {
     try {
       await apiFeirante.put(
         `/produtos/${feirante._id}/${produtoId}`,
-        formParaEnviar,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
+        formParaEnviar
       );
       alert("Produto atualizado com sucesso!");
       navigate("/feirante/estoque", { state: { from: "cadastro" } });
@@ -99,7 +88,7 @@ function ProdutoAtt() {
         setError(error.response.data.message);
       } else {
         setError("Erro ao cadastrar produto");
-        console.log(error)
+        console.log(error);
       }
     }
   }
@@ -199,4 +188,4 @@ function ProdutoAtt() {
   );
 }
 
-export default ProdutoAtt
+export default ProdutoAtt;

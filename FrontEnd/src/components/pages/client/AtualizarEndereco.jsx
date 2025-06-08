@@ -29,12 +29,7 @@ function AtualizarEndereco() {
     async function fetchEndereco() {
       try {
         const response = await apiCliente.get(
-          `/enderecoCliente/${cliente._id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
+          `/enderecoCliente/${cliente._id}`
         );
         const endereco = response.data;
         setForm({
@@ -79,11 +74,7 @@ function AtualizarEndereco() {
       return;
     }
     try {
-      await apiCliente.put(`/enderecoCliente/${cliente._id}`, form, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      await apiCliente.put(`/enderecoCliente/${cliente._id}`, form);
       navigate("/perfilCliente");
     } catch (err) {
       if (err.response?.data?.message) {

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiFeirante = axios.create({
-    baseURL: "http://localhost:7000/api"
+    baseURL: import.meta.env.VITE_API_URL,
 })
 
 apiFeirante.interceptors.request.use((config) => {

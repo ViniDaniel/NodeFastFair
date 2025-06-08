@@ -33,11 +33,7 @@ useEffect(() => {
   async function fetchFeirante() {
     if (!feirante || !feirante._id) return;
     try {
-      const response = await apiFeirante.get(`/feirantes/${feirante._id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await apiFeirante.get(`/feirantes/${feirante._id}`);
 
       const data = response.data;
 
@@ -90,11 +86,7 @@ useEffect(() => {
       return setError("Selecione um estado válido!");
     }
     try {
-      const response = await apiFeirante.put(`/feirantes/`, form, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await apiFeirante.put(`/feirantes/`, form);
       console.log("Atualizado com sucesso", response.data);
       navigate("/feirante/perfilFeirante");
     } catch (err) {

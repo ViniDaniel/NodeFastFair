@@ -8,12 +8,7 @@ export const atualizarDescricao = async (
 ) => {
   return await apiFeirante.patch(
     `/feirante/descricao/${feiranteId}/${descricaoId}/descricao/atualizar`,
-    { descricao },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
+    { descricao }
   );
 };
 
@@ -21,12 +16,7 @@ export const atualizarDescricao = async (
 export const adicionarTopico = async (feiranteId, descricaoId, novoTopico) => {
   return await apiFeirante.post(
     `/feirante/descricao/${feiranteId}/${descricaoId}/topicos`,
-    { novoTopico },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
+    { novoTopico }
   );
 };
 
@@ -34,12 +24,7 @@ export const adicionarTopico = async (feiranteId, descricaoId, novoTopico) => {
 export const atualizarTopico = async (feiranteId, descricaoId, topicos) => {
   return await apiFeirante.patch(
     `/feirante/descricao/${feiranteId}/${descricaoId}/topicos/atualizar`,
-    { topicos },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
+    { topicos }
   );
 };
 
@@ -47,12 +32,7 @@ export const atualizarTopico = async (feiranteId, descricaoId, topicos) => {
 export const removerTopico = async (feiranteId, descricaoId, topico) => {
   return await apiFeirante.patch(
     `/feirante/descricao/${feiranteId}/${descricaoId}/topicos/remove`,
-    { topico },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
+    { topico }
   );
 };
 
@@ -64,12 +44,7 @@ export const adicionarEndereco = async (
 ) => {
   return await apiFeirante.post(
     `/feirante/descricao/${feiranteId}/${descricaoId}/enderecos`,
-    { novoEndereco },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
+    { novoEndereco }
   );
 };
 
@@ -77,12 +52,7 @@ export const adicionarEndereco = async (
 export const atualizarEndereco = async (feiranteId, descricaoId, enderecos) => {
   return await apiFeirante.patch(
     `/feirante/descricao/${feiranteId}/${descricaoId}/enderecos/atualizar`,
-    { enderecos },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
+    { enderecos }
   );
 };
 
@@ -90,12 +60,7 @@ export const atualizarEndereco = async (feiranteId, descricaoId, enderecos) => {
 export const removeEndereco = async (feiranteId, descricaoId, endereco) => {
   return await apiFeirante.patch(
     `/feirante/descricao/${feiranteId}/${descricaoId}/enderecos/remove`,
-    { endereco },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
+    { endereco }
   );
 };
 
@@ -107,12 +72,7 @@ export const adicionarContato = async (
 ) => {
   return await apiFeirante.post(
     `/feirante/descricao/${feiranteId}/${descricaoId}/contatos`,
-    { novoContato },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
+    { novoContato }
   );
 };
 
@@ -120,12 +80,7 @@ export const adicionarContato = async (
 export const atualizarContato = async (feiranteId, descricaoId, contatos) => {
   return await apiFeirante.patch(
     `/feirante/descricao/${feiranteId}/${descricaoId}/contatos/atualizar`,
-    { contatos },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
+    { contatos }
   );
 };
 
@@ -133,12 +88,7 @@ export const atualizarContato = async (feiranteId, descricaoId, contatos) => {
 export const removeContato = async (feiranteId, descricaoId, contato) => {
   return await apiFeirante.patch(
     `/feirante/descricao/${feiranteId}/${descricaoId}/contatos/remove`,
-    { contato },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
+    { contato }
   );
 };
 
@@ -146,11 +96,6 @@ export const removeContato = async (feiranteId, descricaoId, contato) => {
 export const atualizarCapa = async (feiranteId, descricaoId, capa) => {
   return await apiFeirante.patch(
     `/feirante/descricao/${feiranteId}/${descricaoId}/capa/atualizar`,
-    { capa },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
+    { capa }
   );
 };

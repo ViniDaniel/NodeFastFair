@@ -47,11 +47,7 @@ function AtualizarCliente() {
     return;
   }
     try {
-      const response = await apiCliente.put(`/clientes/`, form, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await apiCliente.put(`/clientes/`, form);
       console.log("Atualizado com sucesso", response.data);
       navigate("/perfilCliente");
     } catch (err) {

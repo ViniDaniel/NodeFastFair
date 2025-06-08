@@ -19,11 +19,7 @@ function PerfilFeirante() {
   useEffect(() => {
     async function fetchFeirante() {
       try {
-        const { data } = await apiFeirante.get(`feirantes/${feirante._id}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const { data } = await apiFeirante.get(`feirantes/${feirante._id}`);
         setDadosFeirante(data);
       } catch (error) {
         console.log(error);

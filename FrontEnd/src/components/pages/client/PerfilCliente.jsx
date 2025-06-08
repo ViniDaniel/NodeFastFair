@@ -21,11 +21,7 @@ function PerfilCliente() {
   useEffect(() => {
     async function fetchCliente() {
       try {
-        const { data } = await apiCliente.get(`/clientes/${cliente._id}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const { data } = await apiCliente.get(`/clientes/${cliente._id}`);
         setDadosCliente(data);
       } catch (error) {
         console.log(error);
@@ -41,12 +37,7 @@ function PerfilCliente() {
     async function fetchEndereco() {
       try {
         const { data } = await apiCliente.get(
-          `/enderecoCliente/${cliente._id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
+          `/enderecoCliente/${cliente._id}`
         );
         setEndereco(data);
       } catch (error) {

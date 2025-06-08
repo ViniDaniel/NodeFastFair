@@ -40,12 +40,7 @@ function DescricaoFeirante() {
   const fetchDescricao = async () => {
     try {
       const { data } = await apiFeirante.get(
-        `/feirante/descricao/${feirante._id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
+        `/feirante/descricao/${feirante._id}`
       );
       setDescricao(data);
       setTopicosEditados(data.topicos);

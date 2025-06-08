@@ -18,11 +18,7 @@ function EstoqueFeirante() {
   useEffect(() => {
     async function fetchProdutos() {
       try {
-        const { data } = await apiFeirante.get(`/produtos/${feirante._id}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const { data } = await apiFeirante.get(`/produtos/${feirante._id}`);
         setProduto(data);
       } catch (error) {
         if (error.response?.status === 4001) {
@@ -44,11 +40,7 @@ function EstoqueFeirante() {
   async function deletarProduto(produtoId) {
     if (!window.confirm("Tem certeza que deseja deletar este produto?")) return;
     try {
-      await apiFeirante.delete(`/produtos/${feirante._id}/${produtoId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      await apiFeirante.delete(`/produtos/${feirante._id}/${produtoId}`);
       setProduto((prevProdutos) =>
         prevProdutos.filter((p) => p._id !== produtoId)
       );

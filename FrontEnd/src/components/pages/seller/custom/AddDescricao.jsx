@@ -71,11 +71,7 @@ function AddDescricao() {
       return setError("A descrição precisa ter mais de 50 caracteres");
 
     try {
-      await apiFeirante.post(`/feirante/descricao/${feirante._id}`, form, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      await apiFeirante.post(`/feirante/descricao/${feirante._id}`, form);
       alert("Descrição criada com sucesso!");
       navigate("/feirante/descricao");
     } catch (error) {
