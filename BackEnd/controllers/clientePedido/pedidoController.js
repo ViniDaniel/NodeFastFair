@@ -74,7 +74,7 @@ const pedidoController = {
             clienteId,
             produtos,
             total,
-            status: "pago",
+            status: "confirmado",
             pagamentoId: pagamento.body.id,
           });
 
