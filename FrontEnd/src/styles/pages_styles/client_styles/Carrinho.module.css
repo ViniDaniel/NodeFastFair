@@ -66,7 +66,7 @@
 }
 
 .button_d,
-.burron_a {
+.button_a {
   background-color: #2F4F4F; /* Verde escuro para botões de quantidade */
   color: white;
   border: none;
@@ -82,7 +82,7 @@
 }
 
 .button_d:hover,
-.burron_a:hover {
+.button_a:hover {
   background-color: #3e6d3e; /* Escurece no hover */
 }
 

@@ -15,6 +15,7 @@
 .footer ul li:hover {
     color: #27c213;
     text-decoration: none;
+     transform: scale(1.1);
 }
 .footer svg {
     font-size: 1.5em;

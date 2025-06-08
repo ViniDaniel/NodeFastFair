@@ -4,10 +4,14 @@ import apiCliente from "../../../services/apiCliente";
 import { formatPreco } from "../../../scripts/ProdutoFormValidation";
 import { FaMinusCircle, FaPlusCircle, FaTrash } from "react-icons/fa";
 import styles from "../../../../styles/pages_styles/client_styles/Carrinho.module.css";
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+
+const PUBLIC_KEY = "TEST-c5ffc48b-5723-4b8d-883b-84734f6e9b33";
 
 function Carrinho() {
   const { cliente } = useContext(ClienteContext);
   const [carrinho, setCarrinho] = useState(null);
+  const [preferenceId, setPreferenceId] = useState(null);
 
   const fetchCarrinho = async () => {
     try {
@@ -19,18 +23,12 @@ function Carrinho() {
   };
 
   useEffect(() => {
+    initMercadoPago(PUBLIC_KEY);
+  }, []);
+
+  useEffect(() => {
     if (cliente) fetchCarrinho();
   }, [cliente]);
-
-  const handleFinalizarCarrinho = async () => {
-    try {
-      await apiCliente.post("cliente/carrinho/finalizar");
-      alert("Pedido realizado com sucesso!");
-      setCarrinho({ itens: [] });
-    } catch (error) {
-      console.error("Erro ao finalizar pedido", error);
-    }
-  };
 
   const removerItem = async (produtoId) => {
     try {
@@ -50,12 +48,27 @@ function Carrinho() {
     }
   };
 
-  const diminuirquantidade = async (produtoId) => {
+  const diminuirQuantidade = async (produtoId) => {
     try {
       await apiCliente.patch(`/cliente/carrinho/item/${produtoId}/diminuir`);
       fetchCarrinho();
     } catch (error) {
       console.error("Erro ao diminuir quantidade", error);
+    }
+  };
+
+  const criarPreferencia = async () => {
+    try {
+      const response = await apiCliente.post(
+        "/cliente/carrinho/gerar-preferencia"
+      );
+      if (response.data?.preferenceId) {
+        setPreferenceId(response.data.preferenceId);
+      } else {
+        console.error("Preferência inválida", response.data);
+      }
+    } catch (error) {
+      console.error("Erro ao criar preferência", error);
     }
   };
 
@@ -81,14 +94,14 @@ function Carrinho() {
                 Unitário: R${formatPreco(item.produtoId.preco)}
                 <div className={styles.buttonGroup}>
                   <button
-                    onClick={() => diminuirquantidade(item.produtoId._id)}
+                    onClick={() => diminuirQuantidade(item.produtoId._id)}
                     className={styles.button_d}
                   >
                     <FaMinusCircle />
                   </button>
                   <button
                     onClick={() => aumentaQuantidade(item.produtoId._id)}
-                    className={styles.burron_a}
+                    className={styles.button_a}
                   >
                     <FaPlusCircle />
                   </button>
@@ -104,17 +117,17 @@ function Carrinho() {
               </li>
             ))}
           </ul>
-          <div className={styles.finalizar}>
-            <p>
-              <strong>Total:</strong> R${carrinho.total?.toFixed(2) || 0}
-            </p>
+          {!preferenceId ? (
             <button
-              onClick={handleFinalizarCarrinho}
+              onClick={criarPreferencia}
               className={styles.button_finzalizar}
+              disabled={!carrinho.itens.length}
             >
               Finalizar Pedido
             </button>
-          </div>
+          ) : (
+            <Wallet initialization={{ preferenceId }} />
+          )}
         </div>
       )}
     </div>

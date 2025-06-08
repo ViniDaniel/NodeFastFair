@@ -1,0 +1,30 @@
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-size: 2em;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.p_pendente {
+  text-align: center;
+  font-size: 1.1em;
+  color: #cccccc;
+  padding: 1rem;
+  background-color: rgb(233, 151, 0);
+  border: 1px solid rgb(175, 115, 2);
+  border-radius: 5px;
+  margin-top: 1.5rem;
+}

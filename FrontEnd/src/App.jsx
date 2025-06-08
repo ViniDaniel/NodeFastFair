@@ -34,6 +34,9 @@ import Verduras from "./components/pages/client/shop/categorias/Verduras";
 import PesquisaProdutos from "./components/pages/client/shop/Produtos/PesquisaProdutos";
 import ColaboradorPerfil from "./components/pages/client/shop/colaboradores/ColaboradorPerfil";
 import Carrinho from "./components/pages/client/shop/carrinho";
+import PedidosPagos from "./components/pages/client/shop/pedidos/PedidosPagos";
+import PedidoErro from "./components/pages/client/shop/pedidos/PedidoErro";
+import PedidoPendente from "./components/pages/client/shop/pedidos/PedidoPendente";
 
 
 function App() {
@@ -91,6 +94,9 @@ function App() {
               <Route path="/produtos/pesquisa" element={<PesquisaProdutos />} ></Route>
               <Route path="/public/colaborador/:id" element={<ColaboradorPerfil />} ></Route>
               <Route path="/cliente/carrinho"  element={<Carrinho />}></Route>
+              <Route path="/cliente/pedidos/confirmados" element={<PedidosPagos />}></Route>
+              <Route path="/cliente/pedido/erro" element={<PedidoErro />}></Route>
+              <Route path="/cliente/pedido/pendente" element={<PedidoPendente />}></Route>
             </Routes>
           </Container>
           <Footer />

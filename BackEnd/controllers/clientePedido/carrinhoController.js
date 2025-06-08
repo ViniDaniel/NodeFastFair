@@ -249,9 +249,9 @@ const carrinhoController = {
           carrinhoId: carrinho._id.toString(),
         },
         back_urls: {
-          success: "https://seusite.com/sucesso",
-          failure: "https://seusite.com/erro",
-          pending: "https://seusite.com/pendente",
+          success: "http://localhost:5173/pedido/sucesso",
+          failure: "https://seusite.com/pedido/erro",
+          pending: "https://seusite.com/pedido/pendente",
         },
         notification_url: "https://seusite.com/api/pedidos/webhook",
 

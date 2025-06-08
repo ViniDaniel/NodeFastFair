@@ -4,13 +4,11 @@ import logo from "../../assets/logo.png";
 import SidebarMenu from "./SidebarMenu";
 import { useContext, useState } from "react";
 import { FeiranteContext } from "../context/FeiranteContext";
-import { FaBars } from "react-icons/fa";
-import {ClienteContext} from "../context/ClienteContext";
-
-
+import { FaBars, FaShoppingCart } from "react-icons/fa";
+import { ClienteContext } from "../context/ClienteContext";
 
 function NavBar() {
-  const {cliente} = useContext(ClienteContext)
+  const { cliente } = useContext(ClienteContext);
   const { feirante } = useContext(FeiranteContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -28,16 +26,16 @@ function NavBar() {
                 <Link to="/produtos/categorias">Categorias</Link>
               </li>
               <li>
-                <Link to="/colaboradores" >Colaboradores</Link>
+                <Link to="/colaboradores">Colaboradores</Link>
               </li>
               <li>
-                <Link to="/sobre">Sobre</Link>
+                <Link to="/cliente/carrinho">
+                  <FaShoppingCart />
+                  Carrinho
+                </Link>
               </li>
               <li>
-                <Link to="/suporte">Suporte</Link>
-              </li>
-              <li>
-                <Link to="/perfilCliente" >{cliente.nome}</Link>
+                <Link to="/perfilCliente">{cliente.nome}</Link>
               </li>
             </>
           ) : feirante ? (
@@ -54,7 +52,6 @@ function NavBar() {
               <li>
                 <Link to="/feirante/perfilFeirante">Perfil</Link>
               </li>
-              
             </>
           ) : (
             // Navbar para Usuários Não Logados
@@ -65,14 +62,8 @@ function NavBar() {
               <li>
                 <Link to="/produtos/categorias">Categorias</Link>
               </li>
-               <li>
-                <Link to="/colaboradores" >Colaboradores</Link>
-              </li>
               <li>
-                <Link to="/sobre">Sobre</Link>
-              </li>
-              <li>
-                <Link to="/suporte">Suporte</Link>
+                <Link to="/colaboradores">Colaboradores</Link>
               </li>
             </>
           )}

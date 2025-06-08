@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import styles from "../../styles/layout_styles/SidebarMenu.module.css";
-import { FaShoppingCart } from "react-icons/fa";
-
 function SidebarMenu({ isOpen, onClose }) {
   return (
     <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
@@ -10,7 +8,7 @@ function SidebarMenu({ isOpen, onClose }) {
       <ul>
         <li><Link to="/cadastroCliente" onClick={onClose}>Cadastro</Link></li>
         <li><Link to="/loginCliente" onClick={onClose}>Login</Link></li>
-        <li><Link to="/cliente/carrinho"><FaShoppingCart /> Carrinho</Link></li>
+        <li><Link to="/cliente/pedidos/confirmados">Meus Pedidos</Link></li>
       </ul>
 
       <h3>Feirante</h3>
