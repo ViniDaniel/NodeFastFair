@@ -69,6 +69,13 @@ const pedidoController = {
       let pagamento;
       try {
         pagamento = await payment.get({ id: paymentId });
+        console.log("Resposta do Mercado Pago:", JSON.stringify(pagamento, null, 2));
+
+
+        if (!pagamento || !pagamento.body || !pagamento.body.status) {
+          console.warn("Resposta inválida ao buscar pagamento:", pagamento);
+          return res.sendStatus(200);
+        }
       } catch (erroPagamento) {
         if (erroPagamento?.status === 404) {
           console.warn("Pagamento não encontrado:", paymentId);
