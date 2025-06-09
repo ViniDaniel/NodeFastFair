@@ -46,7 +46,6 @@ const pedidoController = {
       console.log("Webhook recebido:", JSON.stringify(req.body, null, 2));
 
       const body = req.body;
-
       let paymentId = null;
 
       // CASO 1 - Webhook padrão do Checkout Pro ou Transparente (data.id)
@@ -68,12 +67,23 @@ const pedidoController = {
 
       let pagamento;
       try {
-        pagamento = await payment.get({ id: paymentId });
-        console.log("Resposta do Mercado Pago:", JSON.stringify(pagamento, null, 2));
+        const response = await payment.get({ id: paymentId });
+        console.log(
+          "Resposta do Mercado Pago:",
+          JSON.stringify(response, null, 2)
+        );
 
+        // Verificar se os dados estão em response.body ou diretamente em response
+        pagamento = response.body || response;
 
-        if (!pagamento || !pagamento.body || !pagamento.body.status) {
-          console.warn("Resposta inválida ao buscar pagamento:", pagamento);
+        // Validação mais robusta
+        if (!pagamento || typeof pagamento !== "object" || !pagamento.status) {
+          console.warn("Resposta inválida ao buscar pagamento. Estrutura:", {
+            temBody: !!response.body,
+            temStatus: !!pagamento?.status,
+            tipoResponse: typeof response,
+            tipoPagamento: typeof pagamento,
+          });
           return res.sendStatus(200);
         }
       } catch (erroPagamento) {
@@ -85,18 +95,24 @@ const pedidoController = {
         return res.sendStatus(500);
       }
 
-      if (pagamento.body.status === "approved") {
-        const { clienteId, carrinhoId } = pagamento.body.metadata;
+      if (pagamento.status === "approved") {
+        const { clienteId, carrinhoId } = pagamento.metadata || {};
 
         if (!clienteId || !carrinhoId) {
-          console.warn("Metadata ausente no pagamento:", pagamento.body);
+          console.warn("Metadata ausente no pagamento:", {
+            metadata: pagamento.metadata,
+            external_reference: pagamento.external_reference,
+          });
           return res.sendStatus(200);
         }
 
         const carrinho = await Carrinho.findById(carrinhoId).populate(
           "itens.produtoId"
         );
-        if (!carrinho) return res.sendStatus(200);
+        if (!carrinho) {
+          console.warn("Carrinho não encontrado:", carrinhoId);
+          return res.sendStatus(200);
+        }
 
         const produtos = carrinho.itens.map((item) => ({
           produtoId: item.produtoId._id,
@@ -112,7 +128,7 @@ const pedidoController = {
           produtos,
           total,
           status: "confirmado",
-          pagamentoId: pagamento.body.id,
+          pagamentoId: pagamento.id,
         });
 
         await pedido.save();
@@ -120,6 +136,8 @@ const pedidoController = {
 
         console.log("Pedido criado com sucesso:", pedido._id);
         console.log("Carrinho removido:", carrinhoId);
+      } else {
+        console.log("Pagamento não aprovado. Status:", pagamento.status);
       }
 
       return res.sendStatus(200);
