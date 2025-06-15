@@ -48,16 +48,11 @@ const pedidoController = {
       const body = req.body;
       let paymentId = null;
 
-      // CASO 1 - Webhook padrão do Checkout Pro ou Transparente (data.id)
       if (body.type === "payment" && body.data?.id) {
         paymentId = body.data.id;
-      }
-      // CASO 2 - Webhook do tipo "topic: payment" (resource = id)
-      else if (body.topic === "payment" && body.resource) {
+      } else if (body.topic === "payment" && body.resource) {
         paymentId = body.resource;
-      }
-      // CASO 3 - Webhook "merchant_order" (ignorar ou implementar futuramente)
-      else if (body.topic === "merchant_order") {
+      } else if (body.topic === "merchant_order") {
         console.log("Webhook merchant_order recebido, ignorado por enquanto.");
         return res.sendStatus(200);
       } else {
@@ -73,7 +68,6 @@ const pedidoController = {
           JSON.stringify(response, null, 2)
         );
 
-        // Verificar se os dados estão em response.body ou diretamente em response
         pagamento = response.body || response;
 
         // Validação mais robusta
@@ -122,6 +116,14 @@ const pedidoController = {
         const total = carrinho.itens.reduce((acc, item) => {
           return acc + item.produtoId.preco * item.quantidade;
         }, 0);
+
+        const pedidoExistente = await PedidoModel.findOne({
+          pagamentoId: pagamento.id,
+        });
+        if (pedidoExistente) {
+          console.warn("Pedido já existe para esse pagamento:", pagamento.id);
+          return res.sendStatus(200);
+        }
 
         const pedido = new PedidoModel({
           clienteId,

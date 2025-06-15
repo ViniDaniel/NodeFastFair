@@ -5,14 +5,21 @@ const {
 const descricaoFeiranteController = {
   create: async (req, res) => {
     try {
-      const { descricao, topicos, enderecos, contatos, capa } = req.body;
+      const contatos = JSON.parse(req.body.contatos || "[]");
+      const topicos = JSON.parse(req.body.topicos || "[]");
+      const enderecos = JSON.parse(req.body.enderecos || "[]");
+
+      const { descricao } = req.body;
+
+      const capaPath = req.file ? req.file.path : null;
+
       const descricaoFeirante = {
         feiranteId: req.user.id,
         descricao,
         topicos,
         enderecos,
         contatos,
-        capa,
+        capa: capaPath ? [capaPath] : [],
       };
       const jaExiste = await DescricaoModel.findOne({
         feiranteId: req.user.id,
@@ -100,11 +107,13 @@ const descricaoFeiranteController = {
         }
       );
 
-      if(!updateDescricaoFeirante){
-        return res.status(404).json({message: "Descrição não encontrada"})
+      if (!updateDescricaoFeirante) {
+        return res.status(404).json({ message: "Descrição não encontrada" });
       }
 
-      return res.status(200).json({updateDescricaoFeirante, message: "Atualizado com sucesso"})
+      return res
+        .status(200)
+        .json({ updateDescricaoFeirante, message: "Atualizado com sucesso" });
     } catch (error) {
       console.log(error);
       return res
@@ -114,4 +123,4 @@ const descricaoFeiranteController = {
   },
 };
 
-module.exports = descricaoFeiranteController
+module.exports = descricaoFeiranteController;

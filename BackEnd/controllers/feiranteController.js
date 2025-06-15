@@ -15,6 +15,7 @@ const feiranteController = {
         bairro,
         cidade,
         uf,
+        mercadoPagoId,
         senha,
         confirmarSenha,
       } = req.body;
@@ -34,6 +35,7 @@ const feiranteController = {
         bairro,
         cidade,
         uf,
+        mercadoPagoId,
         senha,
       };
 

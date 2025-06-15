@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { Carrinho: CarrinhoModel } = require("../../models/Carrinho");
-const { preference } = require("../../api/mercadoPago");
+const { getMercadoPagoClient } = require("../../api/mercadoPago");
 
 const carrinhoController = {
   adicionarProduto: async (req, res) => {
@@ -145,143 +145,94 @@ const carrinhoController = {
     }
   },
 
-  /*finalizarPedido: async (req, res) => {
-    try {
-      const clienteId = req.cliente.id;
-      const { cardToken, installments } = req.body;
+  finalizarCompra: async (req, res) => {
+  try {
+    const clienteId = req.cliente.id;
 
-      const cliente = await ClienteModel.findById(clienteId);
-      if (!cliente)
-        return res.status(404).json({ message: "Cliente não encontrado" });
+    // 1. Buscar carrinho com os produtos populados
+    const carrinho = await CarrinhoModel.findOne({ clienteId }).populate({
+      path: "itens.produtoId",
+      populate: { path: "feiranteId" },
+    });
 
-      const carrinho = await CarrinhoModel.findOne({ clienteId }).populate(
-        "itens.produtoId"
-      );
-      if (!carrinho || carrinho.itens.length === 0) {
-        return res.status(400).json({ message: "Carrinho vazio" });
-      }
-
-      let total = 0;
-      carrinho.itens.forEach((item) => {
-        total += item.produtoId.preco * item.quantidade;
-      });
-
-      const pagamento = await payment.create({
-        body: {
-          transaction_amount: total,
-          token: cardToken,
-          description: "Compra na Feira Online",
-          installments: installments,
-          payer: {
-            email: cliente.email,
-          },
-          application_fee_amount: total * 0.1,
-          metadata: {
-            clienteId: clienteId,
-            carrinhoId: carrinho._id.toString(),
-          },
-        },
-      });
-
-      if (pagamento.status !== "approved") {
-        return res.status(400).json({
-          message: "Pagamento não aprovado",
-          status: pagamento.status,
-          detalhes: pagamento.status_detail,
-        });
-      }
-
-      const produtos = carrinho.itens.map((item) => ({
-        produtoId: item.produtoId._id,
-        quantidade: item.quantidade,
-      }));
-
-      const pedido = new PedidoModel({
-        clienteId,
-        produtos,
-        total,
-        status: "pago",
-        pagamentoId: pagamento.id,
-      });
-
-      await pedido.save();
-      await CarrinhoModel.findOneAndDelete({ clienteId });
-
-      return res
-        .status(201)
-        .json({ message: "Pedido finalizado com sucesso", pedido });
-    } catch (error) {
-      console.error(error);
-      return res
-        .status(500)
-        .json({ message: "Erro ao finalizar pedido", error: error.message });
+    if (!carrinho || carrinho.itens.length === 0) {
+      return res.status(400).json({ message: "Carrinho vazio" });
     }
-  },*/
 
-  gerarPreferencia: async (req, res) => {
-    try {
-      const clienteId = req.cliente.id;
+    // 2. Calcular o total do carrinho
+    let total = 0;
+    const produtos = [];
 
-      const carrinho = await CarrinhoModel.findOne({ clienteId }).populate(
-        "itens.produtoId"
-      );
-      if (!carrinho || carrinho.itens.length === 0) {
-        return res.status(400).json({ message: "Carrinho vazio" });
-      }
+    const items = carrinho.itens.map((item) => {
+      const produto = item.produtoId;
+      const subtotal = produto.preco * item.quantidade;
+      total += subtotal;
 
-      const items = carrinho.itens.map((item) => ({
-        title: item.produtoId.nome,
+      produtos.push({
+        produtoId: produto._id,
+        quantidade: item.quantidade,
+      });
+
+      return {
+        title: produto.nome,
+        unit_price: produto.preco,
         quantity: item.quantidade,
-        unit_price: Number(item.produtoId.preco) || 0,
+        description: produto.descricao || "Produto",
+        picture_url: produto.imagem[0] || "",
         currency_id: "BRL",
-      }));
+        // SPLIT de pagamento direto para o feirante
+        beneficiary: {
+          id: produto.feiranteId.mercadoPagoId, // Cada feirante deve ter esse campo
+        },
+        // Taxa do app sobre este item (ajuste a função se quiser)
+        application_fee: Math.round(subtotal * 0.10), // Ex: 10% de comissão
+      };
+    });
 
-      const preferencia = {
-        items,
+    // 3. Criar o pagamento com Checkout Transparente
+    const pagamento = await payment.create({
+      body: {
+        transaction_amount: total,
+        description: "Pagamento de pedido no Fast&Fair",
+        payment_method_id: req.body.metodoPagamento,
         payer: {
           email: req.cliente.email,
         },
-        back_urls: {
-          success:
-            "https://node-fast-fair.vercel.app/cliente/pedidos/confirmados",
-          failure: "https://node-fast-fair.vercel.app/cliente/pedido/erro",
-          pending: "https://node-fast-fair.vercel.app/cliente/pedido/pendente",
-        },
-        notification_url:
-          "https://nodefastfair.onrender.com/api/pedidos/webhook",
+        items: items,
         metadata: {
           clienteId: clienteId,
-          carrinhoId: carrinho._id.toString(),
         },
-        external_reference: `cliente_${clienteId}_carrinho_${carrinho._id}`,
-        auto_return: "approved",
+        statement_descriptor: "Fast&Fair",
+      },
+    });
 
-        statement_descriptor: "Fast&Fair", // Nome que aparece na fatura
-        expires: true,
-        expiration_date_from: new Date().toISOString(),
-        expiration_date_to: new Date(
-          Date.now() + 24 * 60 * 60 * 1000
-        ).toISOString(), // 24h
-      };
+    // 4. Salvar o pedido no banco
+    const pedido = new PedidoModel({
+      clienteId,
+      produtos,
+      total,
+      status: "pago",
+      pagamentoId: pagamento.id,
+    });
 
-      const result = await preference.create({ body: preferencia });
+    await pedido.save();
 
-      return res.status(200).json({
-        preferenceId: result.id,
-        sandbox_init_point: result.sandbox_init_point, // Para testes
-        init_point: result.init_point,
-      });
-    } catch (error) {
-      console.error("Erro ao criar preferência:", error);
-      return res
-        .status(500)
-        .json({
-          message: "Erro ao criar preferência",
-          error: error.message,
-          details: error.cause || error.stack,
-        });
-    }
-  },
-};
+    // 5. Limpar o carrinho
+    await CarrinhoModel.findOneAndDelete({ clienteId });
 
+    return res.status(201).json({
+      message: "Pedido realizado com sucesso",
+      pedido,
+      pagamento,
+    });
+
+  } catch (error) {
+    console.error("Erro ao finalizar compra:", error);
+    return res.status(500).json({
+      message: "Erro ao finalizar compra",
+      error: error.message,
+    });
+  }
+}
+}
 module.exports = carrinhoController;

@@ -2,7 +2,8 @@ const {
   CategoriaProduto: CategoriaModel,
 } = require("../models/CategoriaProduto");
 const { Produto: ProdutoModel } = require("../models/Produto");
-require("../models/CategoriaProduto"); // importa só pra registrar
+const fs = require("fs");
+const path = require("path");
 
 const produtoController = {
   create: async (req, res) => {
@@ -12,6 +13,19 @@ const produtoController = {
 
       const imagemPath = req.file ? req.file.path : null;
 
+      if (!nome || !categoria || !preco || !peso || !quantidade) {
+        return res.status(400).json({
+          message:
+            "Preencha todos os campos obrigatórios: nome, categoria, preço, peso e quantidade.",
+        });
+      }
+
+      if (isNaN(preco) || preco <= 0) {
+        return res
+          .status(400)
+          .json({ message: "Preço deve ser um número positivo." });
+      }
+      
       const produto = {
         feiranteId: req.user.id,
         nome,
@@ -135,16 +149,8 @@ const produtoController = {
   update: async (req, res) => {
     try {
       const { feiranteId, produtoId } = req.params;
-      const {
-        nome,
-        categoria,
-        descricao,
-        preco,
-        peso,
-        quantidade,
-        imagem,
-        status,
-      } = req.body;
+      const { nome, categoria, descricao, preco, peso, quantidade, status } =
+        req.body;
       const produto = {
         nome,
         categoria,
@@ -152,7 +158,6 @@ const produtoController = {
         preco,
         peso,
         quantidade,
-        imagem,
         status,
       };
 
@@ -175,6 +180,44 @@ const produtoController = {
       return res
         .status(500)
         .json({ message: "Erro interno!", error: error.message });
+    }
+  },
+  patchImagem: async (req, res) => {
+    try {
+      const { feiranteId, produtoId } = req.params;
+      const novaImagemPath = req.file ? req.file.path : null;
+
+      if (!novaImagemPath) {
+        return res.status(400).json({ message: "Nenhuma imagem enviada." });
+      }
+
+      const produtoExistente = await ProdutoModel.findOne({
+        _id: produtoId,
+        feiranteId,
+      });
+
+      const imagemAntiga = produtoExistente.imagem?.[0];
+      if (imagemAntiga) {
+        const caminhoAbsoluto = path.resolve(imagemAntiga);
+        fs.unlink(caminhoAbsoluto, (err) => {
+          if (err) {
+            console.warn("Falha ao apagar imagem antiga:", err.message);
+          } else {
+            console.log("Imagem removida com sucesso", caminhoAbsoluto);
+          }
+        });
+      }
+
+      produtoExistente.imagem = [novaImagemPath];
+      await produtoExistente.save();
+
+      return res.status(200).json({
+        message: "Imagem atualizada com sucesso!",
+        data: produtoExistente,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Erro interno" });
     }
   },
 };

@@ -2,17 +2,12 @@
 const { CategoriaProduto } = require("../models/CategoriaProduto");
 
 async function seed() {
-  await mongoose.connect("mongodb://localhost:27017/fastfair", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  });
-  const nomes = ["Fruta", "Legume", "Vegetal", "Grãos", "Verdura", "Temperos"];
+  mongoose.set("strictQuery", false);
+  await mongoose.connect(process.env.MONGO_URI);
+
+  const nomes = ["Fruta", "Legume", "Grãos", "Verdura", "Temperos"];
   for (const nome of nomes) {
-    await CategoriaProduto.updateOne(
-      { nome },
-      { nome },
-      { upsert: true }
-    );
+    await CategoriaProduto.updateOne({ nome }, { nome }, { upsert: true });
   }
   console.log("Categorias semeadas!");
   await mongoose.disconnect();
@@ -20,7 +15,4 @@ async function seed() {
 
 seed().catch(console.error);
 
-
-
-Feito somente para preencher o banco de dados
-*/
+Feito somente para preencher o banco de dados */

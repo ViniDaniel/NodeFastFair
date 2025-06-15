@@ -77,7 +77,11 @@ const feiranteSchema = new Schema(
       minlength: 2,
       maxlength: 2,
     },
-
+    mercadoPagoId: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     senha: {
       type: String,
       required: true,

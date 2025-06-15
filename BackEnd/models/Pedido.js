@@ -30,6 +30,10 @@ const pedidoSchema = new Schema({
     enum: ["pendente", "confirmado", "entregue", "cancelado"],
     default: "pendente",
   },
+  pagamentoId: {
+  type: String,
+  required: true,
+},
   dataPedido: {
     type: Date,
     default: Date.now,

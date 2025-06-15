@@ -31,7 +31,7 @@ const descricaoFeiranteSchema = new Schema(
       default: [],
     },
     capa: {
-      type: String,
+      type: [String],
     },
   },
   { timestamps: true }

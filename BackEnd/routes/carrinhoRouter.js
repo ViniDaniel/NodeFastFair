@@ -21,7 +21,7 @@ router
 router
   .route("/cliente/carrinho/finalizar")
   .post(authCliente, (req, res) =>
-    carrinhoController.finalizarPedido(req, res)
+    carrinhoController.finalizarCompra(req, res)
   );
 
 router
@@ -36,7 +36,7 @@ router
     carrinhoController.diminuirQuantidade(req, res)
   );
 
-  router.post("/cliente/carrinho/gerar-preferencia", authCliente, carrinhoController.gerarPreferencia);
+
 
 
 module.exports = router;

@@ -6,10 +6,11 @@ const descricaoFeirantePatchController = require("../controllers/descricaoFeiran
 const enderecosFeiranteController = require("../controllers/descricaoFeirante/enderecosFeiranteController");
 const topicosFeiranteController = require("../controllers/descricaoFeirante/topicosFeiranteController");
 const authFeirante = require("../middlewares/authFeirante");
+const capas = require("../middlewares/capas");
 
 router
   .route("/feirante/descricao/:feiranteId")
-  .post(authFeirante, (req, res) =>
+  .post(authFeirante, capas.single("capa"), (req, res) =>
     descricaoFeiranteController.create(req, res)
   );
 
@@ -75,7 +76,7 @@ router.patch("/feirante/descricao/:feiranteId/:descricaoFeiranteId/contatos/remo
 );
 
 //Capa
-router.patch("/feirante/descricao/:feiranteId/:descricaoFeiranteId/capa/atualizar", authFeirante, (req, res) =>
+router.patch("/feirante/descricao/:feiranteId/:descricaoFeiranteId/capa/atualizar", authFeirante, capas.single("capa"), (req, res) =>
   capaFeiranteController.patchCapa(req, res)
 );
 

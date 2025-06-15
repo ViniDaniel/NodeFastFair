@@ -3,7 +3,6 @@ const authFeirante = require("../middlewares/authFeirante");
 const produtoController = require("../controllers/produtoController");
 const upload = require("../middlewares/upload");
 
-
 router
   .route("/produtos/categorias/:nome")
   .get((req, res) => produtoController.getByCategoria(req, res));
@@ -37,5 +36,11 @@ router
 router
   .route("/produtos/:feiranteId/:produtoId")
   .put(authFeirante, (req, res) => produtoController.update(req, res));
+
+router
+  .route("/produtos/:feiranteId/:produtoId/atualizarImagem")
+  .patch(authFeirante, upload.single("imagem"), (req, res) =>
+    produtoController.patchImagem(req, res)
+  );
 
 module.exports = router;

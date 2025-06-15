@@ -1,15 +1,15 @@
-const mercadopago = require("mercadopago");
+const { MercadoPagoConfig, Preference, Payment } = require("mercadopago");
 
-const client = new mercadopago.MercadoPagoConfig({
-  accessToken: process.env.MP_ACCESS_TOKEN,
-});
+// Função que retorna instâncias configuradas com o access token do feirante
+function getMercadoPagoClient(accessToken) {
+  const client = new MercadoPagoConfig({ accessToken });
 
-const { Preference, Payment } = require("mercadopago");
-
-const preference = new Preference(client);
-const payment = new Payment(client);
+  return {
+    preference: new Preference(client),
+    payment: new Payment(client),
+  };
+}
 
 module.exports = {
-  preference,
-  payment,
+  getMercadoPagoClient,
 };

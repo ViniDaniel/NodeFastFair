@@ -4,11 +4,9 @@ const cors = require("cors");
 const app = express();
 const routes = require("./routes/router");
 
-//const allowedOrigins = process.env.FRONTEND_URL.split(",");
-
 app.use(
   cors({
-    origin: "https://node-fast-fair.vercel.app",
+    origin: "https://node-fast-fair.vercel.app/",
   })
 );
 //evita erro com a conexção do front com o back
@@ -23,6 +21,7 @@ app.use("/api", routes); //chama as rotas
 
 app.use("/uploads", express.static("uploads"));
 
+app.use("/capas", express.static("capas"));
 
 app.listen(7000, function () {
   console.log("Servidor rodando na porta 7000");
