@@ -2,6 +2,8 @@ import { useState, useContext } from "react";
 import { ClienteContext } from "../../../../context/ClienteContext";
 import apiCliente from "../../../../services/apiCliente";
 import styles from "../../../../../styles/pages_styles/client_styles/cards_styles/CardProduto.module.css"
+import ColaboradorCardProduto from "../colaboradores/ColaboradorCardProduto";
+import CardCategoria from "../categorias/CardCategoria";
 function CardProduto({ produto }) {
   const [detalhes, setDetalhes] = useState(false);
   const[quantidade, setQuantidade] = useState(1)
@@ -48,9 +50,11 @@ function CardProduto({ produto }) {
 
       {detalhes && (
         <div className={styles.detalhesProduto}>
-          <p>
-            <strong>Feirante:</strong> {produto.feiranteId.nome}
-          </p>
+          
+            <div className={styles.flex}><strong>Feirante:</strong> <ColaboradorCardProduto feirante={produto.feiranteId} /></div>
+
+            <div className={styles.flex}><strong>Categoria:</strong><CardCategoria categoria={produto.categoria?.nome} />  </div><br />
+
           <label>
             Quantidade:
             <input type="number" min={1} defaultValue={1} onChange={(e)=> setQuantidade(e.target.value)}/>
@@ -66,5 +70,3 @@ function CardProduto({ produto }) {
 }
 
 export default CardProduto;
-
-/* style={{ marginTop: '10px', backgroundColor: '#dc3545' }} */

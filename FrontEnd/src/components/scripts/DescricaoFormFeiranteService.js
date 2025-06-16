@@ -93,9 +93,14 @@ export const removeContato = async (feiranteId, descricaoId, contato) => {
 };
 
 //atualizar capa
-export const atualizarCapa = async (feiranteId, descricaoId, capa) => {
+export const atualizarCapa = async (feiranteId, descricaoId, formData) => {
   return await apiFeirante.patch(
     `/feirante/descricao/${feiranteId}/${descricaoId}/capa/atualizar`,
-    { capa }
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
   );
 };

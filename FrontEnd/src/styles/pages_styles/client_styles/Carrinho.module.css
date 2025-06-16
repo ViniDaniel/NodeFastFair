@@ -145,6 +145,54 @@
   color: #2e2e2e;
 }
 
+.metodos {
+  display: flex;
+  flex-direction: column; /* Ou 'row' se quiser um ao lado do outro */
+  gap: 15px; /* Espaçamento entre os métodos */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* --- Estilos para as Labels de Pix e Cartão --- */
+.labelPix,
+.labelCartao {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.inputPix,
+.inputCartao {
+  margin-right: 10px; /* Espaçamento entre o rádio e o texto */
+  /* Para personalizar a aparência do rádio, você pode esconder o padrão e usar um pseudo-elemento */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #999;
+  border-radius: 50%; /* Faz com que pareça um rádio */
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.inputPix:checked,
+.inputCartao:checked {
+  border-color: #007bff;
+  background-color: #007bff; 
+}
 
 /* Responsividade */
 @media (max-width: 768px) {

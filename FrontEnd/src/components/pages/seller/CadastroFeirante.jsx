@@ -8,6 +8,7 @@ import {
   isValidBairro,
   isValidCidade,
   isValidUF,
+  isValidMercadoPagoId,
   isValidSenha,
 } from "../../scripts/FormValidation";
 import apiFeirante from "../../services/apiFeirante";
@@ -29,6 +30,7 @@ function CadastroFeirante() {
   const inputBairro = useRef();
   const inputUf = useRef();
   const inputCidade = useRef();
+  const inputMercadoPagoId = useRef();
 
   const [error, setError] = useState("");
 
@@ -46,6 +48,7 @@ function CadastroFeirante() {
     const bairro = inputBairro.current.value;
     const uf = inputUf.current.value;
     const cidade = inputCidade.current.value;
+    const mercadoPagoId = inputMercadoPagoId.current.value;
     const senha = inputSenha.current.value;
     const confirmarSenha = inputConfirmarSenha.current.value;
 
@@ -58,6 +61,8 @@ function CadastroFeirante() {
     if (!isValidCidade(cidade)) return setError("Cidade inválida!");
     if (!isValidBairro(bairro)) return setError("Bairro inválido!");
     if (!isValidUF(uf)) return setError("Escolha um estádo!");
+    if (!isValidMercadoPagoId(mercadoPagoId))
+      return setError("Coloque seu token do mercado pago!");
     const senhaValidacao = isValidSenha(senha, confirmarSenha);
     if (!senhaValidacao.valid) return setError(senhaValidacao.message);
 
@@ -74,6 +79,7 @@ function CadastroFeirante() {
         bairro,
         uf,
         cidade,
+        mercadoPagoId,
         senha,
         confirmarSenha,
       });
@@ -120,7 +126,6 @@ function CadastroFeirante() {
               className={styles.input}
             />
           </div>
-
           <div className={styles.field}>
             <label htmlFor="email" className={styles.label}>
               E-Mail:
@@ -134,7 +139,6 @@ function CadastroFeirante() {
               className={styles.input}
             />
           </div>
-
           <div className={styles.field}>
             <label htmlFor="celular" className={styles.label}>
               Celular:
@@ -148,7 +152,6 @@ function CadastroFeirante() {
               className={styles.input}
             />
           </div>
-
           <div className={styles.field}>
             <label htmlFor="genero" className={styles.label}>
               Gênero:
@@ -195,7 +198,6 @@ function CadastroFeirante() {
               className={styles.input}
             />
           </div>
-
           <div className={styles.field}>
             <label htmlFor="numeroCasa" className={styles.label}>
               Numero da Casa:
@@ -209,7 +211,6 @@ function CadastroFeirante() {
               className={styles.input}
             />
           </div>
-
           <div className={styles.field}>
             <label htmlFor="bairro" className={styles.label}>
               Bairro:
@@ -223,7 +224,6 @@ function CadastroFeirante() {
               className={styles.input}
             />
           </div>
-
           <div className={styles.field}>
             <label htmlFor="cidade" className={styles.label}>
               Cidade:
@@ -237,7 +237,6 @@ function CadastroFeirante() {
               className={styles.input}
             />
           </div>
-
           <div className={styles.field}>
             <label htmlFor="uf" className={styles.label}>
               Estado:
@@ -281,6 +280,20 @@ function CadastroFeirante() {
               <option value="TO">Tocantins</option>
             </select>
           </div>
+          
+          <div className={styles.field}>
+            <label htmlFor="senha" className={styles.label}>
+              Mercado Pago ID:
+            </label>
+            <input
+              type="text"
+              name="mercadoPagoId"
+              id="mercadoPagoId"
+              placeholder="Digite o código do mercado pago: "
+              ref={inputMercadoPagoId}
+              className={styles.input}
+            />
+          </div>
           <div className={styles.field}>
             <label htmlFor="senha" className={styles.label}>
               Senha:
@@ -294,7 +307,6 @@ function CadastroFeirante() {
               className={styles.input}
             />
           </div>
-
           <div className={styles.field}>
             <label htmlFor="confirmarSenha" className={styles.label}>
               Confirmar Senha:
@@ -308,7 +320,6 @@ function CadastroFeirante() {
               className={styles.input}
             />
           </div>
-
           <div className={styles.buttonGroup}>
             <button
               type="submit"

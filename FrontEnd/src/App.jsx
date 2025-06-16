@@ -86,11 +86,11 @@ function App() {
               <Route path="/feirante/descricao" element={<DescricaoFeirante />}></Route>
               <Route path="/produtos/categorias" element={<CategoriasProduto />} ></Route>
               <Route path="/colaboradores" element={<Colaboradores />}></Route>
-              <Route path="/produtos/categorias/frutas" element={<Frutas />} ></Route>
-              <Route path="/produtos/categorias/graos" element={<Graos />} ></Route>
-              <Route path="/produtos/categorias/legumes" element={<Legumes />} ></Route>
-              <Route path="/produtos/categorias/temperos" element={<Temperos />}></Route>
-              <Route path="/produtos/categorias/verduras" element={<Verduras />} ></Route>
+              <Route path="/produtos/categorias/Fruta" element={<Frutas />} ></Route>
+              <Route path="/produtos/categorias/Grãos" element={<Graos />} ></Route>
+              <Route path="/produtos/categorias/Legume" element={<Legumes />} ></Route>
+              <Route path="/produtos/categorias/Temperos" element={<Temperos />}></Route>
+              <Route path="/produtos/categorias/Verdura" element={<Verduras />} ></Route>
               <Route path="/produtos/pesquisa" element={<PesquisaProdutos />} ></Route>
               <Route path="/public/colaborador/:id" element={<ColaboradorPerfil />} ></Route>
               <Route path="/cliente/carrinho"  element={<Carrinho />}></Route>

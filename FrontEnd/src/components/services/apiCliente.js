@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiCliente = axios.create({
-    baseURL: "https://nodefastfair.onrender.com/api",
+   baseURL: "https://nodefastfair.onrender.com/api",
 })
 
 apiCliente.interceptors.request.use((config) => {

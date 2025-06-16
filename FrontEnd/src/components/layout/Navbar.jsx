@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { FeiranteContext } from "../context/FeiranteContext";
 import { FaBars, FaShoppingCart } from "react-icons/fa";
 import { ClienteContext } from "../context/ClienteContext";
+import LinkButton from "./LinkButton"
 
 function NavBar() {
   const { cliente } = useContext(ClienteContext);
@@ -51,6 +52,9 @@ function NavBar() {
               </li>
               <li>
                 <Link to="/feirante/perfilFeirante">Perfil</Link>
+              </li>
+              <li>
+                <LinkButton to={`https://auth.mercadopago.com.br/authorization?client_id=${feirante.mercadoPagoId}&response_type=code&platform_id=mp&redirect_uri=https://nodefastfair.onrender.com/`} text="Mercado Pago" />
               </li>
             </>
           ) : (

@@ -33,6 +33,10 @@
   border: 3px solid #fff; /* Borda branca na imagem para destacar */
 }
 
+.flex{
+  display: flex;
+}
+
 /* Container do texto e botão do produto */
 .infoProduto {
   flex-grow: 1;

@@ -1,0 +1,83 @@
+/* --- Estilos para o Contêiner Principal --- */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Espaçamento entre o formulário do cartão e o botão */
+  padding: 20px;
+  background-color: #f0f2f5; /* Um fundo levemente diferente para a seção */
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  margin-top: 20px; /* Espaçamento superior se for logo abaixo da seleção de método */
+}
+
+/* --- Estilos para o Contêiner do Formulário de Cartão --- */
+.cartao { /* Nome da classe 'catao' no seu JSX */
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Duas colunas para os inputs */
+  gap: 15px; /* Espaçamento entre os inputs */
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilos para os Inputs do Formulário de Cartão */
+.cartao input[type="text"] {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333;
+  box-sizing: border-box; /* Garante que padding e borda não aumentem o tamanho total */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cartao input[type="text"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  outline: none; /* Remove o outline padrão do navegador */
+}
+
+/* Ajustes específicos para o número do cartão e nome do titular, se necessário */
+.numeroCartao {
+  grid-column: 1 / -1; /* Ocupa as duas colunas */
+}
+
+.titular {
+  grid-column: 1 / -1; /* Ocupa as duas colunas */
+}
+
+/* Ajustes para Validade e CVV ficarem na mesma linha */
+.validade {
+  grid-column: auto; /* Deixa na primeira coluna disponível */
+}
+
+.cvv { /* O input sem classe explícita */
+  grid-column: auto; /* Deixa na próxima coluna disponível */
+}
+
+/* --- Estilos para o Botão de Pagamento --- */
+.metodo { /* A classe do botão é 'metodo' no seu JSX */
+  padding: 15px 25px;
+  background-color: #28a745; /* Um verde atraente para "Pagar" */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%; /* Botão ocupa a largura total */
+}
+
+.metodo:hover {
+  background-color: #218838; /* Verde um pouco mais escuro no hover */
+  transform: translateY(-2px); /* Efeito de "levantar" */
+}
+
+.metodo:active {
+  background-color: #1e7e34; /* Verde ainda mais escuro ao clicar */
+  transform: translateY(0); /* Retorna à posição original */
+}

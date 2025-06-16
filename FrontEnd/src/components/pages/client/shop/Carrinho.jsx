@@ -4,14 +4,12 @@ import apiCliente from "../../../services/apiCliente";
 import { formatPreco } from "../../../scripts/ProdutoFormValidation";
 import { FaMinusCircle, FaPlusCircle, FaTrash } from "react-icons/fa";
 import styles from "../../../../styles/pages_styles/client_styles/Carrinho.module.css";
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-
-const PUBLIC_KEY = "APP_USR-5d67495d-9cc9-47d3-a4ca-86aa06c36d97";
+import CardForm from "./CardForm"
 
 function Carrinho() {
   const { cliente } = useContext(ClienteContext);
   const [carrinho, setCarrinho] = useState(null);
-  const [preferenceId, setPreferenceId] = useState(null);
+  const [metodoPagamento, setMetodoPagamento] = useState("pix");
 
   const fetchCarrinho = async () => {
     try {
@@ -21,10 +19,6 @@ function Carrinho() {
       console.error("Erro ao buscar carrinho", error);
     }
   };
-
-  useEffect(() => {
-    initMercadoPago(PUBLIC_KEY);
-  }, []);
 
   useEffect(() => {
     if (cliente) fetchCarrinho();
@@ -57,21 +51,6 @@ function Carrinho() {
     }
   };
 
-  const criarPreferencia = async () => {
-    try {
-      const response = await apiCliente.post(
-        "/cliente/carrinho/gerar-preferencia"
-      );
-      if (response.data?.preferenceId) {
-        setPreferenceId(response.data.preferenceId);
-      } else {
-        console.error("Preferência inválida", response.data);
-      }
-    } catch (error) {
-      console.error("Erro ao criar preferência", error);
-    }
-  };
-
   if (!cliente)
     return (
       <p className={styles.logado}>
@@ -79,7 +58,6 @@ function Carrinho() {
       </p>
     );
   if (!carrinho) return <p className={styles.loading}>Carregando...</p>;
-
 
   return (
     <div className={styles.div}>
@@ -118,22 +96,47 @@ function Carrinho() {
               </li>
             ))}
           </ul>
-          {!preferenceId ? (
-            <>
-              <p className={styles.total}>
-                Total: R$ {formatPreco(carrinho.total)}
-              </p>
-              <button
-                onClick={criarPreferencia}
-                className={styles.button_finzalizar}
-                disabled={!carrinho.itens.length}
-              >
-                Finalizar Pedido
-              </button>
-            </>
-          ) : (
-            <Wallet initialization={{ preferenceId }} />
-          )}
+          <p className={styles.total}>
+            Total: R$ {formatPreco(carrinho.total)}
+          </p>
+
+          <div className={styles.metodos}>
+            <label className={styles.labelPix}>
+              <input
+                type="radio"
+                name="pagamento"
+                value="pix"
+                checked={metodoPagamento === "pix"}
+                onChange={() => setMetodoPagamento("pix")
+                  
+                }
+                className={styles.inputPix}
+              />
+              Pix
+            </label>
+            <label className={styles.labelCartao}>
+              <input
+                type="radio"
+                name="pagamento"
+                value="cartao"
+                checked={metodoPagamento === "cartao"}
+                onChange={() => setMetodoPagamento("cartao")}
+                className={styles.inputCartao}
+              />
+              Cartão
+            </label>
+          </div>
+
+          <CardForm
+            carrinho={carrinho}
+            metodo={metodoPagamento}
+            cliente={cliente}
+            onSucesso={() => {
+              setCarrinho(null);
+              setMetodoPagamento("pix");
+              alert("Pedido realizado com sucesso!");
+            }}
+          />
         </div>
       )}
     </div>

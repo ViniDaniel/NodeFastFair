@@ -38,10 +38,10 @@
   overflow-wrap: break-word;
 }
 .produto_item p {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    /* Opcional: Para remover o espaço em branco extra se houver muitos */
-    white-space: normal; /* Garante que o texto se envolva normalmente */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  /* Opcional: Para remover o espaço em branco extra se houver muitos */
+  white-space: normal; /* Garante que o texto se envolva normalmente */
 }
 
 .button {
@@ -66,8 +66,20 @@
   object-fit: cover;
   margin-bottom: 10px;
 }
+.sem_produto {
+  text-align: center;
+  margin-top: 15%;
+  margin-bottom: 15%;
+}
 
-
+.p_sem_produto {
+  cursor: pointer;
+  color: gray;
+  font-style: italic;
+}
+.input{
+  display: none;
+}
 /* Considerar media queries para responsividade */
 @media (max-width: 1200px) {
   .produto_item {

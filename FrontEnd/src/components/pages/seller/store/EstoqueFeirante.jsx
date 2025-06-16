@@ -14,6 +14,7 @@ function EstoqueFeirante() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
+  const [imagens, setImagens] = useState({});
 
   useEffect(() => {
     async function fetchProdutos() {
@@ -35,7 +36,6 @@ function EstoqueFeirante() {
       fetchProdutos();
     }
   }, [feirante, location.state]);
-  
 
   async function deletarProduto(produtoId) {
     if (!window.confirm("Tem certeza que deseja deletar este produto?")) return;
@@ -49,6 +49,31 @@ function EstoqueFeirante() {
       console.error(error);
     }
   }
+
+  const handleImagemChange = async (produtoId, file) => {
+    const imagem = file;
+    if (!imagem) return;
+
+    const formData = new FormData();
+    formData.append("imagem", imagem);
+
+    try {
+      await apiFeirante.patch(
+        `/produtos/${feirante._id}/${produtoId}/atualizarImagem`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      const { data } = await apiFeirante.get(`/produtos/${feirante._id}`);
+      setProduto(data);
+      alert("Imagem atualizada com sucesso!");
+    } catch (error) {
+      console.error("Erro ao atualizar imagem");
+    }
+  };
 
   return (
     <div>
@@ -80,15 +105,68 @@ function EstoqueFeirante() {
                     <strong>Quantidade:</strong> {item.quantidade} und
                   </p>
 
-                  {item.imagem?.map((img, idx) => (
-                    <img
-                      key={idx}
-                      src={`https://nodefastfair.onrender.com/${img}`}
-                      alt={`${item.nome} ${idx}`}
-                      className={styles.imagem_produto}
-                    />
-                  ))}
-
+                  {item.imagem && item.imagem.length > 0 ? (
+                    item.imagem.map((img, idx) => (
+                      <div key={idx}>
+                        <img
+                          src={`https://nodefastfair.onrender.com/${img}`}
+                          alt={`${item.nome} ${idx}`}
+                          className={styles.imagem_produto}
+                          onClick={() =>
+                            document
+                              .getElementById(`inputImagem-${item._id}`)
+                              .click()
+                          }
+                          style={{ cursor: "pointer" }}
+                        />
+                        <input
+                          type="file"
+                          accept="image/*"
+                          id={`inputImagem-${item._id}`}
+                          className={styles.input}
+                          onChange={(e) => {
+                            const file = e.target.files[0];
+                            if (file) {
+                              setImagens((prev) => ({
+                                ...prev,
+                                [item._id]: file,
+                              }));
+                              handleImagemChange(item._id, file);
+                            }
+                          }}
+                        />
+                      </div>
+                    ))
+                  ) : (
+                    <div>
+                      <p
+                        onClick={() =>
+                          document
+                            .getElementById(`inputImagem-${item._id}`)
+                            .click()
+                        }
+                        className={styles.p_sem_produto}
+                      >
+                        Sem imagem cadastrada. Clique aqui para adicionar.
+                      </p>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        id={`inputImagem-${item._id}`}
+                        className={styles.input}
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          if (file) {
+                            setImagens((prev) => ({
+                              ...prev,
+                              [item._id]: file,
+                            }));
+                            handleImagemChange(item._id, file);
+                          }
+                        }}
+                      />
+                    </div>
+                  )}
                   <div>
                     <AttButton
                       to={`/atualizar_produto/${feirante._id}/${item._id}`}
@@ -105,9 +183,8 @@ function EstoqueFeirante() {
               ))}
             </div>
           ) : (
-            <div>
+            <div className={styles.sem_produto}>
               <p>Sem produto cadastrado</p>
-              <br />
               <p>Clique no botao abaixo para cadastrar</p>
               <LinkButton
                 to="/feirante/adicionar-produto"

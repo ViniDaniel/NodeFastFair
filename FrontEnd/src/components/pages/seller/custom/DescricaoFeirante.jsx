@@ -17,7 +17,7 @@ import {
   removeContato,
   atualizarCapa,
 } from "../../../scripts/DescricaoFormFeiranteService";
-import styles from "../../../../styles/pages_styles/DescricaoFeirante.module.css"
+import styles from "../../../../styles/pages_styles/DescricaoFeirante.module.css";
 
 function DescricaoFeirante() {
   const { feirante } = useContext(FeiranteContext);
@@ -148,8 +148,13 @@ function DescricaoFeirante() {
   };
 
   const handleUpdateCapa = async () => {
+    if(!novaCapa) return;
+
+    const formData = new FormData()
+    formData.append("capa", novaCapa)
+
     try {
-      await atualizarCapa(feirante._id, descricao._id, novaCapa);
+      await atualizarCapa(feirante._id, descricao._id, formData);
       setNovaCapa("");
       fetchDescricao();
     } catch (error) {
@@ -182,7 +187,12 @@ function DescricaoFeirante() {
           placeholder="Atualizar descrição"
           className={styles.input}
         />
-        <button onClick={handleUpdateDescricao} className={styles.btn_atualizar}>Atualizar Descrição</button>
+        <button
+          onClick={handleUpdateDescricao}
+          className={styles.btn_atualizar}
+        >
+          Atualizar Descrição
+        </button>
         {error && <p className={styles.error}>{error}</p>}
       </div>
       <div className={styles.topicos}>
@@ -201,14 +211,22 @@ function DescricaoFeirante() {
                 className={styles.input}
               />
               <div className={styles.buttonGroup}>
-              <button className={styles.btn_atualizar} onClick={() => handleUpdateTopico(i)} >Atualizar</button>
-              <button className={styles.trash} onClick={() => handleDeleteTopico(topico)}>
-                <FaTrashAlt />
-              </button>
+                <button
+                  className={styles.btn_atualizar}
+                  onClick={() => handleUpdateTopico(i)}
+                >
+                  Atualizar
+                </button>
+                <button
+                  className={styles.trash}
+                  onClick={() => handleDeleteTopico(topico)}
+                >
+                  <FaTrashAlt />
+                </button>
               </div>
             </li>
           ))}
-        </ul >
+        </ul>
 
         <input
           type="text"
@@ -217,7 +235,9 @@ function DescricaoFeirante() {
           placeholder="Novo tópico"
           className={styles.input}
         />
-        <button onClick={handleAddTopico} className={styles.btn_adicionar}>Adicionar Tópico</button>
+        <button onClick={handleAddTopico} className={styles.btn_adicionar}>
+          Adicionar Tópico
+        </button>
       </div>
 
       <div className={styles.enderecos}>
@@ -236,10 +256,18 @@ function DescricaoFeirante() {
                 className={styles.input}
               />
               <div className={styles.buttonGroup}>
-              <button className={styles.btn_atualizar} onClick={() => handleUpdateEndereco(i)}>Atualizar</button>
-              <button className={styles.trash} onClick={() => handleDeleteEndereco(endereco)}>
-                <FaTrashAlt />
-              </button>
+                <button
+                  className={styles.btn_atualizar}
+                  onClick={() => handleUpdateEndereco(i)}
+                >
+                  Atualizar
+                </button>
+                <button
+                  className={styles.trash}
+                  onClick={() => handleDeleteEndereco(endereco)}
+                >
+                  <FaTrashAlt />
+                </button>
               </div>
             </li>
           ))}
@@ -252,7 +280,9 @@ function DescricaoFeirante() {
           placeholder="Novo endereço"
           className={styles.input}
         />
-        <button className={styles.btn_adicionar} onClick={handleAddEndereco}>Adicionar Endereço</button>
+        <button className={styles.btn_adicionar} onClick={handleAddEndereco}>
+          Adicionar Endereço
+        </button>
       </div>
 
       <div className={styles.contatos}>
@@ -271,7 +301,6 @@ function DescricaoFeirante() {
               >
                 <option value="WhatsApp">WhatsApp</option>
                 <option value="Email">Email</option>
-                <option value="Telefone">Telefone</option>
                 <option value="Instagram">Instagram</option>
               </select>
               <input
@@ -285,18 +314,25 @@ function DescricaoFeirante() {
                 className={styles.input}
               />
               <div className={styles.buttonGroup}>
-               <button className={styles.btn_atualizar} onClick={handleUpdateContato}>Atualizar Contato</button>
-              <button className={styles.trash} onClick={() => handleDeleteContato(contato)}>
-                <FaTrashAlt />
-              </button>
+                <button
+                  className={styles.btn_atualizar}
+                  onClick={handleUpdateContato}
+                >
+                  Atualizar Contato
+                </button>
+                <button
+                  className={styles.trash}
+                  onClick={() => handleDeleteContato(contato)}
+                >
+                  <FaTrashAlt />
+                </button>
               </div>
             </li>
           ))}
         </ul>
-    
 
         <select
-        className={styles.select}
+          className={styles.select}
           value={novoContatoTipo}
           onChange={(e) => setNovoContatoTipo(e.target.value)}
         >
@@ -312,21 +348,32 @@ function DescricaoFeirante() {
           onChange={(e) => setNovoContatoValor(e.target.value)}
           className={styles.input}
         />
-        
-        <button className={styles.btn_adicionar} onClick={handleAddContato}>Adicionar Contato</button>
+
+        <button className={styles.btn_adicionar} onClick={handleAddContato}>
+          Adicionar Contato
+        </button>
       </div>
 
       <div className={styles.capa}>
         <h3 className={styles.h3}>Capa</h3>
-        <p>{descricao.capa || "Sem capa definida"}</p>
+        <p>
+          {descricao.capa?.map((img, idx) => (
+            <img
+              key={idx}
+              src={`https://nodefastfair.onrender.com/${img}`}
+              alt="Capa do feirante"
+            />
+          )) || "Sem capa definida"}
+        </p>
         <input
-          type="text"
-          value={novaCapa}
-          onChange={(e) => setNovaCapa(e.target.value)}
-          placeholder="URL da nova capa"
-          className={styles.input}
+          type="file"
+          accept="image/*"
+          onChange={(e) => setNovaCapa(e.target.files[0])}
+          className={styles.capaInput}
         />
-        <button className={styles.btn_atualizar} onClick={handleUpdateCapa}>Atualizar Capa</button>
+        <button className={styles.btn_atualizar} onClick={handleUpdateCapa}>
+          Atualizar Capa
+        </button>
       </div>
     </div>
   );

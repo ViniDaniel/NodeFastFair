@@ -17,15 +17,18 @@ function AddDescricao() {
     topicos: [],
     enderecos: [],
     contatos: [],
-    capa: "",
   });
 
   const [novoTopico, setNovoTopico] = useState("");
   const [novoEndereco, setNovoEndereco] = useState("");
   const [novoContato, setNovoContato] = useState({ tipo: "", valor: "" });
-
+  const [capa, setCapa] = useState(null);
   const [error, setError] = useState();
   const navigate = useNavigate();
+
+  function handleCapaChange(e) {
+    setCapa(e.target.files[0]);
+  }
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -70,8 +73,18 @@ function AddDescricao() {
     if (!isValidDescricao(form.descricao))
       return setError("A descrição precisa ter mais de 50 caracteres");
 
+    const formData = new FormData();
+    formData.append("descricao", form.descricao);
+    formData.append("topicos", JSON.stringify(form.topicos));
+    formData.append("contatos", JSON.stringify(form.contatos));
+    formData.append("enderecos", JSON.stringify(form.enderecos));
+
+    if (capa) {
+      formData.append("capa", capa);
+    }
+
     try {
-      await apiFeirante.post(`/feirante/descricao/${feirante._id}`, form);
+      await apiFeirante.post(`/feirante/descricao/${feirante._id}`, formData);
       alert("Descrição criada com sucesso!");
       navigate("/feirante/descricao");
     } catch (error) {
@@ -110,6 +123,7 @@ function AddDescricao() {
               <input
                 type="text"
                 value={novoTopico}
+                name="topicos"
                 onChange={(e) => setNovoTopico(e.target.value)}
                 placeholder="Adicionar novo tópico"
               />
@@ -136,6 +150,7 @@ function AddDescricao() {
               <input
                 type="text"
                 value={novoEndereco}
+                name="enderecos"
                 onChange={(e) => setNovoEndereco(e.target.value)}
                 placeholder="Adicionar novo endereço"
               />
@@ -161,6 +176,7 @@ function AddDescricao() {
             <div className={styles.flexRow}>
               <select
                 value={novoContato.tipo}
+                name="tipoContato"
                 onChange={(e) =>
                   setNovoContato((prev) => ({ ...prev, tipo: e.target.value }))
                 }
@@ -174,6 +190,7 @@ function AddDescricao() {
               <input
                 type="text"
                 value={novoContato.valor}
+                name="tipoContato"
                 onChange={(e) =>
                   setNovoContato((prev) => ({
                     ...prev,
@@ -200,13 +217,15 @@ function AddDescricao() {
 
           {/* Capas */}
           <div className={styles.field}>
-            <label className={styles.label}>Capa</label>
+            <label htmlFor="capa" className={styles.label}>
+              Capa
+            </label>
 
             <input
-              type="text"
-              value={form.capa}
-              onChange={handleChange}
-              placeholder="https://imagem.com"
+              type="file"
+              name="capa"
+              accept="image/*"
+              onChange={handleCapaChange}
               className={styles.input}
             />
           </div>
