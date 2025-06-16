@@ -6,7 +6,7 @@ const routes = require("./routes/router");
 
 app.use(
   cors({
-    origin: "https://node-fast-fair.vercel.app/",
+    origin: "https://node-fast-fair.vercel.app",
   })
 );
 //evita erro com a conexção do front com o back
