@@ -189,6 +189,7 @@ const carrinhoController = {
       };
     });
 
+    const { payment } = getMercadoPagoClient(process.env.MP_ACCESS_TOKEN);
     // 3. Criar o pagamento com Checkout Transparente
     const pagamento = await payment.create({
       body: {
@@ -201,6 +202,8 @@ const carrinhoController = {
         items: items,
         metadata: {
           clienteId: clienteId,
+          carrinhoId: carrinho._id,
+          accessToken: feirante.accessToken, 
         },
         statement_descriptor: "Fast&Fair",
       },

@@ -33,4 +33,8 @@ router.use("/", carrinhoRouter)
 const pedidoRouter = require("./pedidoRouter")
 router.use("/", pedidoRouter)
 
+const mercadoPagoAuthRoutes = require("./mercadoPagoCallBack");
+
+router.use("/", mercadoPagoAuthRoutes);
+
 module.exports = router;

@@ -31,7 +31,7 @@ router
   );
 
 router
-  .route("/cliente/carrinho/item/:produtoId/diminuir/")
+  .route("/cliente/carrinho/item/:produtoId/diminuir")
   .patch(authCliente, (req, res) =>
     carrinhoController.diminuirQuantidade(req, res)
   );

@@ -1,13 +1,13 @@
 const { Pedido: PedidoModel } = require("../../models/Pedido");
-const { payment } = require("../../api/mercadoPago");
-const { Carrinho } = require("../../models/Carrinho");
+const { Carrinho: CarrinhoModel } = require("../../models/Carrinho");
+const { getMercadoPagoClient } = require("../../api/mercadoPago");
+const { Feirante } = require("../../models/Feirante"); // Se quiser buscar o token via feiranteId
 
 const pedidoController = {
-  // Buscar todos os pedidos de um cliente
+  // Buscar pedidos do cliente autenticado
   getByCliente: async (req, res) => {
     try {
-      const { clienteId } = req.params;
-
+      const clienteId = req.cliente.id; // 🔒 Protegido
       const pedidos = await PedidoModel.find({ clienteId })
         .populate("produtos.produtoId")
         .sort({ dataPedido: -1 });
@@ -21,7 +21,7 @@ const pedidoController = {
     }
   },
 
-  // Atualizar status do pedido
+  // Atualizar o status do pedido
   updateStatus: async (req, res) => {
     try {
       const { pedidoId } = req.params;
@@ -41,9 +41,11 @@ const pedidoController = {
       return res.status(500).json({ message: "Erro ao atualizar o pedido." });
     }
   },
+
+  // Webhook de notificação do Mercado Pago
   webhook: async (req, res) => {
     try {
-      console.log("Webhook recebido:", JSON.stringify(req.body, null, 2));
+      console.log("🔔 Webhook recebido:", JSON.stringify(req.body, null, 2));
 
       const body = req.body;
       let paymentId = null;
@@ -53,39 +55,32 @@ const pedidoController = {
       } else if (body.topic === "payment" && body.resource) {
         paymentId = body.resource;
       } else if (body.topic === "merchant_order") {
-        console.log("Webhook merchant_order recebido, ignorado por enquanto.");
+        console.log("🔄 Ignorado: merchant_order");
         return res.sendStatus(200);
       } else {
-        console.error("Corpo inválido:", body);
+        console.error("❌ Webhook inválido:", body);
         return res.sendStatus(400);
       }
 
+      // Buscar pagamento do Mercado Pago (usando token do feirante se houver)
       let pagamento;
       try {
+        const client = getMercadoPagoClient(process.env.MP_ACCESS_TOKEN); // fallback
+        const { payment } = client;
         const response = await payment.get({ id: paymentId });
-        console.log(
-          "Resposta do Mercado Pago:",
-          JSON.stringify(response, null, 2)
-        );
 
         pagamento = response.body || response;
 
-        // Validação mais robusta
-        if (!pagamento || typeof pagamento !== "object" || !pagamento.status) {
-          console.warn("Resposta inválida ao buscar pagamento. Estrutura:", {
-            temBody: !!response.body,
-            temStatus: !!pagamento?.status,
-            tipoResponse: typeof response,
-            tipoPagamento: typeof pagamento,
-          });
+        if (!pagamento || !pagamento.status) {
+          console.warn("⚠️ Pagamento com estrutura inválida:", pagamento);
           return res.sendStatus(200);
         }
-      } catch (erroPagamento) {
-        if (erroPagamento?.status === 404) {
-          console.warn("Pagamento não encontrado:", paymentId);
+      } catch (err) {
+        if (err?.status === 404) {
+          console.warn("⚠️ Pagamento não encontrado:", paymentId);
           return res.sendStatus(200);
         }
-        console.error("Erro ao buscar pagamento:", erroPagamento);
+        console.error("❌ Erro ao buscar pagamento:", err);
         return res.sendStatus(500);
       }
 
@@ -93,18 +88,26 @@ const pedidoController = {
         const { clienteId, carrinhoId } = pagamento.metadata || {};
 
         if (!clienteId || !carrinhoId) {
-          console.warn("Metadata ausente no pagamento:", {
-            metadata: pagamento.metadata,
-            external_reference: pagamento.external_reference,
-          });
+          console.warn("⚠️ Metadata ausente no pagamento:", pagamento.metadata);
           return res.sendStatus(200);
         }
 
-        const carrinho = await Carrinho.findById(carrinhoId).populate(
+        const carrinho = await CarrinhoModel.findById(carrinhoId).populate(
           "itens.produtoId"
         );
+
         if (!carrinho) {
-          console.warn("Carrinho não encontrado:", carrinhoId);
+          console.warn("⚠️ Carrinho não encontrado:", carrinhoId);
+          return res.sendStatus(200);
+        }
+
+        // Verificar duplicidade
+        const pedidoExistente = await PedidoModel.findOne({
+          pagamentoId: pagamento.id,
+        });
+
+        if (pedidoExistente) {
+          console.warn("⚠️ Pedido já existente:", pagamento.id);
           return res.sendStatus(200);
         }
 
@@ -113,17 +116,9 @@ const pedidoController = {
           quantidade: item.quantidade,
         }));
 
-        const total = carrinho.itens.reduce((acc, item) => {
-          return acc + item.produtoId.preco * item.quantidade;
+        const total = carrinho.itens.reduce((soma, item) => {
+          return soma + item.produtoId.preco * item.quantidade;
         }, 0);
-
-        const pedidoExistente = await PedidoModel.findOne({
-          pagamentoId: pagamento.id,
-        });
-        if (pedidoExistente) {
-          console.warn("Pedido já existe para esse pagamento:", pagamento.id);
-          return res.sendStatus(200);
-        }
 
         const pedido = new PedidoModel({
           clienteId,
@@ -134,17 +129,16 @@ const pedidoController = {
         });
 
         await pedido.save();
-        await Carrinho.findByIdAndDelete(carrinhoId);
+        await CarrinhoModel.findByIdAndDelete(carrinhoId);
 
-        console.log("Pedido criado com sucesso:", pedido._id);
-        console.log("Carrinho removido:", carrinhoId);
+        console.log("✅ Pedido criado:", pedido._id);
       } else {
-        console.log("Pagamento não aprovado. Status:", pagamento.status);
+        console.log("⏳ Pagamento ainda não aprovado:", pagamento.status);
       }
 
       return res.sendStatus(200);
     } catch (error) {
-      console.error("Erro inesperado no webhook:", error);
+      console.error("❌ Erro no webhook:", error);
       return res.sendStatus(500);
     }
   },

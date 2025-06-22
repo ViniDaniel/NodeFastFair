@@ -19,7 +19,7 @@ function CardForm({ carrinho, metodo, cliente, onSucesso }) {
         cardInfo: metodo === "cartao" ? cardInfo : undefined,
       });
 
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 201) {
         onSucesso();
       }
     } catch (error) {
@@ -57,7 +57,7 @@ function CardForm({ carrinho, metodo, cliente, onSucesso }) {
             placeholder="Validade (MM/AA)"
             value={cardInfo.validade}
             onChange={(e) =>
-              setCardInfo({ ...cardInfo, validade: e.target.ariaValueMin })
+              setCardInfo({ ...cardInfo, validade: e.target.value })
             }
             className={styles.validade}
           />

@@ -33,6 +33,7 @@ const pedidoSchema = new Schema({
   pagamentoId: {
   type: String,
   required: true,
+  unique: true,
 },
   dataPedido: {
     type: Date,
