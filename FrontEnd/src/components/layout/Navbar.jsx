@@ -55,7 +55,7 @@ function NavBar() {
               </li>
               <li>
                 <LinkButton
-                  to={`https://auth.mercadopago.com.br/authorization?client_id=${SEU_CLIENT_ID_DO_APP}&response_type=code&platform_id=mp&redirect_uri=https://nodefastfair.onrender.com/mercadopago/callback`}
+                  to={`https://auth.mercadopago.com.br/authorization?client_id=4430954803402513&response_type=code&platform_id=mp&redirect_uri=https://nodefastfair.onrender.com/mercadopago/callback`}
                   text="Mercado Pago"
                 />
               </li>
