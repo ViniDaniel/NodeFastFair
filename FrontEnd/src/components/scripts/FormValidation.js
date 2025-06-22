@@ -43,10 +43,6 @@ export function isValidCelular(celular) {
   return celularRegex.test(celular);
 }
 
-export function isValidMercadoPagoId(mercadoPagoId){
-  return mercadoPagoId && mercadoPagoId.trim() !== ""
-}
-
 export function isValidNome(nome) {
   return nome && nome.trim() !== "";
 }
