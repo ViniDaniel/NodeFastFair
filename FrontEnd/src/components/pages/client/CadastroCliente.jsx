@@ -21,6 +21,7 @@ function CadastroCliente() {
   const inputConfirmarSenha = useRef();
 
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState(false);
 
   const navigate = useNavigate();
 
@@ -52,11 +53,17 @@ function CadastroCliente() {
         senha,
         confirmarSenha,
       });
-      alert("Cliente cadastrado com sucesso!");
-      navigate("/loginCliente")
+      setSuccessMessage(true)
+      setError('')
+
+      setTimeout(()=> {
+        setSuccessMessage(false)
+        navigate("/loginCliente")
+      }, 2000)
     } catch (err) {
+      setSuccessMessage(false)
       if (err.response && err.response.data?.message) {
-        setError(err.response.data.message); //retorna mensagem de erro do backend, caso ja tenha algum dado cadastrado
+        setError(err.response.data.message); 
       } else {
         setError("Erro ao cadastrar cliente. Tente novamente.");
       }
@@ -189,6 +196,11 @@ function CadastroCliente() {
             </button>
           </div>
           {error && <p className={styles.error}>{error}</p>}
+          {successMessage && (
+        <div className={styles.successMessage}>
+          Cliente cadastrado com sucesso! Redirecionando...
+        </div>
+      )}
         </form>
       </div>
     </div>

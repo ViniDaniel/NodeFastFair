@@ -29,3 +29,18 @@
   .buttonAtt:hover {
     background-color: #c5a100;
   }
+
+  .mercadoLivre {
+  border: none;
+  background-color: transparent;
+  color: #ffe600;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.mercadoLivre:hover {
+  background-color: transparent;
+  color: #a37000; 
+}
