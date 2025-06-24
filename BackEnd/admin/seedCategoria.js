@@ -5,7 +5,7 @@ async function seed() {
   mongoose.set("strictQuery", false);
   await mongoose.connect(process.env.MONGO_URI);
 
-  const nomes = ["Fruta", "Legume", "Grãos", "Verdura", "Temperos"];
+  const nomes = ["Fruta", "Legume", "Laticínios", "Grãos", "Verdura", "Temperos"];
   for (const nome of nomes) {
     await CategoriaProduto.updateOne({ nome }, { nome }, { upsert: true });
   }
