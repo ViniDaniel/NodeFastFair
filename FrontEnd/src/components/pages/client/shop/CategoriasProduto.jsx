@@ -1,7 +1,7 @@
 import styles from "../../../../styles/pages_styles/client_styles/Categorias.module.css";
 import ShopNavBar from "../../../layout/ShopNavBar";
 import { Link } from "react-router-dom"; 
-import { GiFruitBowl, GiPlantSeed, GiCarrot, GiCoolSpices } from "react-icons/gi";
+import { GiCheeseWedge, GiFruitBowl, GiPlantSeed, GiCarrot, GiCoolSpices } from "react-icons/gi";
 import { LuSalad } from "react-icons/lu";
 
 function CategoriasProduto() {
@@ -16,6 +16,9 @@ function CategoriasProduto() {
           </li>
           <li>
             <Link to="/produtos/categorias/Grãos" className={styles.linkCategoria}> <GiPlantSeed /> Grãos <GiPlantSeed /></Link>
+          </li>
+         <li>
+            <Link to="/produtos/categorias/Laticínios" className={styles.linkCategoria}> <GiCheeseWedge /> Laticínios <GiCheeseWedge /></Link>
           </li>
           <li>
             <Link to="/produtos/categorias/Legume" className={styles.linkCategoria}> <GiCarrot /> Legumes <GiCarrot /></Link>

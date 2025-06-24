@@ -37,6 +37,7 @@ import Carrinho from "./components/pages/client/shop/Carrinho";
 import PedidosPagos from "./components/pages/client/shop/pedidos/PedidosPagos";
 import PedidoErro from "./components/pages/client/shop/pedidos/PedidoErro";
 import PedidoPendente from "./components/pages/client/shop/pedidos/PedidoPendente";
+import Laticinios from "./components/pages/client/shop/categorias/Laticinios";
 
 
 function App() {
@@ -88,6 +89,7 @@ function App() {
               <Route path="/colaboradores" element={<Colaboradores />}></Route>
               <Route path="/produtos/categorias/Fruta" element={<Frutas />} ></Route>
               <Route path="/produtos/categorias/Grãos" element={<Graos />} ></Route>
+              <Route path="/produtos/categorias/Laticínios" element={<Laticinios />} ></Route>
               <Route path="/produtos/categorias/Legume" element={<Legumes />} ></Route>
               <Route path="/produtos/categorias/Temperos" element={<Temperos />}></Route>
               <Route path="/produtos/categorias/Verdura" element={<Verduras />} ></Route>
