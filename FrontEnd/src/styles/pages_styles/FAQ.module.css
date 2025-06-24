@@ -1,0 +1,195 @@
+/* FAQ.module.css */
+
+.faqContainer {
+  width: 100%;
+  max-width: 800px; /* Adapte conforme necessário para o layout da sua página */
+  margin: 40px auto; /* Centraliza o container e dá um espaçamento */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.faqTitle {
+  font-size: 2em;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 15px;
+}
+
+.faqItem {
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden; /* Garante que o border-radius seja aplicado corretamente */
+}
+
+.faqQuestion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #fff;
+  color: #333;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 1px solid #eee; /* Linha sutil entre pergunta e resposta quando expandido */
+  transition: background-color 0.3s ease;
+}
+
+.faqQuestion:hover {
+  background-color: #f0f0f0;
+}
+
+.toggleIcon {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #555;
+  margin-left: 10px;
+}
+
+.faqAnswer {
+  padding: 15px 20px;
+  background-color: #fff; /* Fundo branco para a resposta */
+  color: #666;
+  font-size: 1em;
+  line-height: 1.6;
+  border-top: none; /* Remove a borda superior se desejar que a resposta 'grude' na pergunta */
+}
+
+.faqAnswer p {
+  margin: 0; /* Remove margem padrão do parágrafo */
+}
+
+/* Estilo para a linha entre "Product Info" e "Can I buy..." na imagem */
+.faqItem:first-of-type {
+  border-top: none; /* Remove borda superior do primeiro item, se a linha horizontal estiver em outro lugar */
+}
+
+.contactLink {
+  color: #007bff; /* Cor azul comum para links */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contactLink:hover {
+  text-decoration: underline;
+}
+
+.form {
+  width: 100%;
+  max-width: 800px; /* Adapte conforme necessário, talvez um pouco menor que o FAQ para diferenciá-lo */
+  margin: 40px auto; /* Espaçamento para separar do FAQ e Contatos */
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra um pouco mais proeminente */
+}
+
+.field {
+  margin-bottom: 20px; /* Espaçamento entre os campos */
+}
+
+.label {
+  display: block; /* Para que o label ocupe toda a largura disponível */
+  margin-bottom: 8px;
+  font-size: 1.1em;
+  color: #333;
+  font-weight: 600;
+}
+
+.input,
+textarea.input { /* Estiliza tanto input quanto textarea com a classe input */
+  width: calc(100% - 22px); /* 100% menos padding e borda */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  color: #555;
+  box-sizing: border-box; /* Garante que padding e borda sejam incluídos na largura total */
+}
+
+textarea.input {
+  resize: vertical; /* Permite redimensionar verticalmente */
+  min-height: 100px; /* Altura mínima para o campo de texto grande */
+}
+
+.input:focus,
+textarea.input:focus {
+  border-color: #007bff; /* Cor ao focar */
+  outline: none; /* Remove outline padrão do navegador */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end; /* Alinha os botões à direita */
+  gap: 15px; /* Espaçamento entre os botões */
+  margin-top: 30px;
+}
+
+.button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button[type="submit"] {
+  background-color: #007bff; /* Cor principal para o botão de enviar */
+  color: white;
+}
+
+.button[type="submit"]:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.button[type="reset"] {
+  background-color: #6c757d; /* Cor secundária para o botão de cancelar */
+  color: white;
+}
+
+.button[type="reset"]:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+}
+
+.error {
+  color: #dc3545; /* Vermelho para mensagens de erro */
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.successMessage{
+  background-color: #d4edda;
+  color: #155724; 
+  border: 1px solid #c3e6cb; 
+  padding: 15px;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.p_suporte {
+  font-size: 1.2em; /* Um pouco maior para se destacar */
+  color: #555; /* Cor cinza para suavizar */
+  text-align: center; /* Centraliza o texto */
+  margin: 20px auto 40px auto; /* Espaçamento superior, inferior e centralização */
+  max-width: 600px; /* Limita a largura para melhor legibilidade */
+  line-height: 1.6; /* Aumenta o espaçamento entre linhas para facilitar a leitura */
+  font-weight: 400; /* Peso da fonte normal, não muito pesado */
+}
