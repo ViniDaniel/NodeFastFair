@@ -37,4 +37,9 @@ const mercadoPagoAuthRoutes = require("./mercadoPagoCallBack");
 
 router.use("/", mercadoPagoAuthRoutes);
 
+const suporteRouter = require("./suporteRouter")
+
+router.use("/", suporteRouter)
+
+
 module.exports = router;
