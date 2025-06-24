@@ -107,7 +107,7 @@ function CardProduto({ produto }) {
         )}
         {successMessage && (
           <div className={styles.successMessage}>
-            Cadastro realizado com sucesso! Redirecionando...
+            Produto adicionado ao carrinho!
           </div>
         )}
       </div>
