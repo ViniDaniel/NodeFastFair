@@ -8,11 +8,16 @@ function CardProduto({ produto }) {
   const [detalhes, setDetalhes] = useState(false);
   const[quantidade, setQuantidade] = useState(1)
   const {cliente} = useContext(ClienteContext)
+  const [error, setError] = useState(false);
 
 
   const handleAdicionarCarrinho = async () => {
     if(!cliente){
-      alert("Você precisa estar logado como cliente para adicionar ao carrinho")
+      setError(true);
+
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
       return;
     }
 
@@ -64,6 +69,11 @@ function CardProduto({ produto }) {
             <button onClick={() => setDetalhes(false)} className={styles.btnDetalhes}>Fechar Detalhes</button>
         </div>
       )}
+      {error && (
+                  <div className={styles.error}>
+                    Você precisa estar logado para adicionar o produto no carrinho!
+                  </div>
+                )}
       </div>
     </div>
   );

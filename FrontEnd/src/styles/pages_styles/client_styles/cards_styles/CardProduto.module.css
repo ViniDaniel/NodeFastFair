@@ -199,6 +199,18 @@
   }
 }
 
+.error{
+  margin-top: 10px;
+  background-color: #edd4d4;
+  color: #880000; 
+  border: 1px solid #e6c3c3; 
+  padding: 15px;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
 @media (max-width: 480px) {
   .cardProduto {
     padding: 15px;
