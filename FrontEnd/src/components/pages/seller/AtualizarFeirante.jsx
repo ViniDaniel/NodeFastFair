@@ -27,36 +27,37 @@ function AtualizarFeirante() {
     uf: "",
   });
   const [error, setError] = useState();
+  const [successMessage, setSuccessMessage] = useState(false);
+
   const navigate = useNavigate();
 
-useEffect(() => {
-  async function fetchFeirante() {
-    if (!feirante || !feirante._id) return;
-    try {
-      const response = await apiFeirante.get(`/feirantes/${feirante._id}`);
+  useEffect(() => {
+    async function fetchFeirante() {
+      if (!feirante || !feirante._id) return;
+      try {
+        const response = await apiFeirante.get(`/feirantes/${feirante._id}`);
 
-      const data = response.data;
+        const data = response.data;
 
-      setForm({
-        nome: data.nome || "",
-        celular: data.celular || "",
-        genero: data.genero || "",
-        cep: data.cep || "",
-        endereco: data.endereco || "",
-        numeroCasa: data.numeroCasa || "",
-        bairro: data.bairro || "",
-        cidade: data.cidade || "",
-        uf: data.uf || "",
-      });
-    } catch (err) {
-      console.error("Erro ao buscar feirante:", err);
-      setError("Não foi possível carregar os dados do feirante.");
+        setForm({
+          nome: data.nome || "",
+          celular: data.celular || "",
+          genero: data.genero || "",
+          cep: data.cep || "",
+          endereco: data.endereco || "",
+          numeroCasa: data.numeroCasa || "",
+          bairro: data.bairro || "",
+          cidade: data.cidade || "",
+          uf: data.uf || "",
+        });
+      } catch (err) {
+        console.error("Erro ao buscar feirante:", err);
+        setError("Não foi possível carregar os dados do feirante.");
+      }
     }
-  }
 
-  fetchFeirante();
-}, [feirante]);
-
+    fetchFeirante();
+  }, [feirante]);
 
   function handlechange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -86,10 +87,16 @@ useEffect(() => {
       return setError("Selecione um estado válido!");
     }
     try {
-      const response = await apiFeirante.put(`/feirantes/`, form);
-      console.log("Atualizado com sucesso", response.data);
-      navigate("/feirante/perfilFeirante");
+      await apiFeirante.put(`/feirantes/`, form);
+      setSuccessMessage(true);
+      setError("");
+
+      setTimeout(() => {
+        setSuccessMessage(false);
+        navigate("/feirante/perfilFeirante");
+      }, 2000);
     } catch (err) {
+      setSuccessMessage(false);
       if (err.response && err.response.data?.message) {
         setError(err.response.data.message);
       } else {
@@ -263,6 +270,11 @@ useEffect(() => {
           </button>
         </div>
         {error && <p className={styles.error}>{error}</p>}
+        {successMessage && (
+          <div className={styles.successMessage}>
+            Perfil atualizado com sucesso!
+          </div>
+        )}
       </form>
     </div>
   );

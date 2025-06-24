@@ -15,6 +15,7 @@ function EstoqueFeirante() {
   const navigate = useNavigate();
   const location = useLocation();
   const [imagens, setImagens] = useState({});
+  
 
   useEffect(() => {
     async function fetchProdutos() {
@@ -69,7 +70,6 @@ function EstoqueFeirante() {
       );
       const { data } = await apiFeirante.get(`/produtos/${feirante._id}`);
       setProduto(data);
-      alert("Imagem atualizada com sucesso!");
     } catch (error) {
       console.error("Erro ao atualizar imagem");
     }
@@ -79,7 +79,6 @@ function EstoqueFeirante() {
     <div>
       <div className={styles.container}>
         <div className={styles.card_dados}>
-          <h1>Seus Produtos</h1>
           {loading ? (
             <p>Carregando produtos...</p>
           ) : Array.isArray(produto) && produto.length > 0 ? (

@@ -25,7 +25,6 @@ function Frutas() {
     <div>
       <ShopNavBar />
       <div className={styles.vitrineContainer}>
-        <h1 className={styles.pageTitle}>Frutas</h1>
         <div className={styles.produtosWrapper}>
           {produtos.length === 0 ? (
             <p>Nenhum produto encontrado.</p>

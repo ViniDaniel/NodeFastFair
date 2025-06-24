@@ -66,13 +66,7 @@ function PerfilCliente() {
   }
 
   return (
-    <div>
-      <h1>Seu Perfil</h1>
-      <div className={styles.card_button_cliente}>
-        <button onClick={handleLogout} className={styles.deslogar}>
-          Sair
-        </button>
-      </div>
+    <div className={styles.profilePageWrapper}>
       <div className={styles.container}>
         <div className={styles.card_dados}>
           <h2>Dados</h2>
@@ -91,10 +85,12 @@ function PerfilCliente() {
           <p>
             <strong>Gênero:</strong> {dadosCliente.genero}
           </p>
+          <div className={styles.card_buttons_wrapper}>
           <AttButton
             to={`/atualizar_cliente/${cliente._id}`}
             text="Atualizar Perfil"
           />
+        </div>
         </div>
 
         <div className={styles.card_endereco}>
@@ -127,16 +123,16 @@ function PerfilCliente() {
                 <strong>Referência: </strong>
                 {endereco.referencia}
               </p>
+              <div className={styles.card_buttons_wrapper}>
               <AttButton
                 to={`/atualizar_endereco/${cliente._id}`}
                 text="Atualizar Endereço"
               />
+              </div>
             </>
           ) : (
-            <div>
+            <div className={styles.card_buttons_wrapper}>
               <p>Endereço não cadastrado</p>
-              <br />
-              <p>Clique no botao abaixo para cadastrar</p>
               <LinkButton to="/cadastrar-endereco" text="Cadastrar endereço" />
             </div>
           )}

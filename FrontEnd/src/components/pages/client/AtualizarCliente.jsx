@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import apiCliente from "../../services/apiCliente";
 import { ClienteContext } from "../../context/ClienteContext";
 import styles from "../../../styles/pages_styles/Cadastro.module.css";
-import {isValidCelular, isValidGenero, isValidNome} from "../../scripts/FormValidation"
+import {
+  isValidCelular,
+  isValidGenero,
+  isValidNome,
+} from "../../scripts/FormValidation";
 
 function AtualizarCliente() {
   const { cliente } = useContext(ClienteContext);
@@ -13,6 +17,8 @@ function AtualizarCliente() {
     genero: "",
   });
   const [error, setError] = useState();
+  const [successMessage, setSuccessMessage] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,24 +39,30 @@ function AtualizarCliente() {
   async function putUser(e) {
     e.preventDefault();
     if (!isValidNome(form.nome)) {
-    setError("Nome inválido.");
-    return;
-  }
+      setError("Nome inválido.");
+      return;
+    }
 
-  if (!isValidCelular(form.celular)) {
-    setError("Celular inválido. Deve ter pelo menos 11 dígitos.");
-    return;
-  }
+    if (!isValidCelular(form.celular)) {
+      setError("Celular inválido. Deve ter pelo menos 11 dígitos.");
+      return;
+    }
 
-  if (!isValidGenero(form.genero)) {
-    setError("Gênero inválido.");
-    return;
-  }
+    if (!isValidGenero(form.genero)) {
+      setError("Gênero inválido.");
+      return;
+    }
     try {
-      const response = await apiCliente.put(`/clientes/`, form);
-      console.log("Atualizado com sucesso", response.data);
-      navigate("/perfilCliente");
+      await apiCliente.put(`/clientes/`, form);
+      setSuccessMessage(true);
+      setError("");
+
+      setTimeout(() => {
+        setSuccessMessage(false);
+        navigate("/perfilCliente");
+      }, 2000);
     } catch (err) {
+      setSuccessMessage(false);
       if (err.response && err.response.data?.message) {
         setError(err.response.data.message);
       } else {
@@ -61,9 +73,10 @@ function AtualizarCliente() {
   return (
     <div className={styles.div}>
       <form onSubmit={putUser} className={styles.form}>
-        <h1>Atualizar Dados</h1>
         <div className={styles.field}>
-          <label htmlFor="nome" className={styles.label}>Nome: </label>
+          <label htmlFor="nome" className={styles.label}>
+            Nome:{" "}
+          </label>
           <input
             name="nome"
             value={form.nome}
@@ -110,6 +123,11 @@ function AtualizarCliente() {
           </button>
         </div>
         {error && <p className={styles.error}>{error}</p>}
+        {successMessage && (
+          <div className={styles.successMessage}>
+            Perfil atualizado com sucesso!
+          </div>
+        )}
       </form>
     </div>
   );

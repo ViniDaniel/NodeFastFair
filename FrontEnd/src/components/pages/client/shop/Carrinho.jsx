@@ -61,7 +61,6 @@ function Carrinho() {
 
   return (
     <div className={styles.div}>
-      <h1 className={styles.h1}>Seu carrinho</h1>
       {carrinho.itens.length === 0 ? (
         <p className={styles.vazio}>Carrinho vazio</p>
       ) : (

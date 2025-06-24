@@ -9,7 +9,6 @@ function CategoriasProduto() {
     <div>
       <ShopNavBar />
       <div className={styles.categoriasContainer}>
-      <h1 className={styles.tituloCategorias}>Categorias</h1> 
       <div className={styles.listaCategorias}>
         <ul>
           <li>

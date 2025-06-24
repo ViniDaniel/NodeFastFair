@@ -72,7 +72,6 @@ function Colaboradores() {
 
   return (
     <div className={styles.div}>
-      <h1 className={styles.h1}>Colaboradores</h1>
       <div className={styles.lista}>
         {loading && <p>Carregando colaboradores...</p>}
         {error && <p className={styles.error}>{error}</p>}{" "}

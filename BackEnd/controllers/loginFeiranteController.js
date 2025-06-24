@@ -9,7 +9,7 @@ const loginFeiranteController = {
       const feirante = await FeiranteModel.findOne({ email });
 
       if (!feirante) {
-        return res.status(400).json({ message: "Feirantenão encontrado!" });
+        return res.status(400).json({ message: "Feirante não encontrado!" });
       }
 
       const senhaCorreta = await bcrypt.compare(senha, feirante.senha);

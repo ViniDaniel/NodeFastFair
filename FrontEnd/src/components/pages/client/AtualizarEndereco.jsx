@@ -23,6 +23,7 @@ function AtualizarEndereco() {
     referencia: "",
   });
   const [error, setError] = useState();
+  const [successMessage, setSuccessMessage] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -75,8 +76,15 @@ function AtualizarEndereco() {
     }
     try {
       await apiCliente.put(`/enderecoCliente/${cliente._id}`, form);
-      navigate("/perfilCliente");
+      setSuccessMessage(true);
+      setError("");
+
+      setTimeout(() => {
+        setSuccessMessage(false);
+        navigate("/perfilCliente");
+      }, 2000);
     } catch (err) {
+      setSuccessMessage(false)
       if (err.response?.data?.message) {
         setError(err.response.data.message);
       } else {
@@ -87,7 +95,6 @@ function AtualizarEndereco() {
   return (
     <div className={styles.div} >
         <form onSubmit={handleSubmit} className={styles.form}>
-            <h1>Atualizar Endereço</h1>
             <div className={styles.field}>
                 <label htmlFor="cep" className={styles.label}>CEP: </label>
                 <input name="cep" value={form.cep} onChange={handleChange} className={styles.input} />
@@ -156,6 +163,11 @@ function AtualizarEndereco() {
                 <button type="reset" className={styles.button}>Cancelar</button>
             </div>
             {error && <p className={styles.error}>{error}</p>}
+            {successMessage && (
+              <div className={styles.successMessage}>
+                Endereço atualizado com sucesso!
+              </div>
+            )}
         </form>
     </div>
   )

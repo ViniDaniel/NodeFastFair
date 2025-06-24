@@ -20,6 +20,7 @@ function EnderecoForm() {
   const inputReferencia = useRef();
 
   const [error, setError] = useState();
+  const [successMessage, setSuccessMessage] = useState(false);
 
   const navigate = useNavigate();
 
@@ -51,11 +52,16 @@ function EnderecoForm() {
         complemento,
         referencia,
         clienteId,
-
       });
-      alert("Endereço cadastrado com sucesso!");
-      navigate("/perfilCliente");
+      setSuccessMessage(true);
+      setError("");
+
+      setTimeout(() => {
+        setSuccessMessage(false);
+        navigate("/perfilCliente");
+      }, 2000);
     } catch (err) {
+      setSuccessMessage(false);
       if (err.response && err.response.data?.message) {
         setError(err.response.data.message);
       } else {
@@ -225,6 +231,11 @@ function EnderecoForm() {
             </button>
           </div>
           {error && <p className={styles.error}>{error}</p>}
+          {successMessage && (
+            <div className={styles.successMessage}>
+              Endereço adicionado com sucesso! Redirecionando...
+            </div>
+          )}
         </form>
       </div>
     </div>

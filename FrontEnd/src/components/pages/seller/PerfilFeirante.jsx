@@ -40,8 +40,7 @@ function PerfilFeirante() {
     );
   }
   return (
-    <div>
-      <h1>Seu Perfil</h1>
+    <div className={styles.profilePageWrapper}>
       <div className={styles.container}>
         <div className={styles.card_dados}>
           <h2>Dados</h2>
@@ -77,12 +76,12 @@ function PerfilFeirante() {
             <strong>Cidade:</strong> {dadosFeirante.cidade} - {dadosFeirante.uf}
           </p>
         </div>
-        <div className={styles.card_button}>
+        <div className={styles.card_buttons_wrapper}>
           <AttButton
             to={`/feirante/atualizar_feirante/${feirante._id}`}
             text="Atualizar Dados"
           />
-          <button className={styles.deslogar} onClick={handleLogout} >Sair</button>
+          <button className={styles.deslogar} onClick={handleLogout} >Deslogar</button>
         </div>
       </div>
     </div>

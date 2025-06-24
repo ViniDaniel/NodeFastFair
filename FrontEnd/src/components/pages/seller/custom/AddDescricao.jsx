@@ -24,6 +24,8 @@ function AddDescricao() {
   const [novoContato, setNovoContato] = useState({ tipo: "", valor: "" });
   const [capa, setCapa] = useState(null);
   const [error, setError] = useState();
+  const [successMessage, setSuccessMessage] = useState(false)
+
   const navigate = useNavigate();
 
   function handleCapaChange(e) {
@@ -85,9 +87,15 @@ function AddDescricao() {
 
     try {
       await apiFeirante.post(`/feirante/descricao/${feirante._id}`, formData);
-      alert("Descrição criada com sucesso!");
-      navigate("/feirante/descricao");
+      setSuccessMessage(true)
+      setError("")
+
+      setTimeout(()=> {
+        setSuccessMessage(false)
+        navigate("/feirante/descricao");
+      }, 2000)
     } catch (error) {
+      setSuccessMessage(false)
       if (error.response && error.response.data?.message) {
         setError(error.response.data.message);
       } else {
@@ -231,6 +239,11 @@ function AddDescricao() {
           </div>
 
           {error && <p className={styles.error}>{error}</p>}
+          {successMessage && (
+            <div className={styles.successMessage}>
+              Descrição adicionada com sucesso!
+            </div>
+          )}
           <button type="submit" className={styles.button}>
             Salvar descrição
           </button>

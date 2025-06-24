@@ -53,17 +53,17 @@ function CadastroCliente() {
         senha,
         confirmarSenha,
       });
-      setSuccessMessage(true)
-      setError('')
+      setSuccessMessage(true);
+      setError("");
 
-      setTimeout(()=> {
-        setSuccessMessage(false)
-        navigate("/loginCliente")
-      }, 2000)
+      setTimeout(() => {
+        setSuccessMessage(false);
+        navigate("/loginCliente");
+      }, 2000);
     } catch (err) {
-      setSuccessMessage(false)
+      setSuccessMessage(false);
       if (err.response && err.response.data?.message) {
-        setError(err.response.data.message); 
+        setError(err.response.data.message);
       } else {
         setError("Erro ao cadastrar cliente. Tente novamente.");
       }
@@ -74,7 +74,7 @@ function CadastroCliente() {
     <div>
       <div className={styles.div}>
         <form className={styles.form}>
-          <h1>Cadastrar Cliente</h1>
+          <h1>Efetue seu Cadastro!</h1>
           <div className={styles.field}>
             <label htmlFor="nome" className={styles.label}>
               Nome:
@@ -197,10 +197,10 @@ function CadastroCliente() {
           </div>
           {error && <p className={styles.error}>{error}</p>}
           {successMessage && (
-        <div className={styles.successMessage}>
-          Cliente cadastrado com sucesso! Redirecionando...
-        </div>
-      )}
+            <div className={styles.successMessage}>
+              Cadastro realizado com sucesso! Redirecionando...
+            </div>
+          )}
         </form>
       </div>
     </div>

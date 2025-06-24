@@ -24,7 +24,6 @@ function Home() {
     <div>
       <ShopNavBar />
       <div className={styles.vitrineContainer}>
-        <h1 className={styles.pageTitle}>Vitrine de Produtos</h1>
         <div className={styles.produtosWrapper}>
           {produtos.map((produto) => (
             <CardProduto key={produto._id} produto={produto} />

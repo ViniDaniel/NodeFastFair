@@ -148,10 +148,10 @@ function DescricaoFeirante() {
   };
 
   const handleUpdateCapa = async () => {
-    if(!novaCapa) return;
+    if (!novaCapa) return;
 
-    const formData = new FormData()
-    formData.append("capa", novaCapa)
+    const formData = new FormData();
+    formData.append("capa", novaCapa);
 
     try {
       await atualizarCapa(feirante._id, descricao._id, formData);
@@ -166,18 +166,19 @@ function DescricaoFeirante() {
   if (loading) return <p>Carregando...</p>;
   if (!descricao)
     return (
-      <div>
-        <h1>Descrição não encontrada</h1>
-        <LinkButton
-          to="/feirante/adicionar_descricao/"
-          text="Adicionar descrição"
-        />
+      <div className={styles.content_sem_descricao}>
+        <div className={styles.sem_descricao}>
+          <h1>Descrição não encontrada</h1>
+          <LinkButton
+            to="/feirante/adicionar_descricao/"
+            text="Adicionar descrição"
+          />
+        </div>
       </div>
     );
 
   return (
     <div className={styles.div}>
-      <h2 className={styles.h2}>Descrição do Feirante</h2>
       <div className={styles.descricao}>
         <p>{descricao.descricao}</p>
         <input

@@ -109,6 +109,26 @@
   }
 }
 
+.content_sem_cadastro {
+  display: flex; 
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  min-height: calc(80vh - var(--header-height, 0px) - var(--footer-height, 0px)); 
+  flex-grow: 1; 
+}
+
+.sem_cadastro {
+  text-align: center; 
+  padding: 40px 20px; 
+  background-color: #b101019c; 
+  border-radius: 8px; 
+  max-width: 600px; 
+  width: 90%; 
+  box-sizing: border-box; 
+}
+
+
 @media (max-width: 480px) {
   .container h2 {
     font-size: 1.5em;

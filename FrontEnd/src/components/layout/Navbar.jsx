@@ -9,9 +9,19 @@ import { ClienteContext } from "../context/ClienteContext";
 import MercadoLivreButton from "./MercadoLivreButton";
 
 function NavBar() {
-  const { cliente } = useContext(ClienteContext);
-  const { feirante } = useContext(FeiranteContext);
+  const { cliente, deslogarCliente } = useContext(ClienteContext);
+  const { feirante, deslogarFeirante } = useContext(FeiranteContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const handleLogoutCliente = () => {
+    deslogarCliente();
+    navigate("/loginCliente");
+  };
+
+  const handleLogoutFeirante = () => {
+    deslogarFeirante();
+    navigate("/loginFeirante");
+  };
 
   return (
     <nav className={styles.navbar}>
@@ -38,6 +48,11 @@ function NavBar() {
               <li>
                 <Link to="/perfilCliente">{cliente.nome}</Link>
               </li>
+              <li>
+                <button className={styles.deslogar} onClick={handleLogoutCliente}>
+                  Deslogar
+                </button>
+              </li>
             </>
           ) : feirante ? (
             <>
@@ -58,6 +73,11 @@ function NavBar() {
                   to={`https://auth.mercadopago.com.br/authorization?client_id=4430954803402513&response_type=code&platform_id=mp&redirect_uri=https://nodefastfair.onrender.com/mercadopago/callback`}
                   text="Mercado Pago"
                 />
+              </li>
+              <li>
+                <button className={styles.deslogar} onClick={handleLogoutFeirante}>
+                  Deslogar
+                </button>
               </li>
             </>
           ) : (

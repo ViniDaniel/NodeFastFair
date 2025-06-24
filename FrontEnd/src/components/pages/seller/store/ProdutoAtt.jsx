@@ -24,6 +24,8 @@ function ProdutoAtt() {
     categoria: "",
   });
   const [error, setError] = useState();
+  const [successMessage, setSuccessMessage] = useState(false);
+
   const navigate = useNavigate();
   const { produtoId } = useParams();
 
@@ -81,9 +83,15 @@ function ProdutoAtt() {
         `/produtos/${feirante._id}/${produtoId}`,
         formParaEnviar
       );
-      alert("Produto atualizado com sucesso!");
-      navigate("/feirante/estoque", { state: { from: "cadastro" } });
+      setSuccessMessage(true);
+      setError("");
+
+      setTimeout(() => {
+        setSuccessMessage(false);
+        navigate("/feirante/estoque", { state: { from: "cadastro" } });
+      }, 2000);
     } catch (error) {
+      setSuccessMessage(false);
       if (error.response && error.response.data?.message) {
         setError(error.response.data.message);
       } else {
@@ -96,7 +104,6 @@ function ProdutoAtt() {
     <div>
       <div className={styles.div}>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <h1>Atualize seu produto</h1>
           <div className={styles.field}>
             <label htmlFor="nome" className={styles.label}>
               Nome do Produto:
@@ -182,6 +189,11 @@ function ProdutoAtt() {
             </button>
           </div>
           {error && <p className={styles.error}>{error}</p>}
+          {successMessage && (
+            <div className={styles.successMessage}>
+              Produto atualizado com sucesso!
+            </div>
+          )}
         </form>
       </div>
     </div>

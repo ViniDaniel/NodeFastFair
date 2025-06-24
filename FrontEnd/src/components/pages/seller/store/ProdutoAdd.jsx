@@ -26,6 +26,7 @@ function ProdutoAdd() {
   const [imagem, setImagem] = useState(null);
 
   const [error, setError] = useState();
+  const [successMessage, setSuccessMessage] = useState(false);
 
   const navigate = useNavigate();
 
@@ -67,16 +68,21 @@ function ProdutoAdd() {
 
     try {
       await apiFeirante.post(`/produtos/${feirante._id}`, formData);
-      alert("Produto cadastrado com sucesso!");
-      navigate("/feirante/estoque", { state: { from: "cadastro" } });
+      setSuccessMessage(true);
+      setError("");
+
+      setTimeout(() => {
+        setSuccessMessage(false);
+        navigate("/feirante/estoque", { state: { from: "cadastro" } });
+      }, 2000);
     } catch (error) {
+      setSuccessMessage(false);
       if (error.response && error.response.data?.message) {
         setError(error.response.data.message);
       } else {
         setError("Erro ao cadastrar produto");
       }
     }
-    
   }
   return (
     <div>
@@ -180,6 +186,11 @@ function ProdutoAdd() {
             </button>
           </div>
           {error && <p className={styles.error}>{error}</p>}
+          {successMessage && (
+            <div className={styles.successMessage}>
+              Produto adicionado com sucesso!
+            </div>
+          )}
         </form>
       </div>
     </div>

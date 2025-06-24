@@ -21,9 +21,13 @@ function PedidosPagos() {
   }, [cliente]);
   if (!cliente)
     return (
-      <p className={styles.p_erro}>
-        Você precisa estar logado para ver seus pedidos.
-      </p>
+      <div className={styles.content_sem_cadastro}>
+        <div className={styles.sem_cadastro}>
+          <p className={styles.p_erro}>
+            Você precisa estar logado para ver seus pedidos.
+          </p>
+        </div>
+      </div>
     );
 
   return (

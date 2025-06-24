@@ -30,6 +30,7 @@ function CadastroFeirante() {
   const inputUf = useRef();
   const inputCidade = useRef();
 
+  const [successMessage, setSuccessMessage] = useState(false);
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -79,9 +80,15 @@ function CadastroFeirante() {
         senha,
         confirmarSenha,
       });
-      alert("Cadastro realizado com sucesso!");
-      navigate("/loginFeirante");
+      setSuccessMessage(true);
+      setError("");
+
+      setTimeout(() => {
+        setSuccessMessage(false);
+        navigate("/loginFeirante");
+      }, 2000);
     } catch (err) {
+      setSuccessMessage(false);
       if (err.response && err.response.data?.message) {
         setError(err.response.data.message); //retorna mensagem de erro do backend, caso ja tenha algum dado cadastrado
       } else {
@@ -94,7 +101,7 @@ function CadastroFeirante() {
     <div>
       <div className={styles.div}>
         <form className={styles.form}>
-          <h1>Cadastrar Feirante</h1>
+          <h1>Efetue seu Cadastro!</h1>
           <div className={styles.field}>
             <label htmlFor="nome" className={styles.label}>
               Nome:
@@ -319,6 +326,11 @@ function CadastroFeirante() {
             </button>
           </div>
           {error && <p className={styles.error}>{error}</p>}
+          {successMessage && (
+            <div className={styles.successMessage}>
+              Cadastro realizado com sucesso!
+            </div>
+          )}
         </form>
       </div>
     </div>
