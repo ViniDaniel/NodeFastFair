@@ -42,7 +42,7 @@ function Suporte() {
 
       setTimeout(() => {
         setSuccessMessage(false);
-      }, 4000);
+      }, 7000);
     } catch (error) {
       setSuccessMessage(false);
       if (error.response && error.response.data?.message) {
