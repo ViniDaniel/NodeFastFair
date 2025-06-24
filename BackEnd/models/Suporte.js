@@ -13,7 +13,7 @@ const suporteSchema = new Schema({
         type: String,
         required: true,
         minlength: 50,
-        maxlength: 300,
+        maxlength: 500,
     },
 }, {timestamps: true})
 
