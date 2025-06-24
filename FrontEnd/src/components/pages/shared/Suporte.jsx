@@ -29,9 +29,9 @@ function Suporte() {
         setError("O nome não pode ser vazio.");
         return;
       }
-      if (form.motivo.trim().length < 50 || form.motivo.trim().length > 300) {
+      if (form.motivo.trim().length < 50 || form.motivo.trim().length > 500) {
         setError(
-          "O motivo deve conter no mínimo 50 caracteres e no máximo 300 caracteres."
+          "O motivo deve conter no mínimo 50 caracteres e no máximo 500 caracteres."
         );
         return;
       }
